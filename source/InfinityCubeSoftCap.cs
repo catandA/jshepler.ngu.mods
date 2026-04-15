@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -79,40 +79,68 @@ namespace jshepler.ngu.mods
             var concat2strings = typeof(string).GetMethod("Concat", [typeof(string), typeof(string)]);
             var concat3strings = typeof(string).GetMethod("Concat", [typeof(string), typeof(string), typeof(string)]);
 
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, powerString))
-                .Advance(1)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, powerString))
-                .Advance(1)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, powerString))
-                .Advance(1)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldarg_0))
-                .RemoveInstructions(8)
-                .InsertAndAdvance(Transpilers.EmitDelegate(CubePowerWithSoftcap))
+            var cm = new CodeMatcher(instructions);
 
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, toughString))
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, powerString));
+            if (cm.IsValid)
+            {
+                cm.Advance(1)
+                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, powerString))
                 .Advance(1)
+                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, powerString))
+                .Advance(1)
+                .MatchForward(false, new CodeMatch(OpCodes.Ldarg_0))
+                .RemoveInstructions(8)
+                .InsertAndAdvance(Transpilers.EmitDelegate(CubePowerWithSoftcap));
+            }
+            else
+            {
+                Plugin.LogWarning("[InfinityCubeSoftCap] Cube Power softcap patch skipped: '<b>Power:</b>' string not found");
+                return cm.InstructionEnumeration();
+            }
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, toughString));
+            if (cm.IsValid)
+            {
+                cm.Advance(1)
                 .MatchForward(false, new CodeMatch(OpCodes.Ldstr, toughString))
                 .Advance(1)
                 .MatchForward(false, new CodeMatch(OpCodes.Ldarg_0))
                 .RemoveInstructions(8)
-                .InsertAndAdvance(Transpilers.EmitDelegate(CubeToughnessWithSoftcap))
+                .InsertAndAdvance(Transpilers.EmitDelegate(CubeToughnessWithSoftcap));
+            }
+            else
+            {
+                Plugin.LogWarning("[InfinityCubeSoftCap] Cube Toughness softcap patch skipped: '<b>Toughness:</b>' string not found");
+                return cm.InstructionEnumeration();
+            }
                 
-                .End()
-                .MatchBack(false, new CodeMatch(OpCodes.Call, concat2strings))
-                .SetInstruction(new CodeInstruction(OpCodes.Call, concat3strings))
+            cm.End()
+                .MatchBack(false, new CodeMatch(OpCodes.Call, concat2strings));
+            
+            if (cm.IsValid)
+                cm.SetInstruction(new CodeInstruction(OpCodes.Call, concat3strings))
                 .Advance(-1)
                 .Insert(Transpilers.EmitDelegate(Additionalnfo));
+            else
+                Plugin.LogWarning("[InfinityCubeSoftCap] Additional info insertion skipped: string concat not found");
 
             var labelAfterSoftcapWarnings = cm
                 .MatchBack(false, new CodeMatch(OpCodes.Ldarg_0), new CodeMatch(OpCodes.Ldarg_0))
                 .Labels[0];
 
-            cm.MatchBack(false, new CodeMatch(OpCodes.Ldfld, inventoryCubePower))
-                .Advance(-1)
+            cm.MatchBack(false, new CodeMatch(OpCodes.Ldfld, inventoryCubePower));
+            if (cm.IsValid)
+            {
+                cm.Advance(-1)
                 .MatchBack(false, new CodeMatch(OpCodes.Ldfld, inventoryCubePower))
                 .Advance(-3)
                 .Set(OpCodes.Br, labelAfterSoftcapWarnings);
+            }
+            else
+            {
+                Plugin.LogWarning("[InfinityCubeSoftCap] Softcap warning skip patch failed: cubePower field not found");
+            }
 
             return cm.InstructionEnumeration();
         }

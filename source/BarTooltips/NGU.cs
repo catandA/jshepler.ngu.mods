@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
@@ -92,16 +92,47 @@ namespace jshepler.ngu.mods.BarTooltips
         {
             var respawnBonusNormal = typeof(AllNGUController).GetMethod("respawnBonusNormal");
 
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Callvirt, respawnBonusNormal))
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "###,##0.##"))
-                .SetOperandAndAdvance("r")
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "###,##0.##"))
-                .SetOperandAndAdvance("r")
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "###,##0.##"))
-                .SetOperandAndAdvance("r")
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "###,##0.##"))
-                .SetOperandAndAdvance("r");
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, respawnBonusNormal));
+            if (!cm.IsValid)
+            {
+                Plugin.LogWarning("[NGU] NGU tooltip patch skipped: respawnBonusNormal method not found");
+                return cm.InstructionEnumeration();
+            }
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "###,##0.##"));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance("r");
+            else
+            {
+                Plugin.LogWarning("[NGU] NGU tooltip format patch incomplete: first format string not found");
+                return cm.InstructionEnumeration();
+            }
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "###,##0.##"));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance("r");
+            else
+            {
+                Plugin.LogWarning("[NGU] NGU tooltip format patch incomplete: second format string not found");
+                return cm.InstructionEnumeration();
+            }
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "###,##0.##"));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance("r");
+            else
+            {
+                Plugin.LogWarning("[NGU] NGU tooltip format patch incomplete: third format string not found");
+                return cm.InstructionEnumeration();
+            }
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "###,##0.##"));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance("r");
+            else
+                Plugin.LogWarning("[NGU] NGU tooltip format patch incomplete: fourth format string not found");
 
             return cm.InstructionEnumeration();
         }

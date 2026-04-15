@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -88,13 +88,21 @@ namespace jshepler.ngu.mods
             HarmonyPatch(typeof(Character), "adventureOfflineProgress")]
         private static IEnumerable<CodeInstruction> titans_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64))
-                .Repeat(m =>
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64));
+            if (cm.IsValid)
+            {
+                cm.Repeat(m =>
                 {
                     m.Advance(1)
                     .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Titans)));
                 });
+            }
+            else
+            {
+                Plugin.LogWarning("[TrackAPGained] Titans AP tracking patch skipped: addAP method not found");
+            }
 
             return cm.InstructionEnumeration();
         }
@@ -104,10 +112,18 @@ namespace jshepler.ngu.mods
             HarmonyPatch(typeof(Character), "adventureOfflineProgress")]
         private static IEnumerable<CodeInstruction> itopod_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Stfld, _curArbitraryPoints))
-                .Advance(-1)
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Stfld, _curArbitraryPoints));
+            if (cm.IsValid)
+            {
+                cm.Advance(-1)
                 .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.ITOPOD)));
+            }
+            else
+            {
+                Plugin.LogWarning("[TrackAPGained] ITOPOD AP tracking patch skipped: curArbitraryPoints field not found");
+            }
 
             return cm.InstructionEnumeration();
         }
@@ -115,13 +131,21 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(AdventureController), "enemyDeath")]
         private static IEnumerable<CodeInstruction> bosses_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP32))
-                .Advance(1)
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP32));
+            if (cm.IsValid)
+            {
+                cm.Advance(1)
                 .RemoveInstructions(1)
                 .Insert(
                     Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Bosses)),
                     Transpilers.EmitDelegate((long l) => Plugin.Character.adventureController.log.AddEvent($"You also gained {l} AP for killing 10 bosses!", 3)));
+            }
+            else
+            {
+                Plugin.LogWarning("[TrackAPGained] Bosses AP tracking patch skipped: addAP method not found");
+            }
 
             return cm.InstructionEnumeration();
         }
@@ -137,13 +161,21 @@ namespace jshepler.ngu.mods
             HarmonyPatch(typeof(DailyRewardController), "tier7Reward")]
         private static IEnumerable<CodeInstruction> dailyspin_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP32))
-                .Repeat(m =>
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP32));
+            if (cm.IsValid)
+            {
+                cm.Repeat(m =>
                 {
                     m.Advance(1)
                     .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.DailySpin)));
                 });
+            }
+            else
+            {
+                Plugin.LogWarning("[TrackAPGained] Daily Spin AP tracking patch skipped: addAP method not found");
+            }
 
             return cm.InstructionEnumeration();
         }
@@ -151,13 +183,21 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(BeastQuestController), "giveRewardsAndClear", typeof(bool))]
         private static IEnumerable<CodeInstruction> quests_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64))
-                .Repeat(m =>
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64));
+            if (cm.IsValid)
+            {
+                cm.Repeat(m =>
                 {
                     m.Advance(1)
                     .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Quests)));
                 });
+            }
+            else
+            {
+                Plugin.LogWarning("[TrackAPGained] Quests AP tracking patch skipped: addAP method not found");
+            }
 
             return cm.InstructionEnumeration();
         }
@@ -165,10 +205,18 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(FruitController), "consumeAPFruit")]
         private static IEnumerable<CodeInstruction> fruit_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64))
-                .Advance(1)
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64));
+            if (cm.IsValid)
+            {
+                cm.Advance(1)
                 .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Fruit)));
+            }
+            else
+            {
+                Plugin.LogWarning("[TrackAPGained] Fruit AP tracking patch skipped: addAP method not found");
+            }
 
             return cm.InstructionEnumeration();
         }
@@ -176,10 +224,18 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(PitController), "oneTossReward")]
         private static IEnumerable<CodeInstruction> pit_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64))
-                .Advance(1)
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64));
+            if (cm.IsValid)
+            {
+                cm.Advance(1)
                 .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.MoneyPit)));
+            }
+            else
+            {
+                Plugin.LogWarning("[TrackAPGained] Money Pit AP tracking patch skipped: addAP method not found");
+            }
 
             return cm.InstructionEnumeration();
         }
@@ -187,10 +243,18 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(Rebirth), "awardAP")]
         private static IEnumerable<CodeInstruction> rebirth_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64))
-                .Advance(1)
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64));
+            if (cm.IsValid)
+            {
+                cm.Advance(1)
                 .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Rebirth)));
+            }
+            else
+            {
+                Plugin.LogWarning("[TrackAPGained] Rebirth AP tracking patch skipped: addAP method not found");
+            }
 
             return cm.InstructionEnumeration();
         }
@@ -198,10 +262,18 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(OpenFileDialog), "startSaveStandalone")]
         private static IEnumerable<CodeInstruction> dailySave_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP32))
-                .Advance(1)
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP32));
+            if (cm.IsValid)
+            {
+                cm.Advance(1)
                 .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.DailySave)));
+            }
+            else
+            {
+                Plugin.LogWarning("[TrackAPGained] Daily Save AP tracking patch skipped: addAP method not found");
+            }
 
             return cm.InstructionEnumeration();
         }
@@ -317,9 +389,13 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(BeastQuestController), "updateText")]
         private static IEnumerable<CodeInstruction> BeastQuestController_updateText_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>This Quest is currently worth "))
-                .SetInstruction(Transpilers.EmitDelegate(BuildQuestReward));
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>This Quest is currently worth "));
+            if (cm.IsValid)
+                cm.SetInstruction(Transpilers.EmitDelegate(BuildQuestReward));
+            else
+                Plugin.LogWarning("[TrackAPGained] Quest AP display patch skipped: quest reward string not found (likely due to localization mod)");
 
             return cm.InstructionEnumeration();
         }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
 using jshepler.ngu.mods.CapCalculators;
@@ -11,11 +11,22 @@ namespace jshepler.ngu.mods.BarTooltips
         [HarmonyTranspiler, HarmonyPatch(typeof(AdvancedTrainingController), "bonusText")]
         private static IEnumerable<CodeInstruction> AdvancedTrainingController_bonusText_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "##.0#"))
-                .SetOperandAndAdvance("r")
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "##.0#"))
-                .SetOperandAndAdvance("r");
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "##.0#"));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance("r");
+            else
+            {
+                Plugin.LogWarning("[AdvancedTraining] Bonus text format patch skipped: format string not found");
+                return cm.InstructionEnumeration();
+            }
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "##.0#"));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance("r");
+            else
+                Plugin.LogWarning("[AdvancedTraining] Bonus text format patch incomplete: second format string not found");
 
             return cm.InstructionEnumeration();
         }

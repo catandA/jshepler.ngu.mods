@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Text;
 using HarmonyLib;
@@ -15,10 +15,14 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(EquipmentDisplay), "updateDisplay")]
         private static IEnumerable<CodeInstruction> EquipmentDisplay_updateDisplay_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\n<b>Special Bonuses:</b>"))
-                .Advance(-1)
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\n<b>Special Bonuses:</b>"));
+            if (cm.IsValid)
+                cm.Advance(-1)
                 .Insert(Transpilers.EmitDelegate(EMOverHardcaps));
+            else
+                Plugin.LogWarning("[ShowExcessEMPC] EM over hardcap display patch skipped: 'Special Bonuses' not found");
 
             return cm.InstructionEnumeration();//.DumpToLog();
         }

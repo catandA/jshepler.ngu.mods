@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
@@ -32,12 +32,20 @@ namespace jshepler.ngu.mods
             var stringConcat3 = typeof(string).GetMethod("Concat", [typeof(string), typeof(string), typeof(string)]);
             var stringConcat4 = typeof(string).GetMethod("Concat", [typeof(string), typeof(string), typeof(string), typeof(string)]);
 
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\nTime until next drop is added to Quest: "))
-                .InsertAndAdvance(Transpilers.EmitDelegate(getTimePerDrop))
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\nTime until next drop is added to Quest: "));
+            if (cm.IsValid)
+            {
+                cm.InsertAndAdvance(Transpilers.EmitDelegate(getTimePerDrop))
                 .SetOperandAndAdvance("\nTime until next drop is added to Quest: ")
                 .MatchForward(false, new CodeMatch(OpCodes.Call, stringConcat3))
                 .SetOperandAndAdvance(stringConcat4);
+            }
+            else
+            {
+                Plugin.LogWarning("[QuestIdleTimePerDrop] Idle mode time per drop patch skipped: quest idle time string not found");
+            }
 
             return cm.InstructionEnumeration();
         }

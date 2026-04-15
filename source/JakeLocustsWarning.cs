@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
@@ -37,10 +37,14 @@ namespace jshepler.ngu.mods
                     , new CodeInstruction(OpCodes.Stfld, enemyAttackTimerField))
 
                 // sets warning text to blue
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, " opens his mouth unnaturally wide and shoots out 100,000 FREAKING LOCUSTS! INCOMING!!!"))
-                .Advance(2)
+                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, " opens his mouth unnaturally wide and shoots out 100,000 FREAKING LOCUSTS! INCOMING!!!"));
+            
+            if (cm.IsValid)
+                cm.Advance(2)
                 //.SetInstruction(new CodeInstruction(OpCodes.Ldc_I4_3));
                 .SetInstruction(Transpilers.EmitDelegate(warningColor));
+            else
+                Plugin.LogWarning("[JakeLocustsWarning] Locust warning color patch skipped: locust attack string not found (likely due to localization mod)");
 
             return cm.InstructionEnumeration();//.DumpToLog();
         }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
 
@@ -41,21 +41,60 @@ namespace jshepler.ngu.mods
             var match4 = " Bar Macguffin Fragment";
             var replace4 = " Bar Macguffin Fragment</color></b>";
 
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, match1))
-                .SetOperandAndAdvance(replace1)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, match2))
-                .SetOperandAndAdvance(replace2)
+            var cm = new CodeMatcher(instructions);
 
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, match1))
-                .SetOperandAndAdvance(replace1)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, match3))
-                .SetOperandAndAdvance(replace3)
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, match1));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance(replace1);
+            else
+            {
+                Plugin.LogWarning("[ColoredItemDropNames] Macguffin color patch skipped: 'also dropped' string not found (likely due to localization mod)");
+                return cm.InstructionEnumeration();
+            }
 
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, match1))
-                .SetOperandAndAdvance(replace1)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, match4))
-                .SetOperandAndAdvance(replace4);
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, match2));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance(replace2);
+            else
+            {
+                Plugin.LogWarning("[ColoredItemDropNames] Macguffin color patch incomplete: 'Power Macguffin Fragment' not found");
+                return cm.InstructionEnumeration();
+            }
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, match1));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance(replace1);
+            else
+            {
+                Plugin.LogWarning("[ColoredItemDropNames] Macguffin color patch incomplete: second 'also dropped' not found");
+                return cm.InstructionEnumeration();
+            }
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, match3));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance(replace3);
+            else
+            {
+                Plugin.LogWarning("[ColoredItemDropNames] Macguffin color patch incomplete: 'Cap Macguffin Fragment' not found");
+                return cm.InstructionEnumeration();
+            }
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, match1));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance(replace1);
+            else
+            {
+                Plugin.LogWarning("[ColoredItemDropNames] Macguffin color patch incomplete: third 'also dropped' not found");
+                return cm.InstructionEnumeration();
+            }
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, match4));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance(replace4);
+            else
+            {
+                Plugin.LogWarning("[ColoredItemDropNames] Macguffin color patch incomplete: 'Bar Macguffin Fragment' not found");
+            }
 
             return cm.InstructionEnumeration();
         }

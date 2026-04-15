@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using HarmonyLib;
@@ -18,18 +18,32 @@ namespace jshepler.ngu.mods
             var statsBreakdown = typeof(StatsDisplay).GetField("statsBreakdown");
             var statValue = typeof(StatsDisplay).GetField("statValue");
 
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, oldString))
-                .SetOperandAndAdvance(newString)
+            var cm = new CodeMatcher(instructions);
 
-                // fixes bug where "Welcome to Sadistic" perk isn't included
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>Total Augment Speed Factor:</b> "))
-                .Advance(-1)
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, oldString));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance(newString);
+            else
+            {
+                Plugin.LogWarning("[StatsBreakdown_Augs] Augment title patch skipped: 'Augment Speed Breakdown' not found");
+                return cm.InstructionEnumeration();
+            }
+
+            // fixes bug where "Welcome to Sadistic" perk isn't included
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>Total Augment Speed Factor:</b> "));
+            if (cm.IsValid)
+            {
+                cm.Advance(-1)
                 .InsertAndAdvance(
                     new CodeInstruction(OpCodes.Dup),
                     new CodeInstruction(OpCodes.Ldarg_0),
                     new CodeInstruction(OpCodes.Ldfld, statValue),
                     new CodeInstruction(Transpilers.EmitDelegate(addSadPerk)));
+            }
+            else
+            {
+                Plugin.LogWarning("[StatsBreakdown_Augs] Sad perk patch skipped: 'Total Augment Speed Factor' not found");
+            }
 
             return cm.InstructionEnumeration();//.DumpToLog();
         }

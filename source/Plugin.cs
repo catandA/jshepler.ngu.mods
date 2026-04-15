@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
@@ -34,6 +34,7 @@ namespace jshepler.ngu.mods
         private readonly Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
         private static ManualLogSource Log;
         internal static void LogInfo(string text) => Log.LogInfo(text);
+        internal static void LogWarning(string text) => Log.LogWarning(text);
 
         internal static event EventHandler OnUpdate;
         internal static event EventHandler OnFixedUpdate;
@@ -212,10 +213,18 @@ namespace jshepler.ngu.mods
         {
             var scrollOffset = typeof(UnityEngine.TextEditor).GetField("scrollOffset");
 
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Stfld, scrollOffset))
-                .Advance(-1)
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Stfld, scrollOffset));
+            if (cm.IsValid)
+            {
+                cm.Advance(-1)
                 .RemoveInstructions(3);
+            }
+            else
+            {
+                LogWarning("[Plugin] TextEditor scroll offset fix skipped: scrollOffset field not found");
+            }
 
             return cm.InstructionEnumeration();
         }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using HarmonyLib;
@@ -27,13 +27,23 @@ namespace jshepler.ngu.mods
                 .Insert(Transpilers.EmitDelegate(PrependMiscStats))
 
                 // modifiy daycare kitty happiness to indicate that it's the speed breakdown, then insert the time breakdown
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\n<b>Base Kitty Happiness</b> "))
-                .SetOperandAndAdvance("\n\n<b>Base Kitty Happiness (speed):</b> ")
+                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\n<b>Base Kitty Happiness</b> "));
+            
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance("\n\n<b>Base Kitty Happiness (speed):</b> ");
+            else
+            {
+                Plugin.LogWarning("[StatBreakdowns_Misc] Daycare kitty happiness patch skipped: 'Base Kitty Happiness' not found");
+                return cm.InstructionEnumeration();
+            }
 
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>Total Kitty Happiness:</b> "))
-                .SetOperandAndAdvance("\n<b>Total Kitty Happiness (speed):</b> ")
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>Total Kitty Happiness:</b> "));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance("\n<b>Total Kitty Happiness (speed):</b> ");
+            else
+                Plugin.LogWarning("[StatBreakdowns_Misc] Total kitty happiness patch skipped: string not found");
 
-                .MatchForward(true, new CodeMatch(OpCodes.Callvirt, setText), new CodeMatch(OpCodes.Ldarg_0))
+            cm.MatchForward(true, new CodeMatch(OpCodes.Callvirt, setText), new CodeMatch(OpCodes.Ldarg_0))
                 .MatchForward(false, new CodeMatch(OpCodes.Callvirt, setText))
                 .Advance(1)
                 .Insert(new CodeInstruction(OpCodes.Ldarg_0)

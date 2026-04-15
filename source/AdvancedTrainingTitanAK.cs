@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Text;
@@ -28,9 +28,17 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(ButtonShower), "showTitanTimers")]
         private static IEnumerable<CodeInstruction> ButtonShower_showTitanTimers_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldc_R4, 1f))
-                .SetInstruction(new CodeInstruction(OpCodes.Ldc_R4, 0.1f));
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldc_R4, 1f));
+            if (cm.IsValid)
+            {
+                cm.SetInstruction(new CodeInstruction(OpCodes.Ldc_R4, 0.1f));
+            }
+            else
+            {
+                Plugin.LogWarning("[AdvancedTrainingTitanAK] Titan timer update frequency patch skipped: float value 1.0 not found");
+            }
 
             return cm.InstructionEnumeration();
         }
@@ -147,13 +155,29 @@ namespace jshepler.ngu.mods
             var oldString = "\n<b>THE BEAST SPAWN READY</b>\n";
             var newString = "\n<b>THE BEAST SPAWN READY</b>";
 
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, oldString))
-                .SetOperandAndAdvance(newString)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldc_I4, 727))
-                .SetOperandAndAdvance(777);
+            var cm = new CodeMatcher(instructions);
 
-            return cm.InstructionEnumeration();//.DumpToLog();
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, oldString));
+            if (cm.IsValid)
+            {
+                cm.SetOperandAndAdvance(newString);
+            }
+            else
+            {
+                Plugin.LogWarning("[AdvancedTrainingTitanAK] Beautify patch skipped: 'BEAST SPAWN READY' string not found (likely due to localization mod)");
+            }
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldc_I4, 727));
+            if (cm.IsValid)
+            {
+                cm.SetOperandAndAdvance(777);
+            }
+            else
+            {
+                Plugin.LogWarning("[AdvancedTrainingTitanAK] T10 BossID fix skipped: value 727 not found (method may already be patched or modified by another mod)");
+            }
+
+            return cm.InstructionEnumeration();
         }
     }
 }

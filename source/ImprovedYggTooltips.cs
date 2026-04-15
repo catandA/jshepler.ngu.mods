@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
 using jshepler.ngu.mods.GameData;
@@ -79,10 +79,18 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(FruitController), "consumePowerFruit")]
         private static IEnumerable<CodeInstruction> FruitController_consumePowerFruit_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You eat the fruit and icrease your Attack and Defense! Power Fruit α's multiplier increased from <b>"))
-                .InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_S, (byte)4))
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You eat the fruit and icrease your Attack and Defense! Power Fruit α's multiplier increased from <b>"));
+            if (cm.IsValid)
+            {
+                cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_S, (byte)4))
                 .SetInstruction(Transpilers.EmitDelegate((long l) => $"You eat the fruit and increase your Attack and Defense! You gain +{l:#,##0} levels, increasing Power Fruit α's multiplier from <b>"));
+            }
+            else
+            {
+                Plugin.LogWarning("[ImprovedYggTooltips] Power fruit tooltip patch skipped: 'icrease your Attack' string not found (likely due to localization mod)");
+            }
 
             return cm.InstructionEnumeration();//.DumpToLog();
         }
@@ -90,10 +98,18 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(FruitController), "consumeLuckFruit")]
         private static IEnumerable<CodeInstruction> FruitController_consumeLuckFruit_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You eat the fruit and gain:\n+"))
-                .InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You eat the fruit and gain:\n+"));
+            if (cm.IsValid)
+            {
+                cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
                 .SetInstruction(Transpilers.EmitDelegate((long l) => $"You eat the fruit and gain:\n+{l:#,##0} levels, resulting in +"));
+            }
+            else
+            {
+                Plugin.LogWarning("[ImprovedYggTooltips] Luck fruit tooltip patch skipped: 'gain:' string not found (likely due to localization mod)");
+            }
 
             return cm.InstructionEnumeration();//.DumpToLog();
         }
@@ -101,10 +117,18 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(FruitController), "consumePermStatFruit")]
         private static IEnumerable<CodeInstruction> FruitController_consumePermStatFruit_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You eat the fruit. It tastes fruity. You also gain:\n+"))
-                .InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You eat the fruit. It tastes fruity. You also gain:\n+"));
+            if (cm.IsValid)
+            {
+                cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
                 .SetInstruction(Transpilers.EmitDelegate((long l) => $"You eat the fruit. It tastes fruity. You also gain:\n+{l:#,##0} levels, resulting in +"));
+            }
+            else
+            {
+                Plugin.LogWarning("[ImprovedYggTooltips] Perm stat fruit tooltip patch skipped: 'tastes fruity' string not found (likely due to localization mod)");
+            }
 
             return cm.InstructionEnumeration();//.DumpToLog();
         }
@@ -112,10 +136,18 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(FruitController), "consumePermNumberFruit")]
         private static IEnumerable<CodeInstruction> FruitController_consumePermNumberFruit_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You eat the fruit. It tastes fruity. You also gain:\n+"))
-                .InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You eat the fruit. It tastes fruity. You also gain:\n+"));
+            if (cm.IsValid)
+            {
+                cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
                 .SetInstruction(Transpilers.EmitDelegate((long l) => $"You eat the fruit. It tastes fruity. You also gain:\n+{l:#,##0} levels, resulting in +"));
+            }
+            else
+            {
+                Plugin.LogWarning("[ImprovedYggTooltips] Perm number fruit tooltip patch skipped: 'tastes fruity' string not found (likely due to localization mod)");
+            }
 
             return cm.InstructionEnumeration();//.DumpToLog();
         }
@@ -123,10 +155,18 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(FruitController), "consumePermStatFruit2")]
         private static IEnumerable<CodeInstruction> FruitController_consumePermStatFruit2_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You put on an extra strong pair of shades and eat the fruit. The glasses melt onto your face causing unbearable pain, but you gain:\n+"))
-                .InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You put on an extra strong pair of shades and eat the fruit. The glasses melt onto your face causing unbearable pain, but you gain:\n+"));
+            if (cm.IsValid)
+            {
+                cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
                 .SetInstruction(Transpilers.EmitDelegate((long l) => $"You put on an extra strong pair of shades and eat the fruit. The glasses melt onto your face causing unbearable pain, but you gain:\n+{l:#,##0} levels, resulting in +"));
+            }
+            else
+            {
+                Plugin.LogWarning("[ImprovedYggTooltips] Perm stat fruit 2 tooltip patch skipped: 'shades' string not found (likely due to localization mod)");
+            }
 
             return cm.InstructionEnumeration();//.DumpToLog();
         }
@@ -155,21 +195,45 @@ namespace jshepler.ngu.mods
                 return instructions;
             }
 
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "<b>"))
-                .Advance(1)
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "<b>"));
+            if (cm.IsValid)
+            {
+                cm.Advance(1)
                 .RemoveInstructions(4)
                 .Advance(2)
-                .SetInstruction(Transpilers.EmitDelegate(AppendFruitModifiers))
+                .SetInstruction(Transpilers.EmitDelegate(AppendFruitModifiers));
+            }
+            else
+            {
+                Plugin.LogWarning("[ImprovedYggTooltips] Fruit tooltip modifier patch skipped: '<b>' not found (likely due to localization mod)");
+                return cm.InstructionEnumeration();
+            }
 
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\n<b>Time to next Tier:</b> "))
-                .SetOperandAndAdvance("\n<b>Time to next Tier:</b> ")
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\n<b>Time to next Tier:</b> "));
+            if (cm.IsValid)
+            {
+                cm.SetOperandAndAdvance("\n<b>Time to next Tier:</b> ");
+            }
+            else
+            {
+                Plugin.LogWarning("[ImprovedYggTooltips] Time to tier patch skipped: 'Time to next Tier' string not found");
+                return cm.InstructionEnumeration();
+            }
 
-                .MatchForward(false, new CodeMatch(OpCodes.Call, concat3))
-                .InsertAndAdvance(
+            cm.MatchForward(false, new CodeMatch(OpCodes.Call, concat3));
+            if (cm.IsValid)
+            {
+                cm.InsertAndAdvance(
                     new CodeInstruction(OpCodes.Ldarg_0),
                     Transpilers.EmitDelegate(InsertTimeToMaxTier))
                 .SetOperandAndAdvance(concat4);
+            }
+            else
+            {
+                Plugin.LogWarning("[ImprovedYggTooltips] Time to max tier insertion skipped: concat3 call not found");
+            }
 
             return cm.InstructionEnumeration();
         }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
 
@@ -15,15 +15,24 @@ namespace jshepler.ngu.mods
             var cm = new CodeMatcher(instructions)
                 .MatchForward(false, new CodeMatch(OpCodes.Ldfld, allActive))
                 .Advance(-4)
-                .Insert(Transpilers.EmitDelegate(AddQuestsPerDay))
+                .Insert(Transpilers.EmitDelegate(AddQuestsPerDay));
 
-                // adding an extra line break so the text is more clean
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "<b>\nThis Quest is currently worth "))
-                .SetOperandAndAdvance("<b>\n\nThis Quest is currently worth ")
+            // adding an extra line break so the text is more clean
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "<b>\nThis Quest is currently worth "));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance("<b>\n\nThis Quest is currently worth ");
+            else
+            {
+                Plugin.LogWarning("[MajorQuestsPerDay] Quest formatting patch skipped: quest worth string not found");
+                return cm.InstructionEnumeration();
+            }
 
-                // removing "a hard worker and " shortens the string enough to not wrap and saves a line, offsetting that exta line break
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "% rewards because you're a hard worker and haven't used Idle Mode!</b>"))
-                .SetOperandAndAdvance("% rewards because you haven't used Idle Mode!</b>");
+            // removing "a hard worker and " shortens the string enough to not wrap and saves a line, offsetting that exta line break
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "% rewards because you're a hard worker and haven't used Idle Mode!</b>"));
+            if (cm.IsValid)
+                cm.SetOperandAndAdvance("% rewards because you haven't used Idle Mode!</b>");
+            else
+                Plugin.LogWarning("[MajorQuestsPerDay] Idle mode text patch skipped: idle mode string not found");
 
             return cm.InstructionEnumeration();
         }

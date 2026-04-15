@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
 using UnityEngine.UI;
@@ -15,15 +15,23 @@ namespace jshepler.ngu.mods
             var statValue = typeof(StatsDisplay).GetField("statValue");
             var setText = typeof(Text).GetProperty("text").GetSetMethod();
 
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>Total Gold Drop Modifier:</b> "))
-                .MatchForward(false, new CodeMatch(OpCodes.Callvirt, setText))
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>Total Gold Drop Modifier:</b> "));
+            if (cm.IsValid)
+            {
+                cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, setText))
                 .Advance(1)
                 .MatchForward(false, new CodeMatch(OpCodes.Callvirt, setText))
                 .Advance(1)
                 .InsertAndAdvance(
                     new CodeInstruction(OpCodes.Ldarg_0),
                     Transpilers.EmitDelegate(insertGPS));
+            }
+            else
+            {
+                Plugin.LogWarning("[StatsBreakdown_MiscAdv] Gold drop modifier patch skipped: 'Total Gold Drop Modifier' not found");
+            }
 
             return cm.InstructionEnumeration();
         }
