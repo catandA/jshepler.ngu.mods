@@ -101,7 +101,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[TrackAPGained] Titans AP tracking patch skipped: addAP method not found");
+                Plugin.LogWarning("[TrackAPGained] Titan AP 追踪补丁已跳过：未找到 addAP 方法");
             }
 
             return cm.InstructionEnumeration();
@@ -122,7 +122,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[TrackAPGained] ITOPOD AP tracking patch skipped: curArbitraryPoints field not found");
+                Plugin.LogWarning("[TrackAPGained] ITOPOD AP 追踪补丁已跳过：未找到 curArbitraryPoints 字段");
             }
 
             return cm.InstructionEnumeration();
@@ -144,7 +144,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[TrackAPGained] Bosses AP tracking patch skipped: addAP method not found");
+                Plugin.LogWarning("[TrackAPGained] Boss AP 追踪补丁已跳过：未找到 addAP 方法");
             }
 
             return cm.InstructionEnumeration();
@@ -174,7 +174,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[TrackAPGained] Daily Spin AP tracking patch skipped: addAP method not found");
+                Plugin.LogWarning("[TrackAPGained] 每日转盘 AP 追踪补丁已跳过：未找到 addAP 方法");
             }
 
             return cm.InstructionEnumeration();
@@ -196,7 +196,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[TrackAPGained] Quests AP tracking patch skipped: addAP method not found");
+                Plugin.LogWarning("[TrackAPGained] 任务 AP 追踪补丁已跳过：未找到 addAP 方法");
             }
 
             return cm.InstructionEnumeration();
@@ -215,7 +215,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[TrackAPGained] Fruit AP tracking patch skipped: addAP method not found");
+                Plugin.LogWarning("[TrackAPGained] 果实 AP 追踪补丁已跳过：未找到 addAP 方法");
             }
 
             return cm.InstructionEnumeration();
@@ -234,7 +234,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[TrackAPGained] Money Pit AP tracking patch skipped: addAP method not found");
+                Plugin.LogWarning("[TrackAPGained] 许愿池 AP 追踪补丁已跳过：未找到 addAP 方法");
             }
 
             return cm.InstructionEnumeration();
@@ -253,7 +253,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[TrackAPGained] Rebirth AP tracking patch skipped: addAP method not found");
+                Plugin.LogWarning("[TrackAPGained] 重生 AP 追踪补丁已跳过：未找到 addAP 方法");
             }
 
             return cm.InstructionEnumeration();
@@ -272,7 +272,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[TrackAPGained] Daily Save AP tracking patch skipped: addAP method not found");
+                Plugin.LogWarning("[TrackAPGained] 每日存档 AP 追踪补丁已跳过：未找到 addAP 方法");
             }
 
             return cm.InstructionEnumeration();
@@ -395,7 +395,7 @@ namespace jshepler.ngu.mods
             if (cm.IsValid)
                 cm.SetInstruction(Transpilers.EmitDelegate(BuildQuestReward));
             else
-                Plugin.LogWarning("[TrackAPGained] Quest AP display patch skipped: quest reward string not found (likely due to localization mod)");
+                Plugin.LogWarning("[TrackAPGained] 任务 AP 显示补丁已跳过：未找到任务奖励字符串");
 
             return cm.InstructionEnumeration();
         }

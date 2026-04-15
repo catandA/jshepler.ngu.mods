@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
@@ -25,7 +25,7 @@ namespace jshepler.ngu.mods
 
             if (cm.IsInvalid)
             {
-                Plugin.LogInfo("TrollChallengeController_displayBox_transpiler(): couldn't find second \"OK\" string");
+                Plugin.LogWarning("[SmallTrollBoxSwitchCount] Troll 挑战框补丁已跳过：未找到第二个 \"OK\" 字符串");
                 return instructions;
             }
 

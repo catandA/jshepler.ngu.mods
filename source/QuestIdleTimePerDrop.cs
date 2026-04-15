@@ -44,7 +44,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[QuestIdleTimePerDrop] Idle mode time per drop patch skipped: quest idle time string not found");
+                Plugin.LogWarning("[QuestIdleTimePerDrop] 待机模式每次掉落时间补丁已跳过：未找到任务待机时间字符串");
             }
 
             return cm.InstructionEnumeration();

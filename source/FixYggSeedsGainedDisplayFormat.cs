@@ -29,7 +29,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] Harvest display format patch skipped: 'You gained' string not found (likely due to localization mod)");
+                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] 收获显示格式补丁已跳过：未找到 'You gained' 字符串");
             }
 
             return cm.InstructionEnumeration();
@@ -53,7 +53,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] Gold fruit consume patch skipped: 'Gold and' string not found (likely due to localization mod)");
+                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] 金币果实消耗补丁已跳过：未找到 'Gold and' 字符串");
             }
 
             return cm.InstructionEnumeration();
@@ -77,7 +77,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] Power fruit consume patch skipped: 'also gained' string not found (likely due to localization mod)");
+                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] 力量果实消耗补丁已跳过：未找到 'also gained' 字符串");
             }
 
             return cm.InstructionEnumeration();
@@ -101,7 +101,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] AP fruit consume patch skipped: 'AP and' string not found (likely due to localization mod)");
+                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] AP 果实消耗补丁已跳过：未找到 'AP and' 字符串");
             }
 
             return cm.InstructionEnumeration();

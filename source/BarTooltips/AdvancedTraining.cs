@@ -18,7 +18,7 @@ namespace jshepler.ngu.mods.BarTooltips
                 cm.SetOperandAndAdvance("r");
             else
             {
-                Plugin.LogWarning("[AdvancedTraining] Bonus text format patch skipped: format string not found");
+                Plugin.LogWarning("[AdvancedTraining] 奖励文本格式补丁已跳过：未找到格式字符串");
                 return cm.InstructionEnumeration();
             }
 
@@ -26,7 +26,7 @@ namespace jshepler.ngu.mods.BarTooltips
             if (cm.IsValid)
                 cm.SetOperandAndAdvance("r");
             else
-                Plugin.LogWarning("[AdvancedTraining] Bonus text format patch incomplete: second format string not found");
+                Plugin.LogWarning("[AdvancedTraining] 奖励文本格式补丁不完整：未找到第二个格式字符串");
 
             return cm.InstructionEnumeration();
         }

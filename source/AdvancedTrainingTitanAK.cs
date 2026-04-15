@@ -37,7 +37,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[AdvancedTrainingTitanAK] Titan timer update frequency patch skipped: float value 1.0 not found");
+                Plugin.LogWarning("[AdvancedTrainingTitanAK] Titan 计时器更新频率补丁已跳过：未找到浮点值 1.0");
             }
 
             return cm.InstructionEnumeration();
@@ -164,7 +164,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[AdvancedTrainingTitanAK] Beautify patch skipped: 'BEAST SPAWN READY' string not found (likely due to localization mod)");
+                Plugin.LogWarning("[AdvancedTrainingTitanAK] 美化补丁已跳过：未找到 'BEAST SPAWN READY' 字符串");
             }
 
             cm.MatchForward(false, new CodeMatch(OpCodes.Ldc_I4, 727));
@@ -174,7 +174,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[AdvancedTrainingTitanAK] T10 BossID fix skipped: value 727 not found (method may already be patched or modified by another mod)");
+                Plugin.LogWarning("[AdvancedTrainingTitanAK] T10 BossID 修复已跳过：未找到值 727");
             }
 
             return cm.InstructionEnumeration();

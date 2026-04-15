@@ -22,7 +22,7 @@ namespace jshepler.ngu.mods
                 cm.Advance(-1)
                 .Insert(Transpilers.EmitDelegate(EMOverHardcaps));
             else
-                Plugin.LogWarning("[ShowExcessEMPC] EM over hardcap display patch skipped: 'Special Bonuses' not found");
+                Plugin.LogWarning("[ShowExcessEMPC] EM 超硬帽显示补丁已跳过：未找到 'Special Bonuses'");
 
             return cm.InstructionEnumeration();//.DumpToLog();
         }

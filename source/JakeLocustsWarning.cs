@@ -44,7 +44,7 @@ namespace jshepler.ngu.mods
                 //.SetInstruction(new CodeInstruction(OpCodes.Ldc_I4_3));
                 .SetInstruction(Transpilers.EmitDelegate(warningColor));
             else
-                Plugin.LogWarning("[JakeLocustsWarning] Locust warning color patch skipped: locust attack string not found (likely due to localization mod)");
+                Plugin.LogWarning("[JakeLocustsWarning] 蝗虫警告颜色补丁已跳过：未找到蝗虫攻击字符串");
 
             return cm.InstructionEnumeration();//.DumpToLog();
         }

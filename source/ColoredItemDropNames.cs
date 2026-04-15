@@ -48,7 +48,7 @@ namespace jshepler.ngu.mods
                 cm.SetOperandAndAdvance(replace1);
             else
             {
-                Plugin.LogWarning("[ColoredItemDropNames] Macguffin color patch skipped: 'also dropped' string not found (likely due to localization mod)");
+                Plugin.LogWarning("[ColoredItemDropNames] Macguffin 颜色补丁已跳过：未找到 'also dropped' 字符串");
                 return cm.InstructionEnumeration();
             }
 
@@ -57,7 +57,7 @@ namespace jshepler.ngu.mods
                 cm.SetOperandAndAdvance(replace2);
             else
             {
-                Plugin.LogWarning("[ColoredItemDropNames] Macguffin color patch incomplete: 'Power Macguffin Fragment' not found");
+                Plugin.LogWarning("[ColoredItemDropNames] Macguffin 颜色补丁不完整：未找到 'Power Macguffin Fragment'");
                 return cm.InstructionEnumeration();
             }
 
@@ -66,7 +66,7 @@ namespace jshepler.ngu.mods
                 cm.SetOperandAndAdvance(replace1);
             else
             {
-                Plugin.LogWarning("[ColoredItemDropNames] Macguffin color patch incomplete: second 'also dropped' not found");
+                Plugin.LogWarning("[ColoredItemDropNames] Macguffin 颜色补丁不完整：未找到第二个 'also dropped'");
                 return cm.InstructionEnumeration();
             }
 
@@ -75,7 +75,7 @@ namespace jshepler.ngu.mods
                 cm.SetOperandAndAdvance(replace3);
             else
             {
-                Plugin.LogWarning("[ColoredItemDropNames] Macguffin color patch incomplete: 'Cap Macguffin Fragment' not found");
+                Plugin.LogWarning("[ColoredItemDropNames] Macguffin 颜色补丁不完整：未找到 'Cap Macguffin Fragment'");
                 return cm.InstructionEnumeration();
             }
 
@@ -84,7 +84,7 @@ namespace jshepler.ngu.mods
                 cm.SetOperandAndAdvance(replace1);
             else
             {
-                Plugin.LogWarning("[ColoredItemDropNames] Macguffin color patch incomplete: third 'also dropped' not found");
+                Plugin.LogWarning("[ColoredItemDropNames] Macguffin 颜色补丁不完整：未找到第三个 'also dropped'");
                 return cm.InstructionEnumeration();
             }
 
@@ -93,7 +93,7 @@ namespace jshepler.ngu.mods
                 cm.SetOperandAndAdvance(replace4);
             else
             {
-                Plugin.LogWarning("[ColoredItemDropNames] Macguffin color patch incomplete: 'Bar Macguffin Fragment' not found");
+                Plugin.LogWarning("[ColoredItemDropNames] Macguffin 颜色补丁不完整：未找到 'Bar Macguffin Fragment'");
             }
 
             return cm.InstructionEnumeration();

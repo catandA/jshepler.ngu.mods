@@ -33,7 +33,7 @@ namespace jshepler.ngu.mods
                 cm.SetOperandAndAdvance("\n\n<b>Base Kitty Happiness (speed):</b> ");
             else
             {
-                Plugin.LogWarning("[StatBreakdowns_Misc] Daycare kitty happiness patch skipped: 'Base Kitty Happiness' not found");
+                Plugin.LogWarning("[StatBreakdowns_Misc] 托儿所猫咪快乐度补丁已跳过：未找到 'Base Kitty Happiness'");
                 return cm.InstructionEnumeration();
             }
 
@@ -41,7 +41,7 @@ namespace jshepler.ngu.mods
             if (cm.IsValid)
                 cm.SetOperandAndAdvance("\n<b>Total Kitty Happiness (speed):</b> ");
             else
-                Plugin.LogWarning("[StatBreakdowns_Misc] Total kitty happiness patch skipped: string not found");
+                Plugin.LogWarning("[StatBreakdowns_Misc] 总猫咪快乐度补丁已跳过：未找到字符串");
 
             cm.MatchForward(true, new CodeMatch(OpCodes.Callvirt, setText), new CodeMatch(OpCodes.Ldarg_0))
                 .MatchForward(false, new CodeMatch(OpCodes.Callvirt, setText))

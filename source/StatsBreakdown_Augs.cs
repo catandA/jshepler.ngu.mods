@@ -25,7 +25,7 @@ namespace jshepler.ngu.mods
                 cm.SetOperandAndAdvance(newString);
             else
             {
-                Plugin.LogWarning("[StatsBreakdown_Augs] Augment title patch skipped: 'Augment Speed Breakdown' not found");
+                Plugin.LogWarning("[StatsBreakdown_Augs] 增强器标题补丁已跳过：未找到 'Augment Speed Breakdown'");
                 return cm.InstructionEnumeration();
             }
 
@@ -42,7 +42,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[StatsBreakdown_Augs] Sad perk patch skipped: 'Total Augment Speed Factor' not found");
+                Plugin.LogWarning("[StatsBreakdown_Augs] 悲惨天赋补丁已跳过：未找到 'Total Augment Speed Factor'");
             }
 
             return cm.InstructionEnumeration();//.DumpToLog();

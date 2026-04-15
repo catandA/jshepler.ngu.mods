@@ -95,7 +95,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[InfinityCubeSoftCap] Cube Power softcap patch skipped: '<b>Power:</b>' string not found");
+                Plugin.LogWarning("[InfinityCubeSoftCap] 方块力量软帽补丁已跳过：未找到 '<b>Power:</b>' 字符串");
                 return cm.InstructionEnumeration();
             }
 
@@ -111,7 +111,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[InfinityCubeSoftCap] Cube Toughness softcap patch skipped: '<b>Toughness:</b>' string not found");
+                Plugin.LogWarning("[InfinityCubeSoftCap] 方块韧性软帽补丁已跳过：未找到 '<b>Toughness:</b>' 字符串");
                 return cm.InstructionEnumeration();
             }
                 
@@ -123,7 +123,7 @@ namespace jshepler.ngu.mods
                 .Advance(-1)
                 .Insert(Transpilers.EmitDelegate(Additionalnfo));
             else
-                Plugin.LogWarning("[InfinityCubeSoftCap] Additional info insertion skipped: string concat not found");
+                Plugin.LogWarning("[InfinityCubeSoftCap] 额外信息插入已跳过：未找到字符串拼接");
 
             var labelAfterSoftcapWarnings = cm
                 .MatchBack(false, new CodeMatch(OpCodes.Ldarg_0), new CodeMatch(OpCodes.Ldarg_0))
@@ -139,7 +139,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[InfinityCubeSoftCap] Softcap warning skip patch failed: cubePower field not found");
+                Plugin.LogWarning("[InfinityCubeSoftCap] 软帽警告跳过补丁失败：未找到 cubePower 字段");
             }
 
             return cm.InstructionEnumeration();

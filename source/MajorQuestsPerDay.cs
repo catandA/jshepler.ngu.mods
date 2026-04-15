@@ -23,7 +23,7 @@ namespace jshepler.ngu.mods
                 cm.SetOperandAndAdvance("<b>\n\nThis Quest is currently worth ");
             else
             {
-                Plugin.LogWarning("[MajorQuestsPerDay] Quest formatting patch skipped: quest worth string not found");
+                Plugin.LogWarning("[MajorQuestsPerDay] 任务格式化补丁已跳过：未找到任务价值字符串");
                 return cm.InstructionEnumeration();
             }
 
@@ -32,7 +32,7 @@ namespace jshepler.ngu.mods
             if (cm.IsValid)
                 cm.SetOperandAndAdvance("% rewards because you haven't used Idle Mode!</b>");
             else
-                Plugin.LogWarning("[MajorQuestsPerDay] Idle mode text patch skipped: idle mode string not found");
+                Plugin.LogWarning("[MajorQuestsPerDay] 待机模式文本补丁已跳过：未找到待机模式字符串");
 
             return cm.InstructionEnumeration();
         }

@@ -20,7 +20,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[GodmotherWarningBlue] Godmother warning color patch skipped: 'starts glowing white' string not found (likely due to localization mod)");
+                Plugin.LogWarning("[GodmotherWarningBlue] 教母警告颜色补丁已跳过：未找到 'starts glowing white' 字符串");
             }
 
             return cm.InstructionEnumeration();

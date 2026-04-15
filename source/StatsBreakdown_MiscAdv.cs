@@ -30,7 +30,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[StatsBreakdown_MiscAdv] Gold drop modifier patch skipped: 'Total Gold Drop Modifier' not found");
+                Plugin.LogWarning("[StatsBreakdown_MiscAdv] 金币掉落修饰符补丁已跳过：未找到 'Total Gold Drop Modifier'");
             }
 
             return cm.InstructionEnumeration();

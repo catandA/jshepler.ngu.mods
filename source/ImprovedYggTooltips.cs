@@ -89,7 +89,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] Power fruit tooltip patch skipped: 'icrease your Attack' string not found (likely due to localization mod)");
+                Plugin.LogWarning("[ImprovedYggTooltips] 力量果实工具提示补丁已跳过：未找到 'icrease your Attack' 字符串");
             }
 
             return cm.InstructionEnumeration();//.DumpToLog();
@@ -108,7 +108,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] Luck fruit tooltip patch skipped: 'gain:' string not found (likely due to localization mod)");
+                Plugin.LogWarning("[ImprovedYggTooltips] 运气果实工具提示补丁已跳过：未找到 'gain:' 字符串");
             }
 
             return cm.InstructionEnumeration();//.DumpToLog();
@@ -127,7 +127,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] Perm stat fruit tooltip patch skipped: 'tastes fruity' string not found (likely due to localization mod)");
+                Plugin.LogWarning("[ImprovedYggTooltips] 永久属性果实工具提示补丁已跳过：未找到 'tastes fruity' 字符串");
             }
 
             return cm.InstructionEnumeration();//.DumpToLog();
@@ -146,7 +146,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] Perm number fruit tooltip patch skipped: 'tastes fruity' string not found (likely due to localization mod)");
+                Plugin.LogWarning("[ImprovedYggTooltips] 永久数字果实工具提示补丁已跳过：未找到 'tastes fruity' 字符串");
             }
 
             return cm.InstructionEnumeration();//.DumpToLog();
@@ -165,7 +165,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] Perm stat fruit 2 tooltip patch skipped: 'shades' string not found (likely due to localization mod)");
+                Plugin.LogWarning("[ImprovedYggTooltips] 永久属性果实2工具提示补丁已跳过：未找到 'shades' 字符串");
             }
 
             return cm.InstructionEnumeration();//.DumpToLog();
@@ -207,7 +207,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] Fruit tooltip modifier patch skipped: '<b>' not found (likely due to localization mod)");
+                Plugin.LogWarning("[ImprovedYggTooltips] 果实工具提示修饰符补丁已跳过：未找到 '<b>'");
                 return cm.InstructionEnumeration();
             }
 
@@ -218,7 +218,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] Time to tier patch skipped: 'Time to next Tier' string not found");
+                Plugin.LogWarning("[ImprovedYggTooltips] 下一层级时间补丁已跳过：未找到 'Time to next Tier' 字符串");
                 return cm.InstructionEnumeration();
             }
 
@@ -232,7 +232,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] Time to max tier insertion skipped: concat3 call not found");
+                Plugin.LogWarning("[ImprovedYggTooltips] 最大层级时间插入已跳过：未找到 concat3 调用");
             }
 
             return cm.InstructionEnumeration();

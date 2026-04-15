@@ -97,7 +97,7 @@ namespace jshepler.ngu.mods.BarTooltips
             cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, respawnBonusNormal));
             if (!cm.IsValid)
             {
-                Plugin.LogWarning("[NGU] NGU tooltip patch skipped: respawnBonusNormal method not found");
+                Plugin.LogWarning("[NGU] NGU 工具提示补丁已跳过：未找到 respawnBonusNormal 方法");
                 return cm.InstructionEnumeration();
             }
 
@@ -106,7 +106,7 @@ namespace jshepler.ngu.mods.BarTooltips
                 cm.SetOperandAndAdvance("r");
             else
             {
-                Plugin.LogWarning("[NGU] NGU tooltip format patch incomplete: first format string not found");
+                Plugin.LogWarning("[NGU] NGU 工具提示格式补丁不完整：未找到第一个格式字符串");
                 return cm.InstructionEnumeration();
             }
 
@@ -115,7 +115,7 @@ namespace jshepler.ngu.mods.BarTooltips
                 cm.SetOperandAndAdvance("r");
             else
             {
-                Plugin.LogWarning("[NGU] NGU tooltip format patch incomplete: second format string not found");
+                Plugin.LogWarning("[NGU] NGU 工具提示格式补丁不完整：未找到第二个格式字符串");
                 return cm.InstructionEnumeration();
             }
 
@@ -124,7 +124,7 @@ namespace jshepler.ngu.mods.BarTooltips
                 cm.SetOperandAndAdvance("r");
             else
             {
-                Plugin.LogWarning("[NGU] NGU tooltip format patch incomplete: third format string not found");
+                Plugin.LogWarning("[NGU] NGU 工具提示格式补丁不完整：未找到第三个格式字符串");
                 return cm.InstructionEnumeration();
             }
 
@@ -132,7 +132,7 @@ namespace jshepler.ngu.mods.BarTooltips
             if (cm.IsValid)
                 cm.SetOperandAndAdvance("r");
             else
-                Plugin.LogWarning("[NGU] NGU tooltip format patch incomplete: fourth format string not found");
+                Plugin.LogWarning("[NGU] NGU 工具提示格式补丁不完整：未找到第四个格式字符串");
 
             return cm.InstructionEnumeration();
         }
