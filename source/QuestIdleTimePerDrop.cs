@@ -34,11 +34,11 @@ namespace jshepler.ngu.mods
 
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\nTime until next drop is added to Quest: "));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\n任务进度增加倒计时："));
             if (cm.IsValid)
             {
                 cm.InsertAndAdvance(Transpilers.EmitDelegate(getTimePerDrop))
-                .SetOperandAndAdvance("\nTime until next drop is added to Quest: ")
+                .SetOperandAndAdvance("\n任务进度增加倒计时：")
                 .MatchForward(false, new CodeMatch(OpCodes.Call, stringConcat3))
                 .SetOperandAndAdvance(stringConcat4);
             }

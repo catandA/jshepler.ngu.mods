@@ -35,6 +35,7 @@ namespace jshepler.ngu.mods
         private static ManualLogSource Log;
         internal static void LogInfo(string text) => Log.LogInfo(text);
         internal static void LogWarning(string text) => Log.LogWarning(text);
+        internal static void LogError(string text) => Log.LogError(text);
 
         internal static event EventHandler OnUpdate;
         internal static event EventHandler OnFixedUpdate;

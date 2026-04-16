@@ -18,21 +18,21 @@ namespace jshepler.ngu.mods
                 .Insert(Transpilers.EmitDelegate(AddQuestsPerDay));
 
             // adding an extra line break so the text is more clean
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "<b>\nThis Quest is currently worth "));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "<b>\n该任务目前价值"));
             if (cm.IsValid)
-                cm.SetOperandAndAdvance("<b>\n\nThis Quest is currently worth ");
+                cm.SetOperandAndAdvance("<b>\n\n该任务目前价值");
             else
             {
-                Plugin.LogWarning("[MajorQuestsPerDay] 任务格式化补丁已跳过：未找到任务价值字符串");
+                Plugin.LogWarning("[MajorQuestsPerDay] 任务格式化补丁已跳过");
                 return cm.InstructionEnumeration();
             }
 
             // removing "a hard worker and " shortens the string enough to not wrap and saves a line, offsetting that exta line break
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "% rewards because you're a hard worker and haven't used Idle Mode!</b>"));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "%奖励，因为您很努力，没有开启放置模式！</b>"));
             if (cm.IsValid)
-                cm.SetOperandAndAdvance("% rewards because you haven't used Idle Mode!</b>");
+                cm.SetOperandAndAdvance("%奖励，因为您没有开启放置模式！</b>");
             else
-                Plugin.LogWarning("[MajorQuestsPerDay] 待机模式文本补丁已跳过：未找到待机模式字符串");
+                Plugin.LogWarning("[MajorQuestsPerDay] 待机模式文本补丁已跳过");
 
             return cm.InstructionEnumeration();
         }

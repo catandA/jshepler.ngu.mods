@@ -27,19 +27,19 @@ namespace jshepler.ngu.mods
                 .Insert(Transpilers.EmitDelegate(PrependMiscStats))
 
                 // modifiy daycare kitty happiness to indicate that it's the speed breakdown, then insert the time breakdown
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\n<b>Base Kitty Happiness</b> "));
+                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\n<b>基础猫猫快乐度：</b>"));
             
             if (cm.IsValid)
-                cm.SetOperandAndAdvance("\n\n<b>Base Kitty Happiness (speed):</b> ");
+                cm.SetOperandAndAdvance("\n\n<b>基础猫猫快乐度（速度）：</b> ");
             else
             {
-                Plugin.LogWarning("[StatBreakdowns_Misc] 托儿所猫咪快乐度补丁已跳过：未找到 'Base Kitty Happiness'");
+                Plugin.LogWarning("[StatBreakdowns_Misc] 托儿所猫咪快乐度补丁已跳过：未找到 '基础猫猫快乐度'");
                 return cm.InstructionEnumeration();
             }
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>Total Kitty Happiness:</b> "));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>总猫猫快乐度：</b>"));
             if (cm.IsValid)
-                cm.SetOperandAndAdvance("\n<b>Total Kitty Happiness (speed):</b> ");
+                cm.SetOperandAndAdvance("\n<b>总猫猫快乐度（速度）：</b> ");
             else
                 Plugin.LogWarning("[StatBreakdowns_Misc] 总猫咪快乐度补丁已跳过：未找到字符串");
 

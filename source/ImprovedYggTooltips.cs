@@ -81,7 +81,7 @@ namespace jshepler.ngu.mods
         {
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You eat the fruit and icrease your Attack and Defense! Power Fruit α's multiplier increased from <b>"));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "您食用了该果实，提升了攻击力和防御力！力量之果实α的加成从<b>"));
             if (cm.IsValid)
             {
                 cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_S, (byte)4))
@@ -89,7 +89,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] 力量果实工具提示补丁已跳过：未找到 'icrease your Attack' 字符串");
+                Plugin.LogWarning("[ImprovedYggTooltips] 力量果实工具提示补丁已跳过");
             }
 
             return cm.InstructionEnumeration();//.DumpToLog();
@@ -100,7 +100,7 @@ namespace jshepler.ngu.mods
         {
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You eat the fruit and gain:\n+"));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "您食用了该果实，并获得了：\n"));
             if (cm.IsValid)
             {
                 cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
@@ -108,7 +108,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] 运气果实工具提示补丁已跳过：未找到 'gain:' 字符串");
+                Plugin.LogWarning("[ImprovedYggTooltips] 运气果实工具提示补丁已跳过");
             }
 
             return cm.InstructionEnumeration();//.DumpToLog();
@@ -119,7 +119,7 @@ namespace jshepler.ngu.mods
         {
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You eat the fruit. It tastes fruity. You also gain:\n+"));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "您食用了该果实。它尝起来果香味浓。您获得了：\n"));
             if (cm.IsValid)
             {
                 cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
@@ -127,7 +127,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] 永久属性果实工具提示补丁已跳过：未找到 'tastes fruity' 字符串");
+                Plugin.LogWarning("[ImprovedYggTooltips] 永久属性果实工具提示补丁已跳过");
             }
 
             return cm.InstructionEnumeration();//.DumpToLog();
@@ -138,7 +138,7 @@ namespace jshepler.ngu.mods
         {
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You eat the fruit. It tastes fruity. You also gain:\n+"));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "您食用了该果实。它尝起来果香味浓。您获得了：\n"));
             if (cm.IsValid)
             {
                 cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
@@ -146,7 +146,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] 永久数字果实工具提示补丁已跳过：未找到 'tastes fruity' 字符串");
+                Plugin.LogWarning("[ImprovedYggTooltips] 永久数字果实工具提示补丁已跳过");
             }
 
             return cm.InstructionEnumeration();//.DumpToLog();
@@ -157,7 +157,7 @@ namespace jshepler.ngu.mods
         {
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You put on an extra strong pair of shades and eat the fruit. The glasses melt onto your face causing unbearable pain, but you gain:\n+"));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "您戴上了一副特别结实的墨镜，然后食用了该水果。墨镜在您的脸上熔化了，带来了剧烈的疼痛，但您获得了：\n"));
             if (cm.IsValid)
             {
                 cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
@@ -165,7 +165,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] 永久属性果实2工具提示补丁已跳过：未找到 'shades' 字符串");
+                Plugin.LogWarning("[ImprovedYggTooltips] 永久属性果实2工具提示补丁已跳过");
             }
 
             return cm.InstructionEnumeration();//.DumpToLog();
@@ -207,18 +207,18 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] 果实工具提示修饰符补丁已跳过：未找到 '<b>'");
+                Plugin.LogWarning("[ImprovedYggTooltips] 果实工具提示修饰符补丁已跳过");
                 return cm.InstructionEnumeration();
             }
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\n<b>Time to next Tier:</b> "));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\n<b>到达下一阶层需时：</b>"));
             if (cm.IsValid)
             {
-                cm.SetOperandAndAdvance("\n<b>Time to next Tier:</b> ");
+                cm.SetOperandAndAdvance("\n<b>到达下一阶层需时：</b> ");
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] 下一层级时间补丁已跳过：未找到 'Time to next Tier' 字符串");
+                Plugin.LogWarning("[ImprovedYggTooltips] 下一层级时间补丁已跳过");
                 return cm.InstructionEnumeration();
             }
 
@@ -232,7 +232,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[ImprovedYggTooltips] 最大层级时间插入已跳过：未找到 concat3 调用");
+                Plugin.LogWarning("[ImprovedYggTooltips] 最大层级时间插入已跳过");
             }
 
             return cm.InstructionEnumeration();

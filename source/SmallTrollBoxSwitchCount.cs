@@ -21,11 +21,11 @@ namespace jshepler.ngu.mods
         {
             var cm = new CodeMatcher(instructions)
                 .End()
-                .MatchBack(false, new CodeMatch(OpCodes.Ldstr, "OK"));
+                .MatchBack(false, new CodeMatch(OpCodes.Ldstr, "好"));
 
             if (cm.IsInvalid)
             {
-                Plugin.LogWarning("[SmallTrollBoxSwitchCount] Troll 挑战框补丁已跳过：未找到第二个 \"OK\" 字符串");
+                Plugin.LogWarning("[SmallTrollBoxSwitchCount] Troll 挑战框补丁已跳过：未找到第二个 \"好\" 字符串");
                 return instructions;
             }
 
@@ -36,7 +36,7 @@ namespace jshepler.ngu.mods
 
         private static string AppendCounter()
         {
-            return $"OK ({Math.Max(0, _controller.switcherooBox - _controller.boxCounter)})";
+            return $"好 ({Math.Max(0, _controller.switcherooBox - _controller.boxCounter)})";
         }
     }
 }

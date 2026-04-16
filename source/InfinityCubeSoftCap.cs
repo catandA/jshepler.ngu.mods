@@ -72,8 +72,8 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(LoadoutController), "infinityCubeTooltip")]
         private static IEnumerable<CodeInstruction> LoadoutController_infinityCubeTooltip_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var powerString = "<b>Power:</b> ";
-            var toughString = "\n<b>Toughness:</b> ";
+            var powerString = "<b>力量：</b>";
+            var toughString = "\n<b>韧性：</b>";
 
             var inventoryCubePower = typeof(Inventory).GetField("cubePower");
             var concat2strings = typeof(string).GetMethod("Concat", [typeof(string), typeof(string)]);
@@ -95,7 +95,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[InfinityCubeSoftCap] 方块力量软帽补丁已跳过：未找到 '<b>Power:</b>' 字符串");
+                Plugin.LogWarning("[InfinityCubeSoftCap] 方块力量软帽补丁已跳过：未找到 '<b>力量：</b>' 字符串");
                 return cm.InstructionEnumeration();
             }
 
@@ -111,7 +111,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[InfinityCubeSoftCap] 方块韧性软帽补丁已跳过：未找到 '<b>Toughness:</b>' 字符串");
+                Plugin.LogWarning("[InfinityCubeSoftCap] 方块韧性软帽补丁已跳过：未找到 '<b>韧性：</b>' 字符串");
                 return cm.InstructionEnumeration();
             }
                 

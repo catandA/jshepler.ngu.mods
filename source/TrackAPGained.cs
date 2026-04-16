@@ -46,6 +46,45 @@ namespace jshepler.ngu.mods
         private static MethodInfo _addAP64 = typeof(Character).GetMethod("addAP", [typeof(long)]);
         private static FieldInfo _curArbitraryPoints = typeof(Arbitrary).GetField("curArbitraryPoints");
 
+        private static IEnumerable<CodeInstruction> PatchAddAP(IEnumerable<CodeInstruction> instructions, MethodInfo addAPMethod, int source, string sourceName)
+        {
+            var cm = new CodeMatcher(instructions);
+
+            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, addAPMethod));
+            if (cm.IsValid)
+            {
+                cm.Advance(1)
+                .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, source)));
+                return cm.InstructionEnumeration();
+            }
+
+            var list = instructions.ToList();
+            var indices = new List<int>();
+            var targetName = addAPMethod.Name;
+            var paramType = addAPMethod.GetParameters()[0].ParameterType.Name;
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].opcode == OpCodes.Call && list[i].operand is MethodInfo mi && mi.Name == targetName && mi.GetParameters()[0].ParameterType.Name == paramType)
+                {
+                    indices.Add(i);
+                }
+            }
+
+            if (indices.Count > 0)
+            {
+                for (int i = indices.Count - 1; i >= 0; i--)
+                {
+                    var idx = indices[i];
+                    list.Insert(idx, Transpilers.EmitDelegate((long l) => TrackGain(l, source)));
+                }
+                return list.AsEnumerable();
+            }
+
+            Plugin.LogWarning($"[TrackAPGained] {sourceName} AP 追踪补丁已跳过：未找到 addAP 方法");
+            return cm.InstructionEnumeration();
+        }
+
         internal static long TrackGain(long amount, int source)
         {
             if (source >= 0 && source < SOURCE_COUNT)
@@ -98,12 +137,30 @@ namespace jshepler.ngu.mods
                     m.Advance(1)
                     .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Titans)));
                 });
-            }
-            else
-            {
-                Plugin.LogWarning("[TrackAPGained] Titan AP 追踪补丁已跳过：未找到 addAP 方法");
+                return cm.InstructionEnumeration();
             }
 
+            var list = instructions.ToList();
+            var indices = new List<int>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].opcode == OpCodes.Call && list[i].operand is MethodInfo mi && mi.Name == "addAP")
+                {
+                    indices.Add(i);
+                }
+            }
+
+            if (indices.Count > 0)
+            {
+                for (int i = indices.Count - 1; i >= 0; i--)
+                {
+                    var idx = indices[i];
+                    list.Insert(idx, Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Titans)));
+                }
+                return list.AsEnumerable();
+            }
+
+            Plugin.LogWarning("[TrackAPGained] Titan AP 追踪补丁已跳过：未找到 addAP 方法");
             return cm.InstructionEnumeration();
         }
 
@@ -141,12 +198,30 @@ namespace jshepler.ngu.mods
                 .Insert(
                     Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Bosses)),
                     Transpilers.EmitDelegate((long l) => Plugin.Character.adventureController.log.AddEvent($"You also gained {l} AP for killing 10 bosses!", 3)));
-            }
-            else
-            {
-                Plugin.LogWarning("[TrackAPGained] Boss AP 追踪补丁已跳过：未找到 addAP 方法");
+                return cm.InstructionEnumeration();
             }
 
+            var list = instructions.ToList();
+            var indices = new List<int>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].opcode == OpCodes.Call && list[i].operand is MethodInfo mi && mi.Name == "addAP" && mi.GetParameters()[0].ParameterType.Name == "Int32")
+                {
+                    indices.Add(i);
+                }
+            }
+
+            if (indices.Count > 0)
+            {
+                for (int i = indices.Count - 1; i >= 0; i--)
+                {
+                    var idx = indices[i];
+                    list.Insert(idx, Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Bosses)));
+                }
+                return list.AsEnumerable();
+            }
+
+            Plugin.LogWarning("[TrackAPGained] Boss AP 追踪补丁已跳过：未找到 addAP 方法");
             return cm.InstructionEnumeration();
         }
 
@@ -161,121 +236,37 @@ namespace jshepler.ngu.mods
             HarmonyPatch(typeof(DailyRewardController), "tier7Reward")]
         private static IEnumerable<CodeInstruction> dailyspin_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions);
-
-            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP32));
-            if (cm.IsValid)
-            {
-                cm.Repeat(m =>
-                {
-                    m.Advance(1)
-                    .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.DailySpin)));
-                });
-            }
-            else
-            {
-                Plugin.LogWarning("[TrackAPGained] 每日转盘 AP 追踪补丁已跳过：未找到 addAP 方法");
-            }
-
-            return cm.InstructionEnumeration();
+            return PatchAddAP(instructions, _addAP32, APSource.DailySpin, "每日转盘");
         }
 
         [HarmonyTranspiler, HarmonyPatch(typeof(BeastQuestController), "giveRewardsAndClear", typeof(bool))]
         private static IEnumerable<CodeInstruction> quests_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions);
-
-            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64));
-            if (cm.IsValid)
-            {
-                cm.Repeat(m =>
-                {
-                    m.Advance(1)
-                    .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Quests)));
-                });
-            }
-            else
-            {
-                Plugin.LogWarning("[TrackAPGained] 任务 AP 追踪补丁已跳过：未找到 addAP 方法");
-            }
-
-            return cm.InstructionEnumeration();
+            return PatchAddAP(instructions, _addAP64, APSource.Quests, "任务");
         }
 
         [HarmonyTranspiler, HarmonyPatch(typeof(FruitController), "consumeAPFruit")]
         private static IEnumerable<CodeInstruction> fruit_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions);
-
-            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64));
-            if (cm.IsValid)
-            {
-                cm.Advance(1)
-                .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Fruit)));
-            }
-            else
-            {
-                Plugin.LogWarning("[TrackAPGained] 果实 AP 追踪补丁已跳过：未找到 addAP 方法");
-            }
-
-            return cm.InstructionEnumeration();
+            return PatchAddAP(instructions, _addAP64, APSource.Fruit, "果实");
         }
 
         [HarmonyTranspiler, HarmonyPatch(typeof(PitController), "oneTossReward")]
         private static IEnumerable<CodeInstruction> pit_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions);
-
-            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64));
-            if (cm.IsValid)
-            {
-                cm.Advance(1)
-                .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.MoneyPit)));
-            }
-            else
-            {
-                Plugin.LogWarning("[TrackAPGained] 许愿池 AP 追踪补丁已跳过：未找到 addAP 方法");
-            }
-
-            return cm.InstructionEnumeration();
+            return PatchAddAP(instructions, _addAP64, APSource.MoneyPit, "许愿池");
         }
 
         [HarmonyTranspiler, HarmonyPatch(typeof(Rebirth), "awardAP")]
         private static IEnumerable<CodeInstruction> rebirth_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions);
-
-            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP64));
-            if (cm.IsValid)
-            {
-                cm.Advance(1)
-                .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Rebirth)));
-            }
-            else
-            {
-                Plugin.LogWarning("[TrackAPGained] 重生 AP 追踪补丁已跳过：未找到 addAP 方法");
-            }
-
-            return cm.InstructionEnumeration();
+            return PatchAddAP(instructions, _addAP64, APSource.Rebirth, "重生");
         }
 
         [HarmonyTranspiler, HarmonyPatch(typeof(OpenFileDialog), "startSaveStandalone")]
         private static IEnumerable<CodeInstruction> dailySave_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions);
-
-            cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, _addAP32));
-            if (cm.IsValid)
-            {
-                cm.Advance(1)
-                .Insert(Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.DailySave)));
-            }
-            else
-            {
-                Plugin.LogWarning("[TrackAPGained] 每日存档 AP 追踪补丁已跳过：未找到 addAP 方法");
-            }
-
-            return cm.InstructionEnumeration();
+            return PatchAddAP(instructions, _addAP32, APSource.DailySave, "每日存档");
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(Rebirth), "engage", typeof(bool))]
@@ -391,11 +382,11 @@ namespace jshepler.ngu.mods
         {
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>This Quest is currently worth "));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>该任务目前价值"));
             if (cm.IsValid)
                 cm.SetInstruction(Transpilers.EmitDelegate(BuildQuestReward));
             else
-                Plugin.LogWarning("[TrackAPGained] 任务 AP 显示补丁已跳过：未找到任务奖励字符串");
+                Plugin.LogWarning("[TrackAPGained] 任务 AP 显示补丁已跳过");
 
             return cm.InstructionEnumeration();
         }
@@ -413,7 +404,7 @@ namespace jshepler.ngu.mods
 
             var ap = character.checkAPAdded(baseAP);
 
-            return $"\n<b>This Quest is currently worth {ap} AP and ";
+            return $"\n<b>该任务目前价值 {ap} 任意点和";
         }
 
         private static int sorter((string s, long l, float f) a, (string s, long l, float f) b) => b.f.CompareTo(a.f);

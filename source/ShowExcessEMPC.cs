@@ -17,12 +17,12 @@ namespace jshepler.ngu.mods
         {
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\n<b>Special Bonuses:</b>"));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n\n<b>特殊加成：</b>"));
             if (cm.IsValid)
                 cm.Advance(-1)
                 .Insert(Transpilers.EmitDelegate(EMOverHardcaps));
             else
-                Plugin.LogWarning("[ShowExcessEMPC] EM 超硬帽显示补丁已跳过：未找到 'Special Bonuses'");
+                Plugin.LogWarning("[ShowExcessEMPC] EM 超硬帽显示补丁已跳过：未找到 '特殊加成'");
 
             return cm.InstructionEnumeration();//.DumpToLog();
         }

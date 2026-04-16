@@ -37,7 +37,7 @@ namespace jshepler.ngu.mods
                     , new CodeInstruction(OpCodes.Stfld, enemyAttackTimerField))
 
                 // sets warning text to blue
-                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, " opens his mouth unnaturally wide and shoots out 100,000 FREAKING LOCUSTS! INCOMING!!!"));
+                .MatchForward(false, new CodeMatch(OpCodes.Ldstr, "不自然地张大嘴巴，发射出约100,000只该死的蝗虫！蝗虫入侵！！！"));
             
             if (cm.IsValid)
                 cm.Advance(2)

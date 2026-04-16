@@ -16,7 +16,7 @@ namespace jshepler.ngu.mods
         {
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "You gained "));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "您获得了"));
             if (cm.IsValid)
             {
                 cm.Advance(1)
@@ -29,7 +29,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] 收获显示格式补丁已跳过：未找到 'You gained' 字符串");
+                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] 收获显示格式补丁已跳过");
             }
 
             return cm.InstructionEnumeration();
@@ -40,7 +40,7 @@ namespace jshepler.ngu.mods
         {
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, " Gold and "));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "黄金和"));
             if (cm.IsValid)
             {
                 cm.Advance(4)
@@ -53,7 +53,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] 金币果实消耗补丁已跳过：未找到 'Gold and' 字符串");
+                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] 金币果实消耗补丁已跳过");
             }
 
             return cm.InstructionEnumeration();
@@ -64,7 +64,7 @@ namespace jshepler.ngu.mods
         {
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "%</b>.You've also gained "));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "%</b>。您还获得了"));
             if (cm.IsValid)
             {
                 cm.Advance(4)
@@ -77,7 +77,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] 力量果实消耗补丁已跳过：未找到 'also gained' 字符串");
+                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] 力量果实消耗补丁已跳过");
             }
 
             return cm.InstructionEnumeration();
@@ -88,7 +88,7 @@ namespace jshepler.ngu.mods
         {
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, " AP and "));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "任意点和"));
             if (cm.IsValid)
             {
                 cm.Advance(-5)
@@ -101,7 +101,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] AP 果实消耗补丁已跳过：未找到 'AP and' 字符串");
+                Plugin.LogWarning("[FixYggSeedsGainedDisplayFormat] AP 果实消耗补丁已跳过");
             }
 
             return cm.InstructionEnumeration();

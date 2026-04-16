@@ -12,7 +12,7 @@ namespace jshepler.ngu.mods
         {
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, " starts glowing white! HIT THE FREAKIN' DECK!"));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "开始发出白光！做好准备！"));
             if (cm.IsValid)
             {
                 cm.Advance(2)
@@ -20,7 +20,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[GodmotherWarningBlue] 教母警告颜色补丁已跳过：未找到 'starts glowing white' 字符串");
+                Plugin.LogWarning("[GodmotherWarningBlue] 教母警告颜色补丁已跳过：未找到 '开始发出白光' 字符串");
             }
 
             return cm.InstructionEnumeration();

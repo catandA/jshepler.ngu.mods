@@ -12,7 +12,7 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(StatsDisplay), "displayAugments")]
         private static IEnumerable<CodeInstruction> StatsDisplay_displayAugments_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var oldString = "Augment Speed Breakdown";
+            var oldString = "挂件速度明细";
             var newString = "Augment Stats Breakdown";
 
             var statsBreakdown = typeof(StatsDisplay).GetField("statsBreakdown");
@@ -25,12 +25,12 @@ namespace jshepler.ngu.mods
                 cm.SetOperandAndAdvance(newString);
             else
             {
-                Plugin.LogWarning("[StatsBreakdown_Augs] 增强器标题补丁已跳过：未找到 'Augment Speed Breakdown'");
+                Plugin.LogWarning("[StatsBreakdown_Augs] 增强器标题补丁已跳过：未找到 '挂件速度明细'");
                 return cm.InstructionEnumeration();
             }
 
             // fixes bug where "Welcome to Sadistic" perk isn't included
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>Total Augment Speed Factor:</b> "));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>总挂件速度因子：</b>"));
             if (cm.IsValid)
             {
                 cm.Advance(-1)
@@ -42,7 +42,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[StatsBreakdown_Augs] 悲惨天赋补丁已跳过：未找到 'Total Augment Speed Factor'");
+                Plugin.LogWarning("[StatsBreakdown_Augs] 悲惨天赋补丁已跳过：未找到 '总挂件速度因子'");
             }
 
             return cm.InstructionEnumeration();//.DumpToLog();

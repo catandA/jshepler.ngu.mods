@@ -17,7 +17,7 @@ namespace jshepler.ngu.mods
 
             var cm = new CodeMatcher(instructions);
 
-            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>Total Gold Drop Modifier:</b> "));
+            cm.MatchForward(false, new CodeMatch(OpCodes.Ldstr, "\n<b>总黄金掉落因子：</b>"));
             if (cm.IsValid)
             {
                 cm.MatchForward(false, new CodeMatch(OpCodes.Callvirt, setText))
@@ -30,7 +30,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[StatsBreakdown_MiscAdv] 金币掉落修饰符补丁已跳过：未找到 'Total Gold Drop Modifier'");
+                Plugin.LogWarning("[StatsBreakdown_MiscAdv] 金币掉落修饰符补丁已跳过：未找到 '总黄金掉落因子'");
             }
 
             return cm.InstructionEnumeration();

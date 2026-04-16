@@ -152,8 +152,8 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPriority(2), HarmonyPatch(typeof(ButtonShower), "showTitanTimer")]
         private static IEnumerable<CodeInstruction> ButtonShower_showTitanTimer_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var oldString = "\n<b>THE BEAST SPAWN READY</b>\n";
-            var newString = "\n<b>THE BEAST SPAWN READY</b>";
+            var oldString = "\n<b>虫兽已出现</b>\n";
+            var newString = "\n<b>虫兽已出现</b>";
 
             var cm = new CodeMatcher(instructions);
 
@@ -164,7 +164,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[AdvancedTrainingTitanAK] 美化补丁已跳过：未找到 'BEAST SPAWN READY' 字符串");
+                Plugin.LogWarning("[AdvancedTrainingTitanAK] 美化补丁已跳过：未找到 '虫兽已出现' 字符串");
             }
 
             cm.MatchForward(false, new CodeMatch(OpCodes.Ldc_I4, 727));
