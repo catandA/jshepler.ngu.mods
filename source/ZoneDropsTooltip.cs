@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿﻿﻿﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -354,18 +354,44 @@ namespace jshepler.ngu.mods
         [HarmonyTranspiler, HarmonyPatch(typeof(LootDrop), "zone7Drop")]
         private static IEnumerable<CodeInstruction> LootDrop_zone7Drop_transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            var cm = new CodeMatcher(instructions)
-                .MatchForward(false, new CodeMatch(OpCodes.Conv_R8))
-                .RemoveInstructions(8)
-                .Insert(new CodeInstruction(OpCodes.Ldloc_3)
-                    , new CodeInstruction(OpCodes.Ldc_R4, 0.012f)
-                    , new CodeInstruction(OpCodes.Ldloc_2)
-                    , new CodeInstruction(OpCodes.Mul)
-                    , new CodeInstruction(OpCodes.Add)
-                    , new CodeInstruction(OpCodes.Dup)
-                    , new CodeInstruction(OpCodes.Stloc_3));
+            var instructionList = instructions.ToList();
 
-            return cm.InstructionEnumeration();//.DumpToLog();
+            try
+            {
+                // In Chinese version, the IL pattern is different from English version
+                // Original: ldloc.0, conv.r8, ldloc.3, conv.r8, ldc.r8 0.012, mul, ldloc.2, conv.r8, mul
+                // Chinese:  stloc.2, ldloc.0, conv.r8, ldloc.2, conv.r8, ldc.r8 0.012, mul, ldloc.1, conv.r8, mul
+
+                // Try matching the full pattern: conv.r8, ldloc.2, conv.r8, ldc.r8 0.012
+                var cm = new CodeMatcher(instructionList)
+                    .MatchForward(false,
+                        new CodeMatch(OpCodes.Conv_R8),
+                        new CodeMatch(OpCodes.Ldloc_2),
+                        new CodeMatch(OpCodes.Conv_R8),
+                        new CodeMatch(OpCodes.Ldc_R8, 0.012));
+
+                if (!cm.IsValid)
+                {
+                    Plugin.LogWarning("[ZoneDropsTooltip] zone7Drop: could not find target IL pattern, skipping patch");
+                    return instructionList;
+                }
+
+                cm.RemoveInstructions(8)
+                    .Insert(new CodeInstruction(OpCodes.Ldloc_2)
+                        , new CodeInstruction(OpCodes.Ldc_R4, 0.012f)
+                        , new CodeInstruction(OpCodes.Ldloc_1)
+                        , new CodeInstruction(OpCodes.Mul)
+                        , new CodeInstruction(OpCodes.Add)
+                        , new CodeInstruction(OpCodes.Dup)
+                        , new CodeInstruction(OpCodes.Stloc_2));
+
+                return cm.InstructionEnumeration();
+            }
+            catch (Exception ex)
+            {
+                Plugin.LogWarning("[ZoneDropsTooltip] zone7Drop transpiler failed: " + ex.Message);
+                return instructionList;
+            }
         }
     }
 }

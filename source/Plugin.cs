@@ -106,8 +106,15 @@ namespace jshepler.ngu.mods
             Log = base.Logger;
             Options.Init(base.Config);
 
-            harmony.PatchAll();
-            LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+            try
+            {
+                harmony.PatchAll();
+                LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("Exception in Awake: " + ex.Message);
+            }
         }
 
         private void Update()

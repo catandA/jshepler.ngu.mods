@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -39,66 +40,69 @@ namespace jshepler.ngu.mods.ModSave
         // if doing a clean save, it creates a new instance of PlayerData
         //
         // note that ModPlayerData implements ISerializable and sets the type to be PlayerData - this is so a vanilla game could still load the save
-        [HarmonyTranspiler, HarmonyPatch(typeof(ImportExport), "gameStateToData")]
-        private static IEnumerable<CodeInstruction> ImportExport_gameStateToData_transpiler(IEnumerable<CodeInstruction> instructions)
+        [HarmonyPrefix, HarmonyPatch(typeof(ImportExport), "gameStateToData")]
+        private static void ImportExport_gameStateToData_prefix(ref PlayerData __result)
         {
-            var cm = new CodeMatcher(instructions)
-                .Advance(1)
-                .SetInstruction(Transpilers.EmitDelegate(CreatePlayerData));
-
-            return cm.InstructionEnumeration();
-        }
-
-        private static PlayerData CreatePlayerData()
-        {
-            if (DoCleanSave)
+            try
             {
-                DoCleanSave = false;
-                return new PlayerData();
+                if (DoCleanSave)
+                {
+                    DoCleanSave = false;
+                    __result = new PlayerData();
+                }
+                else
+                {
+                    __result = new ModPlayerData() { Data = Data.Values };
+                }
             }
-
-            return new ModPlayerData() { Data = Data.Values };
+            catch (Exception ex)
+            {
+                Plugin.LogWarning("[ModSave] gameStateToData prefix failed: " + ex.Message);
+            }
         }
 
         // deserialization patches
 
         // this sets BinaryFormatter.Binder to PlayerDataBinder
         // PlayerDataBinder basically redirects deserliazation of PlayerData to ModPlayerData
-        [HarmonyTranspiler, HarmonyPatch(typeof(BinaryFormatterExtensions), "DeserializePlayerDataFromString")]
-        private static IEnumerable<CodeInstruction> BinaryFormatterExtensions_DeserializePlayerDataFromString_transpiler(IEnumerable<CodeInstruction> instructions)
+        [HarmonyPrefix, HarmonyPatch(typeof(BinaryFormatterExtensions), "DeserializePlayerDataFromString")]
+        private static void BinaryFormatterExtensions_DeserializePlayerDataFromString_prefix(BinaryFormatter __instance)
         {
-            var cm = new CodeMatcher(instructions)
-                .Advance(1)
-                .Insert(new CodeInstruction(OpCodes.Ldarg_0)
-                    , Transpilers.EmitDelegate((BinaryFormatter bf) => bf.Binder = new PlayerDataBinder()));
-
-            return cm.InstructionEnumeration();
+            try
+            {
+                if (__instance != null)
+                {
+                    __instance.Binder = new PlayerDataBinder();
+                }
+            }
+            catch (Exception ex)
+            {
+                Plugin.LogWarning("[ModSave] DeserializePlayerDataFromString prefix failed: " + ex.Message);
+            }
         }
 
         // after deserialization, loadData is called to set everything - insert a call at the end to set Data.Values (the mod data that got saved)
-        [HarmonyTranspiler, HarmonyPatch(typeof(ImportExport), "loadData")]
-        private static IEnumerable<CodeInstruction> ImportExport_loadData_transpiler(IEnumerable<CodeInstruction> instructions, MethodBase method)
+        [HarmonyPostfix, HarmonyPatch(typeof(ImportExport), "loadData", new Type[] { typeof(SaveData) })]
+        private static void ImportExport_loadData_postfix(ImportExport __instance)
         {
-            // instead of relying on the index of the PlayerData local, this is an experiment in getting a reference to it
-            // based on Type - there's only 1 local variable of type PlayerData, so this should work (it does)
-            var locals = method.GetMethodBody().LocalVariables;
-            var playerDataVar = new LocalVar(locals.First(l => l.LocalType == typeof(PlayerData)));
+            try
+            {
+                var playerDataField = typeof(ImportExport).GetField("currentSave", BindingFlags.NonPublic | BindingFlags.Instance);
+                if (playerDataField != null)
+                {
+                    var pd = playerDataField.GetValue(__instance) as PlayerData;
+                    if (pd is ModPlayerData mpd)
+                    {
+                        Data.Values = mpd.Data ?? new();
+                    }
+                }
 
-            var cm = new CodeMatcher(instructions)
-                .End()
-                .Insert(new CodeInstruction(playerDataVar.ToLdloc())
-                    , Transpilers.EmitDelegate(LoadModData));
-
-            return cm.InstructionEnumeration();
-        }
-
-        private static void LoadModData(PlayerData pd)
-        {
-            // check first in case loading a vanilla save
-            if (pd is ModPlayerData mpd)
-                Data.Values = mpd.Data ?? new();
-
-            Plugin.ImportExport_finalTriggers_postfix();
+                Plugin.ImportExport_finalTriggers_postfix();
+            }
+            catch (Exception ex)
+            {
+                Plugin.LogWarning("[ModSave] loadData postfix failed: " + ex.Message);
+            }
         }
     }
 }
