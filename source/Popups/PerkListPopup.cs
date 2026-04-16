@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace jshepler.ngu.mods.Popups
 {
@@ -42,18 +42,18 @@ namespace jshepler.ngu.mods.Popups
             var controller = Plugin.Character.adventureController.itopod;
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("PERK LIST", _titleLabelStyle);
+            GUILayout.Label("天赋列表", _titleLabelStyle);
             if (GUILayout.Button("×", GUILayout.ExpandWidth(false)))
                 Close();
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
 
-            PerkList.FilterEnabled = GUILayout.Toggle(PerkList.FilterEnabled, "Filtered   ");
+            PerkList.FilterEnabled = GUILayout.Toggle(PerkList.FilterEnabled, "已过滤   ");
             if (GUI.changed)
                 controller.onFilterChange();
 
-            PerkList.OrderEnabled = GUILayout.Toggle(PerkList.OrderEnabled, "Ordered   ");
+            PerkList.OrderEnabled = GUILayout.Toggle(PerkList.OrderEnabled, "已排序   ");
             if (GUI.changed)
             {
                 controller.onOrderChange();
@@ -62,7 +62,7 @@ namespace jshepler.ngu.mods.Popups
 
             GUILayout.FlexibleSpace();
 
-            if (GUILayout.Button("Clear"))
+            if (GUILayout.Button("清空"))
                 PerkList.ClearPerks();
 
             GUILayout.EndHorizontal();
@@ -91,10 +91,10 @@ namespace jshepler.ngu.mods.Popups
                 if (!PerkList.CanBuyPerk(perkId))
                     GUI.enabled = false;
 
-                if (GUILayout.Button("Buy", GUILayout.ExpandWidth(false)))
+                if (GUILayout.Button("购买", GUILayout.ExpandWidth(false)))
                     PerkList.BuyPerk(perkId);
 
-                if (GUILayout.Button("Bulk", GUILayout.ExpandWidth(false)))
+                if (GUILayout.Button("批量", GUILayout.ExpandWidth(false)))
                     PerkList.BulkBuyPerk(perkId);
 
                 GUI.enabled = true;

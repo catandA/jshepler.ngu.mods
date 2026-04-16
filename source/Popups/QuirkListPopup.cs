@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace jshepler.ngu.mods.Popups
 {
@@ -43,18 +43,18 @@ namespace jshepler.ngu.mods.Popups
             var controller = Plugin.Character.beastQuestPerkController;
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("QUIRK LIST", _titleLabelStyle);
+            GUILayout.Label("特性列表", _titleLabelStyle);
             if (GUILayout.Button("×", GUILayout.ExpandWidth(false)))
                 Close();
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
 
-            QuirkList.FilterEnabled = GUILayout.Toggle(QuirkList.FilterEnabled, "Filtered   ");
+            QuirkList.FilterEnabled = GUILayout.Toggle(QuirkList.FilterEnabled, "已过滤   ");
             if (GUI.changed)
                 controller.onFilterChange();
 
-            QuirkList.OrderEnabled = GUILayout.Toggle(QuirkList.OrderEnabled, "Ordered   ");
+            QuirkList.OrderEnabled = GUILayout.Toggle(QuirkList.OrderEnabled, "已排序   ");
             if (GUI.changed)
             {
                 controller.onOrderChange();
@@ -63,7 +63,7 @@ namespace jshepler.ngu.mods.Popups
 
             GUILayout.FlexibleSpace();
 
-            if (GUILayout.Button("Clear"))
+            if (GUILayout.Button("清空"))
                 QuirkList.ClearQuirks();
 
             GUILayout.EndHorizontal();
@@ -89,10 +89,10 @@ namespace jshepler.ngu.mods.Popups
                 if (!QuirkList.CanBuyQuirk(quirkId))
                     GUI.enabled = false;
 
-                if (GUILayout.Button("Buy", GUILayout.ExpandWidth(false)))
+                if (GUILayout.Button("购买", GUILayout.ExpandWidth(false)))
                     QuirkList.BuyQuirk(quirkId);
 
-                if (GUILayout.Button("Bulk", GUILayout.ExpandWidth(false)))
+                if (GUILayout.Button("批量", GUILayout.ExpandWidth(false)))
                     QuirkList.BulkBuyQuirk(quirkId);
 
                 GUI.enabled = true;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,7 +59,7 @@ namespace jshepler.ngu.mods.Popups
             GUILayout.BeginArea(_windowRect, _windowStyle);
             GUILayout.BeginVertical();
 
-            GUILayout.Label("<b>GAME OVER</b>", _gameOverStyle);
+            GUILayout.Label("<b>游戏结束</b>", _gameOverStyle);
 
             GUILayout.EndVertical();
             GUILayout.EndArea();

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace jshepler.ngu.mods
@@ -47,9 +47,9 @@ namespace jshepler.ngu.mods
             {
                 message = Id switch
                 {
-                    28 => "You need to complete Evil Troll Challenge #4 to research this Wish!",
-                    45 => "You need to complete Evil Troll Challenge #6 to research this Wish!",
-                    _ => "This wish is currently locked!"
+                    28 => "您需要完成邪恶巨魔挑战#4才能研究此愿望！",
+                    45 => "您需要完成邪恶巨魔挑战#6才能研究此愿望！",
+                    _ => "此愿望目前已锁定！"
                 };
 
                 return true;
@@ -57,7 +57,7 @@ namespace jshepler.ngu.mods
 
             if (_props[Id].difficultyRequirement > Plugin.Character.settings.rebirthDifficulty)
             {
-                message = $"You need to move to at least {_props[Id].difficultyRequirement} difficulty to research this Wish!";
+                message = $"您需要至少切换到{_props[Id].difficultyRequirement}难度才能研究此愿望！";
                 return true;
             }
 

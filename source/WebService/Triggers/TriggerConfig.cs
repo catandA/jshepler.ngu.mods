@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
@@ -174,75 +174,75 @@ namespace jshepler.ngu.mods.WebService.Triggers
             GUILayout.BeginVertical();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("<b>Configure Remote Triggers</b>", _titleStyle);
+            GUILayout.Label("<b>配置远程触发器</b>", _titleStyle);
             if (GUILayout.Button("×", GUILayout.Width(25))) CloseConfig();
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal("box");
-            GUILayout.Label("Accept Trigger Requests");
+            GUILayout.Label("接受触发请求");
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("disabled", !RemoteTriggersEnabled ? _selected : _notSelected)) RemoteTriggersEnabled = false;
-            if (GUILayout.Button("enabled", RemoteTriggersEnabled ? _selected : _notSelected)) RemoteTriggersEnabled = true;
+            if (GUILayout.Button("禁用", !RemoteTriggersEnabled ? _selected : _notSelected)) RemoteTriggersEnabled = false;
+            if (GUILayout.Button("启用", RemoteTriggersEnabled ? _selected : _notSelected)) RemoteTriggersEnabled = true;
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal("box");
-            GUILayout.Label("Auto Boost");
+            GUILayout.Label("自动加速");
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("disabled", !AutoBoostEnabled ? _selected : _notSelected)) AutoBoostEnabled = false;
-            if (GUILayout.Button("enabled", AutoBoostEnabled ? _selected : _notSelected)) AutoBoostEnabled = true;
+            if (GUILayout.Button("禁用", !AutoBoostEnabled ? _selected : _notSelected)) AutoBoostEnabled = false;
+            if (GUILayout.Button("启用", AutoBoostEnabled ? _selected : _notSelected)) AutoBoostEnabled = true;
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal("box");
-            GUILayout.Label("Auto Merge");
+            GUILayout.Label("自动合并");
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("disabled", !AutoMergeEnabled ? _selected : _notSelected)) AutoMergeEnabled = false;
-            if (GUILayout.Button("enabled", AutoMergeEnabled ? _selected : _notSelected)) AutoMergeEnabled = true;
+            if (GUILayout.Button("禁用", !AutoMergeEnabled ? _selected : _notSelected)) AutoMergeEnabled = false;
+            if (GUILayout.Button("启用", AutoMergeEnabled ? _selected : _notSelected)) AutoMergeEnabled = true;
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal("box");
-            GUILayout.Label("Toss Gold");
+            GUILayout.Label("投掷金币");
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("disabled", !TossGoldEnabled ? _selected : _notSelected)) TossGoldEnabled = false;
-            if (GUILayout.Button("enabled", TossGoldEnabled ? _selected : _notSelected)) TossGoldEnabled = true;
+            if (GUILayout.Button("禁用", !TossGoldEnabled ? _selected : _notSelected)) TossGoldEnabled = false;
+            if (GUILayout.Button("启用", TossGoldEnabled ? _selected : _notSelected)) TossGoldEnabled = true;
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal("box");
-            GUILayout.Label("Fight Boss");
+            GUILayout.Label("对决首领");
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("disabled", !FightBossEnabled ? _selected : _notSelected)) FightBossEnabled = false;
-            if (GUILayout.Button("enabled", FightBossEnabled ? _selected : _notSelected)) FightBossEnabled = true;
+            if (GUILayout.Button("禁用", !FightBossEnabled ? _selected : _notSelected)) FightBossEnabled = false;
+            if (GUILayout.Button("启用", FightBossEnabled ? _selected : _notSelected)) FightBossEnabled = true;
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal("box");
-            GUILayout.Label("Kitty");
+            GUILayout.Label("猫咪");
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("disabled", !KittyEnabled ? _selected : _notSelected)) KittyEnabled = false;
-            if (GUILayout.Button("enabled", KittyEnabled ? _selected : _notSelected)) KittyEnabled = true;
+            if (GUILayout.Button("禁用", !KittyEnabled ? _selected : _notSelected)) KittyEnabled = false;
+            if (GUILayout.Button("启用", KittyEnabled ? _selected : _notSelected)) KittyEnabled = true;
             GUILayout.EndHorizontal();
 
             GUILayout.FlexibleSpace();
 
             GUILayout.BeginHorizontal("box");
-            GUILayout.Label("Twitch Integration");
+            GUILayout.Label("Twitch 集成");
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("disabled", !TwitchIntegrationEnabled ? _selected : _notSelected)) TwitchIntegrationEnabled = false;
-            if (GUILayout.Button("enabled", TwitchIntegrationEnabled ? _selected : _notSelected)) TwitchIntegrationEnabled = true;
+            if (GUILayout.Button("禁用", !TwitchIntegrationEnabled ? _selected : _notSelected)) TwitchIntegrationEnabled = false;
+            if (GUILayout.Button("启用", TwitchIntegrationEnabled ? _selected : _notSelected)) TwitchIntegrationEnabled = true;
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal("box");
-            GUILayout.Label("Auto Connect");
+            GUILayout.Label("自动连接");
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("disabled", !TwitchAutoConnect ? _selected : _notSelected)) TwitchAutoConnect = false;
-            if (GUILayout.Button("enabled", TwitchAutoConnect ? _selected : _notSelected)) TwitchAutoConnect = true;
+            if (GUILayout.Button("禁用", !TwitchAutoConnect ? _selected : _notSelected)) TwitchAutoConnect = false;
+            if (GUILayout.Button("启用", TwitchAutoConnect ? _selected : _notSelected)) TwitchAutoConnect = true;
             GUILayout.EndHorizontal();
 
             if (TwitchIntegrationEnabled)
             {
                 GUILayout.BeginHorizontal();
-                GUILayout.Label($"{(Twitch.Manager.IsConnecting ? "connecting ..." : Twitch.Manager.IsConnected ? "CONNECTED" : "DISCONNECTED")}");
+                GUILayout.Label($"{(Twitch.Manager.IsConnecting ? "连接中..." : Twitch.Manager.IsConnected ? "已连接" : "未连接")}");
 
                 if (!Twitch.Manager.IsConnecting)
-                    if (GUILayout.Button($"{(Twitch.Manager.IsConnected ? "disconnect" : "connect")}"))
+                    if (GUILayout.Button($"{(Twitch.Manager.IsConnected ? "断开" : "连接")}"))
                     {
                         if (Twitch.Manager.IsConnected)
                             Twitch.Manager.Disconnect();
@@ -250,7 +250,7 @@ namespace jshepler.ngu.mods.WebService.Triggers
                             Twitch.Manager.Connect();
                     };
 
-                if (GUILayout.Button("reset")) Twitch.Manager.Reset();
+                if (GUILayout.Button("重置")) Twitch.Manager.Reset();
                 GUILayout.EndHorizontal();
             }
 

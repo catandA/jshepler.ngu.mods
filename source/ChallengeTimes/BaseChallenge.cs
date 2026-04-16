@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,10 +80,10 @@ namespace jshepler.ngu.mods.ChallengeTimes
             for (var x = 0; x < 4; x++)
                 columns[x] = new string[numberOfTimeRows + 2]; // +2: 1 for header, 1 for sub total
 
-            columns[0][0] = "Comp";
-            columns[1][0] = $"Norm ({curCompletions[0]}/{maxCompletions})";
-            columns[2][0] = $"Evil ({curCompletions[1]}/{maxCompletions})";
-            columns[3][0] = $"Sad ({curCompletions[2]}/{maxCompletions})";
+            columns[0][0] = "次数";
+            columns[1][0] = $"普通 ({curCompletions[0]}/{maxCompletions})";
+            columns[2][0] = $"邪恶 ({curCompletions[1]}/{maxCompletions})";
+            columns[3][0] = $"残暴 ({curCompletions[2]}/{maxCompletions})";
 
             for (var x = 0; x < numberOfTimeRows; x++)
             {
@@ -93,7 +93,7 @@ namespace jshepler.ngu.mods.ChallengeTimes
                 columns[3][1 + x] = times[2][x] == 0 ? " -- " : _time(times[2][x]);
             }
 
-            columns[0][1 + numberOfTimeRows] = "sub:";
+            columns[0][1 + numberOfTimeRows] = "小计:";
             columns[1][1 + numberOfTimeRows] = _time(times[0].Sum());
             columns[2][1 + numberOfTimeRows] = _time(times[1].Sum());
             columns[3][1 + numberOfTimeRows] = _time(times[2].Sum());
@@ -111,7 +111,7 @@ namespace jshepler.ngu.mods.ChallengeTimes
             sb.AppendLine(string.Join(string.Empty, columns.Zip(maxWidths, (c, w) => c[1 + numberOfTimeRows].PadLeft(w))));
 
             var totalTime = times[0].Sum() + times[1].Sum() + times[2].Sum();
-            sb.Append($"\n\n<b>Total Time In Challenge:</b> {_time(totalTime)}");
+            sb.Append($"\n\n<b>挑战总时间:</b> {_time(totalTime)}");
 
             return sb.ToString();
         }

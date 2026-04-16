@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
@@ -69,8 +69,8 @@ namespace jshepler.ngu.mods
         [HarmonyPostfix, HarmonyPatch(typeof(AllGoldDiggerController), "updateText")]
         private static void AllGoldDiggerController_updateText_postfix()
         {
-            _setLoadoutButtonText.text = $"Save Diggers L{_id + 1}";
-            _applyLoadoutButtonText.text = $"Cap Diggers L{_id + 1}";
+            _setLoadoutButtonText.text = $"保存配置 L{_id + 1}";
+            _applyLoadoutButtonText.text = $"上限配置 L{_id + 1}";
         }
 
         private static void OnGUI(object sender, EventArgs e)
@@ -88,7 +88,7 @@ namespace jshepler.ngu.mods
             else
                 for (var x = 0; x < 3; x++)
                 {
-                    _loadoutTexts[x].text = $"Page {x + 1}";
+                    _loadoutTexts[x].text = $"第{x + 1}页";
                     _loadoutButtons[x].image.color = x == _curPage ? Plugin.ButtonColor_Yellow : Color.white;
                 }
         }

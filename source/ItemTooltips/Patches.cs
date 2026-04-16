@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using HarmonyLib;
 
 namespace jshepler.ngu.mods.ItemTooltips
@@ -66,7 +66,7 @@ namespace jshepler.ngu.mods.ItemTooltips
 
             var dcLevel = Plugin.Character.inventory.daycare[dcId].level + Plugin.Character.inventoryController.daycares[dcId].levelsAdded();
             ___message = __instance.inventoryController.itemTooltipText(__instance.character.inventory.daycare[dcId])
-                + $"\n\n<b>Item level in Daycare:</b> {dcLevel} (this item)";
+                + $"\n\n<b>日托物品等级:</b> {dcLevel} (此物品)";
 
             return false;
         }

@@ -197,7 +197,7 @@ namespace jshepler.ngu.mods
                 .RemoveInstructions(1)
                 .Insert(
                     Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Bosses)),
-                    Transpilers.EmitDelegate((long l) => Plugin.Character.adventureController.log.AddEvent($"You also gained {l} AP for killing 10 bosses!", 3)));
+                    Transpilers.EmitDelegate((long l) => Plugin.Character.adventureController.log.AddEvent($"击杀10个BOSS额外获得 {l} AP!", 3)));
                 return cm.InstructionEnumeration();
             }
 
@@ -333,11 +333,11 @@ namespace jshepler.ngu.mods
 
                 var otherThisRB = _apThisRB - sumThisRB;
                 if (otherThisRB > 0)
-                    dataThisRB.Add(("Other", otherThisRB, _apThisRB == 0 ? 0f : (float)otherThisRB / _apThisRB));
+                    dataThisRB.Add(("其他", otherThisRB, _apThisRB == 0 ? 0f : (float)otherThisRB / _apThisRB));
 
                 var otherLastRB = _apLastRB - sumLastRB;
                 if (otherLastRB > 0)
-                    dataLastRB.Add(("Other", otherLastRB, _apLastRB == 0 ? 0f : (float)otherLastRB / _apLastRB));
+                    dataLastRB.Add(("其他", otherLastRB, _apLastRB == 0 ? 0f : (float)otherLastRB / _apLastRB));
 
                 dataThisRB.Sort(sorter);
                 dataLastRB.Sort(sorter);
@@ -345,13 +345,13 @@ namespace jshepler.ngu.mods
                 var sourcesThisRB = dataThisRB.Join(d => $"   <b>{d.Item1}:</b> {display(d.Item2)} <color=blue>({d.Item3 * 100f:0.#}%)</color>", "\n");
                 var sourcesLastRB = dataLastRB.Join(d => $"   <b>{d.Item1}:</b> {display(d.Item2)} <color=blue>({d.Item3 * 100f:0.#}%)</color>", "\n");
 
-                ___message += $"\n\n<b>AP gained this rebirth:</b> {display(_apThisRB)}\n{sourcesThisRB}"
-                    + $"\n\n<b>AP gained last rebirth:</b> {display(_apLastRB)}\n{sourcesLastRB}";
+                ___message += $"\n\n<b>本次重生任意点获取:</b> {display(_apThisRB)}\n{sourcesThisRB}"
+                    + $"\n\n<b>上次重生任意点获取:</b> {display(_apLastRB)}\n{sourcesLastRB}";
             }
 
             else
-                ___message += $"\n\n<b>AP gained this rebirth:</b> {display(_apThisRB)}"
-                    + $"\n<b>AP gained last rebirth:</b> {display(_apLastRB)}";
+                ___message += $"\n\n<b>本次重生任意点获取:</b> {display(_apThisRB)}"
+                    + $"\n<b>上次重生任意点获取:</b> {display(_apLastRB)}";
 
             __instance.tooltip.showTooltip(___message);
         }
@@ -373,7 +373,7 @@ namespace jshepler.ngu.mods
                 time = 0L;
 
             var ap = character.checkAPAdded(time / 500);
-            __instance.rebirthChange.text += $"\nYou will gain {ap} AP if you rebirth now.";
+            __instance.rebirthChange.text += $"\n重生后将获得 {ap} AP。";
         }
 
         // show AP gain for current quest
@@ -425,14 +425,14 @@ namespace jshepler.ngu.mods
             internal static Func<int, string> Name = i => i switch
             {
                 0 => "ITOPOD",
-                1 => "Titans",
-                2 => "Adv Bosses",
-                3 => "Fruit",
-                4 => "Daily Spin",
-                5 => "Quests",
-                6 => "Money Pit",
-                7 => "Rebirth",
-                8 => "Daily Save",
+                1 => "泰坦",
+                2 => "冒险Boss",
+                3 => "果实",
+                4 => "每日转盘",
+                5 => "任务",
+                6 => "钱坑",
+                7 => "重生",
+                8 => "每日存档",
                 _ => $"{i}??"
             };
         }

@@ -53,7 +53,7 @@ namespace jshepler.ngu.mods
             if (Plugin.Character.settings.rebirthDifficulty >= difficulty.sadistic
                 && Plugin.Character.adventure.itopod.perkLevel[144] >= 1)
             {
-                statText.text += "\n<b>Welcome to Sadistic Perk</b> ";
+                statText.text += "\n<b>欢迎来到虐待狂天赋</b> ";
                 valueText.text += "\nx 120%";
             }
         }
@@ -81,11 +81,11 @@ namespace jshepler.ngu.mods
             var totalMult = augsMultSum * noAugsChallengeMult * nguAugsMult / sadDivider;
 
             __instance.statsBreakdown.text +=
-                $"\n\n<b>Base Augments Modifier:</b> "
-                + (noAugsChallengeMult > 1d ? $"\n<b>No Augs Challenge Modifier:</b> " : string.Empty)
-                + (nguAugsMult > 1d ? $"\n<b>NGU Augments Modifier:</b> " : string.Empty)
-                + (sadDivider > 1d ? $"\n<b>Sadistic Nerf DIVIDER:</b> " : string.Empty)
-                + $"\n<b>Total Attack/Defense Modifier:</b> ";
+                $"\n\n<b>基础挂件修正:</b> "
+                + (noAugsChallengeMult > 1d ? $"\n<b>无挂件挑战修正:</b> " : string.Empty)
+                + (nguAugsMult > 1d ? $"\n<b>NGU挂件修正:</b> " : string.Empty)
+                + (sadDivider > 1d ? $"\n<b>虐待狂削弱除数:</b> " : string.Empty)
+                + $"\n<b>总攻击/防御修正:</b> ";
 
             __instance.statValue.text +=
                 $"\n\n  {character.display(augsMultSum * 100d)}%"

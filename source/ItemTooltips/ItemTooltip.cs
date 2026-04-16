@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Text;
 using UnityEngine;
@@ -113,7 +113,7 @@ namespace jshepler.ngu.mods.ItemTooltips
 
             var controller = Plugin.Character.inventoryController.daycares[dcId];
             var dcLevel = daycare[dcId].level + controller.levelsAdded();
-            var text = $"\n\n<b>Item level in Daycare:</b> {dcLevel}";
+            var text = $"\n\n<b>日托物品等级:</b> {dcLevel}";
 
             if (item.type != part.MacGuffin)
             {
@@ -121,8 +121,8 @@ namespace jshepler.ngu.mods.ItemTooltips
                 var afterMerge = Math.Min(100, dcLevel + item.level + 1);
                 var timeToMaxLevel = Math.Max(0, DaycareBarText.TimeToMaxLevel(controller, item.level + 1));
 
-                text += $" ({afterMerge} after merge)"
-                    + $"\n  ... time to 100 (merged): {NumberOutput.timeOutput(timeToMaxLevel)}";
+                text += $" (合并后 {afterMerge})"
+                    + $"\n  ... 达到100（合并后）时间: {NumberOutput.timeOutput(timeToMaxLevel)}";
             }
 
             return text;

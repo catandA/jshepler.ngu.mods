@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -190,13 +190,13 @@ namespace jshepler.ngu.mods
             var sum = _sources.Sum();
             var other = _totalGained - sum;
             if (other > 0)
-                sources.Add(("Other", other, _totalGained == 0 ? 0f : other / _totalGained));
+                sources.Add(("其他", other, _totalGained == 0 ? 0f : other / _totalGained));
 
             sources.Sort(sorter);
             var lines = sources.Select(s => $"  <b>{s.source}:</b> {Plugin.Character.display(s.value)} <color=blue>({s.pct * 100f:0.#}%)</color>");
             var sourcesText = string.Join("\n", lines);
 
-            __instance.SetMessage($"{_baseMessage}\n\n<b>Total Base Gained:</b> {Plugin.Character.display(_totalGained)}\n{sourcesText}");
+            __instance.SetMessage($"{_baseMessage}\n\n<b>总基础获取:</b> {Plugin.Character.display(_totalGained)}\n{sourcesText}");
         }
 
         private static int sorter((string s, float f1, float f2) a, (string s, float f1, float f2) b) => b.f2.CompareTo(a.f2);
@@ -216,12 +216,12 @@ namespace jshepler.ngu.mods
             {
                 return source switch
                 {
-                    0 => "Exp",
-                    1 => "Sewer Set",
-                    2 => "Fruit",
-                    3 => "Perk 2",
-                    4 => "Money Pit",
-                    5 => "Iron Pill",
+                    0 => "经验",
+                    1 => "下水道套装",
+                    2 => "果实",
+                    3 => "天赋2",
+                    4 => "钱坑",
+                    5 => "铁药",
                     _ => $"??({source})"
                 };
             }

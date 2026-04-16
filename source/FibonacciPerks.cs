@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 
@@ -9,22 +9,22 @@ namespace jshepler.ngu.mods
     {
         private static Dictionary<int, string> _unlocks = new()
             {
-                { 1, "+10% Energy and Magic Power" },
-                { 2, "+10% Energy Cap" },
-                { 3, "+10% Magic Cap" },
-                { 5, "+5% Energy NGU Speed" },
-                { 8, "+5% Magic NGU Speed" },
-                { 13, "+5% PP Earnings" },
-                { 21, "+10% Energy and Magic Bars" },
-                { 34, "+13% Adventure Stats" },
-                { 55, "+5% Daycare Speed" },
-                { 89, "+2% Bonus to AP Earnings" },
-                { 144, "+5% Chance for +1 level on Loot!" },
-                { 233, "+10% QP Rewards" },
-                { 377, "377% Attack/Def Multiplier" },
-                { 610, "Quests Are Always 50 Items!" },
-                { 987, "+5% Bonus EXP Gains" },
-                { 1597, "FIBONACCI KITTY ART" }
+                { 1, "+10% 能量和魔法力量" },
+                { 2, "+10% 能量上限" },
+                { 3, "+10% 魔法上限" },
+                { 5, "+5% 能量NGU速度" },
+                { 8, "+5% 魔法NGU速度" },
+                { 13, "+5% PP收益" },
+                { 21, "+10% 能量和魔法条数" },
+                { 34, "+13% 冒险属性" },
+                { 55, "+5% 日托速度" },
+                { 89, "+2% 任意点收益加成" },
+                { 144, "+5% 掉落物品+1级概率！" },
+                { 233, "+10% QP奖励" },
+                { 377, "377% 攻击/防御倍率" },
+                { 610, "任务总是50个物品！" },
+                { 987, "+5% 经验获取加成" },
+                { 1597, "斐波那契猫咪艺术" }
             };
         
         [HarmonyPostfix, HarmonyPatch(typeof(ItopodPerkController), "fibPerkUnlocks")]

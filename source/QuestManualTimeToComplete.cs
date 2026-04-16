@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
 
@@ -37,14 +37,14 @@ namespace jshepler.ngu.mods
             var dropRemaining = quest.targetDrops - quest.curDrops;
             var dropChance = character.beastQuestController.questDropChance();
             var secondsRemaining = (dropRemaining / dropChance) * secondsPerKill;
-            var text = $"\n<b>  ... est. time remaining:</b> {NumberOutput.timeOutput(secondsRemaining)}";
+            var text = $"\n<b>  ... 预计剩余时间:</b> {NumberOutput.timeOutput(secondsRemaining)}";
 
             var banked = character.beastQuest.curBankedQuests;
             if (banked > 0)
             {
                 var avgItems = character.adventure.itopod.perkLevel[94] >= 610 ? 50 : 55;
                 var bankedSeconds = (banked * avgItems / dropChance) * secondsPerKill;
-                text += $"\n<b>  ... with rest of bank:</b> {NumberOutput.timeOutput(secondsRemaining + bankedSeconds)}";
+                text += $"\n<b>  ... 加上任务队列剩余:</b> {NumberOutput.timeOutput(secondsRemaining + bankedSeconds)}";
             }
 
             return $"{text}\n";

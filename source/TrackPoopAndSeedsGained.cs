@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,7 +88,7 @@ namespace jshepler.ngu.mods
                 if (poopGained > 0)
                 {
                     _poopThisRB += poopGained;
-                    Plugin.ShowNotification($"poop: +{poopGained} ({_poopThisRB} | {_curPoop})");
+                    Plugin.ShowNotification($"便便: +{poopGained} ({_poopThisRB} | {_curPoop})");
 
                     if (UnityEngine.Random.value < Options.Yggdrasil.PoopAudioChance.Value)
                         _fart.fart();
@@ -121,8 +121,8 @@ namespace jshepler.ngu.mods
             var character = Plugin.Character;
             var tooltipText = _tooltipText.GetValue(__instance.tooltip) as Text;
 
-            tooltipText.text += $"\n\n<b>Seeds gained this rebirth:</b> {character.display(_seedsThisRB)}"
-                + $"\n<b>Seeds gained last rebirth:</b> {character.display(_seedsLastRB)}";
+            tooltipText.text += $"\n\n<b>本次重生种子获取:</b> {character.display(_seedsThisRB)}"
+                + $"\n<b>上次重生种子获取:</b> {character.display(_seedsLastRB)}";
         }
 
         //[HarmonyPostfix, HarmonyPatch(typeof(SeedIconHover), "poopInfo")]
@@ -136,7 +136,7 @@ namespace jshepler.ngu.mods
         //}
 
         private static WaitForSeconds _wait = new WaitForSeconds(0.1f);
-        private static string _basePoopText = "This is your Poop count. Each poop allows one fruit to be harvested or eaten for a +50% bonus to the results!";
+        private static string _basePoopText = "这是你的便便数量。每个便便可以收获或吃掉一个果实，结果获得+50%加成！";
         private static Coroutine _poopTooltipCoroutine;
 
         [HarmonyPrefix, HarmonyPatch(typeof(SeedIconHover), "poopInfo")]
@@ -163,8 +163,8 @@ namespace jshepler.ngu.mods
 
             while (true)
             {
-                var thisRB = $"\n\n<b>Poop gained this rebirth:</b> {character.display(_poopThisRB)}";
-                var lastRB = $"\n<b>Poop gained last rebirth:</b> {character.display(_poopLastRB)}";
+                var thisRB = $"\n\n<b>本次重生便便获取:</b> {character.display(_poopThisRB)}";
+                var lastRB = $"\n<b>上次重生便便获取:</b> {character.display(_poopLastRB)}";
 
                 if (Plugin.AltIsDown)
                 {
@@ -259,7 +259,7 @@ namespace jshepler.ngu.mods
 
             var other = totalGained - sum;
             if (other > 0)
-                sources.Add(("Other", other, totalGained == 0 ? 0f : (float)other / totalGained));
+                sources.Add(("其他", other, totalGained == 0 ? 0f : (float)other / totalGained));
 
             sources.Sort(sorter);
 
@@ -278,9 +278,9 @@ namespace jshepler.ngu.mods
 
             internal static Func<int, string> Name = i => i switch
             {
-                0 => "ITOPOD (RNG)",
-                1 => "ITOPOD (9k)",
-                2 => "Daily Spin",
+                0 => "ITOPOD (随机)",
+                1 => "ITOPOD (9000)",
+                2 => "每日转盘",
                 _ => $"{i}??"
             };
         }

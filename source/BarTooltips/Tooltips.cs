@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace jshepler.ngu.mods.BarTooltips
 {
@@ -7,8 +7,8 @@ namespace jshepler.ngu.mods.BarTooltips
         internal static string BuildCurrentCapText(double currentCap, double overCappedDuration, float ppt)
         {
             var capPct = ((decimal)ppt * 100).Truncate(5);
-            var text = $"<b>Current Speed Cap:</b> {Plugin.Character.display(currentCap)}"
-                + $"\n<b>% Allocated:</b> {capPct}%";
+            var text = $"<b>当前速度上限:</b> {Plugin.Character.display(currentCap)}"
+                + $"\n<b>分配百分比:</b> {capPct}%";
 
             if (overCappedDuration > 0)
                 text += $" ({NumberOutput.timeOutput(overCappedDuration)})";
@@ -21,7 +21,7 @@ namespace jshepler.ngu.mods.BarTooltips
 
         internal static string BuildTimeToTargetText(double secondsToTarget)
         {
-            return $"<b>Time to Target:</b> {NumberOutput.timeOutput(secondsToTarget)}";
+            return $"<b>达到目标时间:</b> {NumberOutput.timeOutput(secondsToTarget)}";
         }
     }
 }

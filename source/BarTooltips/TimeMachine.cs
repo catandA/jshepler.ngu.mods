@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using HarmonyLib;
 using jshepler.ngu.mods.CapCalculators;
 
@@ -45,7 +45,7 @@ namespace jshepler.ngu.mods.BarTooltips
 
                 var bank = character.adventureController.itopod.totalBankedTimeMachine();
                 if (bank > 0f)
-                    ___message += $"\n\n<b>Banked ({bank * 100f:0}%):</b> {character.display((long)(currentLevel * bank))}";
+                    ___message += $"\n\n<b>已存储 ({bank * 100f:0}%):</b> {character.display((long)(currentLevel * bank))}";
             }
 
             __instance.tooltip.showTooltip(___message);
@@ -60,10 +60,10 @@ namespace jshepler.ngu.mods.BarTooltips
 
             var timeLeft = Traverse.Create(__instance).Method("goldMultiTimeLeft").GetValue<string>();
 
-            ___message = "<b>Time Machine Gold Multiplier</b>\n\nCapture multiple time bubbles within a single time bubble, letting multiple past-you's loot gold at once!"
-                    + $"\n\n<b>Current Gold Multiplier:</b> {character.machine.levelGoldMulti + 1}"
-                    + $"\n\n<b>Gold Cost:</b> {character.display(__instance.machineGoldMultiCost())}"
-                    + $"\n\n<b>Time to level up:</b> {timeLeft}";
+            ___message = "<b>时光机金币倍率</b>\n\n在单个时间气泡内捕获多个时间气泡，让多个过去的你同时抢夺金币！"
+                    + $"\n\n<b>当前金币倍率:</b> {character.machine.levelGoldMulti + 1}"
+                    + $"\n\n<b>金币消耗:</b> {character.display(__instance.machineGoldMultiCost())}"
+                    + $"\n\n<b>升级所需时间:</b> {timeLeft}";
 
             var currentLevel = character.machine.levelGoldMulti;
             var magic = character.machine.goldMultiMagic;
@@ -96,7 +96,7 @@ namespace jshepler.ngu.mods.BarTooltips
 
                 var bank = character.adventureController.itopod.totalBankedTimeMachine();
                 if (bank > 0f)
-                    ___message += $"\n\n<b>Banked ({bank * 100f:0}%):</b> {character.display((long)(currentLevel * bank))}";
+                    ___message += $"\n\n<b>已存储 ({bank * 100f:0}%):</b> {character.display((long)(currentLevel * bank))}";
             }
 
             __instance.tooltip.showTooltip(___message);

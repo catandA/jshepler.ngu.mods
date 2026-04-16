@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -132,10 +132,10 @@ namespace jshepler.ngu.mods
             var killsPerHour = 3600f / secondsPerKill;
             var killsPerDay = 86400f / secondsPerKill;
 
-            var text = $"\n\n<b>PP Progress:</b> {currentProgress:#,##0} / {MAXPROGRESS:#,##0} ({currentProgress / MAXPROGRESS * 100f:##0.00}%)"
-                + $"\n\n<b>Seconds per kill:</b> {(secondsPerKill == 0f ? "????" : NumberOutput.timeOutput(secondsPerKill))} ({(isEstimated ? "estimated" : currentFloor < optimalFloor ? "sub-optimal" : "optimal")})"
-                + $"\n<b>Kills per hour:</b> {killsPerHour:#,##0.##}"
-                + $"\n<b>Kills per day:</b> {killsPerDay:#,##0.##}";
+            var text = $"\n\n<b>PP进度:</b> {currentProgress:#,##0} / {MAXPROGRESS:#,##0} ({currentProgress / MAXPROGRESS * 100f:##0.00}%)"
+                + $"\n\n<b>每次击杀秒数:</b> {(secondsPerKill == 0f ? "????" : NumberOutput.timeOutput(secondsPerKill))} ({(isEstimated ? "估算" : currentFloor < optimalFloor ? "次优" : "最优")})"
+                + $"\n<b>每小时击杀:</b> {killsPerHour:#,##0.##}"
+                + $"\n<b>每天击杀:</b> {killsPerDay:#,##0.##}";
 
 
             var secondsPerPP = killsPerPP * secondsPerKill;
@@ -145,13 +145,13 @@ namespace jshepler.ngu.mods
             var ppPerDay = secondsPerKill == 0f ? 0 : killsPerDay * ppPerKill;
 
             if (killsPerPP == 1)
-                text += $"\n\n<b>PP per kill:</b> {ppPerKill:#,##0.00}";
+                text += $"\n\n<b>每次击杀PP:</b> {ppPerKill:#,##0.00}";
             else
-                text += $"\n\n<b>Kills per PP:</b> {killsPerPP} taking {(secondsPerPP == 0f ? "????" : NumberOutput.timeOutput(secondsPerPP))}"
-                    + $"\n<b>Kills to next PP:</b> {killsRemaining} in {(secondsRemaining == 0f ? "????" : NumberOutput.timeOutput(secondsRemaining))}";
+                text += $"\n\n<b>每PP击杀:</b> {killsPerPP} 耗时 {(secondsPerPP == 0f ? "????" : NumberOutput.timeOutput(secondsPerPP))}"
+                    + $"\n<b>距离下次PP击杀:</b> {killsRemaining} 还需 {(secondsRemaining == 0f ? "????" : NumberOutput.timeOutput(secondsRemaining))}";
 
-            text += $"\n<b>PP per hour:</b> {ppPerHour:#,##0.##}"
-                + $"\n<b>PP per day:</b> {ppPerDay:#,##0.##}";
+            text += $"\n<b>每小时PP:</b> {ppPerHour:#,##0.##}"
+                + $"\n<b>每天PP:</b> {ppPerDay:#,##0.##}";
 
 
             var tier = character.adventureController.lootDrop.itopodTier(currentFloor);
@@ -163,14 +163,14 @@ namespace jshepler.ngu.mods
             var expPerDay = secondsPerKill == 0f ? 0L : (long)(60 * 60 * 24 / secondsPerExpGroup) * expPerGroup;
             var apPerDay = secondsPerKill == 0f ? 0L : (long)(60 * 60 * 24 / secondsPerExpGroup);
 
-            text += $"\n\n<b>Kills per EXP/AP drop:</b> {killsPerEXP} taking {(secondsPerExpGroup == 0f ? "????" : NumberOutput.timeOutput(secondsPerExpGroup))}"
-                + $"\n<b>Kills to next EXP/AP:</b> {killsToNextAP} in {(secondsPerKill == 0f ? "???" : NumberOutput.timeOutput(killsToNextAP * secondsPerKill))}"
-                + $"\n<b>EXP per drop:</b> {character.display(expPerGroup)} ({baseExpPerGroup} base)"
-                + $"\n<b>EXP per day:</b> {character.display(expPerDay)}"
-                + $"\n<b>AP per day:</b> {character.display(apPerDay)}";
+            text += $"\n\n<b>每次经验/天赋掉落击杀:</b> {killsPerEXP} 耗时 {(secondsPerExpGroup == 0f ? "????" : NumberOutput.timeOutput(secondsPerExpGroup))}"
+                + $"\n<b>距离下次经验/天赋击杀:</b> {killsToNextAP} 还需 {(secondsPerKill == 0f ? "???" : NumberOutput.timeOutput(killsToNextAP * secondsPerKill))}"
+                + $"\n<b>每次掉落经验:</b> {character.display(expPerGroup)} ({baseExpPerGroup} 基础)"
+                + $"\n<b>每天经验:</b> {character.display(expPerDay)}"
+                + $"\n<b>每天天赋:</b> {character.display(apPerDay)}";
 
-            text += $"\n\n<b>Max Floor: </b> {maxFloor - 1}"
-                + $"\n<b>Optimal Floor:</b> {optimalFloor}";
+            text += $"\n\n<b>最高层: </b> {maxFloor - 1}"
+                + $"\n<b>最优层:</b> {optimalFloor}";
 
             return text;
         }
@@ -199,9 +199,9 @@ namespace jshepler.ngu.mods
             var killsPerHour = 3600f / secondsPerKill;
             var killsPerDay = 86400f / secondsPerKill;
 
-            var text = $"\n\n<b>Seconds per kill:</b> {(secondsPerKill == 0f ? "????" : NumberOutput.timeOutput(secondsPerKill))} ({(isEstimated ? "estimated" : currentFloor < optimalFloor ? "sub-optimal" : "optimal")})"
-                + $"\n<b>Kills per hour:</b> {killsPerHour:#,##0.##}"
-                + $"\n<b>Kills per day:</b> {killsPerDay:#,##0.##}";
+            var text = $"\n\n<b>每次击杀秒数:</b> {(secondsPerKill == 0f ? "????" : NumberOutput.timeOutput(secondsPerKill))} ({(isEstimated ? "估算" : currentFloor < optimalFloor ? "次优" : "最优")})"
+                + $"\n<b>每小时击杀:</b> {killsPerHour:#,##0.##}"
+                + $"\n<b>每天击杀:</b> {killsPerDay:#,##0.##}";
 
             if (character.adventure.itopod.perkLevel[30] >= 1)
             {
@@ -209,10 +209,10 @@ namespace jshepler.ngu.mods
                 var killsToNextPoop = killsPerPoop - character.adventure.itopod.poopProgress;
                 var dcPoop = character.adventureController.itopod.effectPerLevel[30];
                 var avgPoopPerDay = (killsPerDay / killsPerPoop) + (killsPerDay * dcPoop);
-                text += $"\n\n<b>Kills per Poop:</b> {killsPerPoop} taking {NumberOutput.timeOutput(killsPerPoop * secondsPerKill)}"
-                    + $"\n<b>Kills to next Poop:</b> {killsToNextPoop} in {(secondsPerKill == 0f ? "???" : NumberOutput.timeOutput(killsToNextPoop * secondsPerKill))}"
-                    + $"\n<b>DC per kill:</b> {dcPoop * 100f:0.####}%"
-                    + $"\n<b>Avg Poop per day:</b> ~{avgPoopPerDay:#,##0.##}";
+                text += $"\n\n<b>每便便击杀:</b> {killsPerPoop} 耗时 {NumberOutput.timeOutput(killsPerPoop * secondsPerKill)}"
+                    + $"\n<b>距离下次便便击杀:</b> {killsToNextPoop} 还需 {(secondsPerKill == 0f ? "???" : NumberOutput.timeOutput(killsToNextPoop * secondsPerKill))}"
+                    + $"\n<b>每次击杀日托:</b> {dcPoop * 100f:0.####}%"
+                    + $"\n<b>每天平均便便:</b> ~{avgPoopPerDay:#,##0.##}";
             }
 
             if (character.achievements.achievementComplete[145] && character.adventure.itopod.perkLevel[68] >= 1)
@@ -220,27 +220,27 @@ namespace jshepler.ngu.mods
                 var killsPerGuff = controller.lootDrop.killsPerMacguffin();
                 var killsToNextGuff = controller.lootDrop.killsUntilMacguffin();
                 var guffsPerDay = killsPerDay / killsPerGuff;
-                text += $"\n\n<b>Kills per MacGuffin:</b> {killsPerGuff} taking {NumberOutput.timeOutput(killsPerGuff * secondsPerKill)}"
-                    + $"\n<b>Kills to next MacGuffin:</b> {killsToNextGuff} in {(secondsPerKill == 0f ? "???" : NumberOutput.timeOutput(killsToNextGuff * secondsPerKill))}"
-                    + $"\n<b>MacGuffins per day:</b> {character.display(guffsPerDay)}";
+                text += $"\n\n<b>每麦高芬击杀:</b> {killsPerGuff} 耗时 {NumberOutput.timeOutput(killsPerGuff * secondsPerKill)}"
+                    + $"\n<b>距离下次麦高芬击杀:</b> {killsToNextGuff} 还需 {(secondsPerKill == 0f ? "???" : NumberOutput.timeOutput(killsToNextGuff * secondsPerKill))}"
+                    + $"\n<b>每天麦高芬:</b> {character.display(guffsPerDay)}";
             }
 
-            text += $"\n\n<b>Max Floor: </b> {maxFloor - 1}"
-                + $"\n<b>Optimal Floor:</b> {optimalFloor}";
+            text += $"\n\n<b>最高层: </b> {maxFloor - 1}"
+                + $"\n<b>最优层:</b> {optimalFloor}";
 
             var nextOptimalFloorPower = getPowForOpt(optimalFloor + 1);
             if (optimalFloor < 1599)
-                text += $"\n\n<b>Power for next opt:</b> {character.display(nextOptimalFloorPower)}";
+                text += $"\n\n<b>下一最优层所需攻击力:</b> {character.display(nextOptimalFloorPower)}";
 
             var next50Floor = (Mathf.FloorToInt(optimalFloor / 50f) + 1) * 50;
             var next50FloorPower = next50Floor < 1600 ? getPowForOpt(next50Floor) : 0f;
             if (next50Floor < 1600)
-                text += $"\n<b>  ... next 50th ({next50Floor}):</b> {character.display(next50FloorPower)}";
+                text += $"\n<b>  ... 下50层 ({next50Floor}):</b> {character.display(next50FloorPower)}";
 
             var nextBoostFloor = _boostFloors.FirstOrDefault(f => f > optimalFloor);
             var nextBoostFloorPower = nextBoostFloor == 0 ? 0 : getPowForOpt(nextBoostFloor);
             if (nextBoostFloor > 0)
-                text += $"\n<b>  ... next boost ({nextBoostFloor}):</b> {character.display(nextBoostFloorPower)}";
+                text += $"\n<b>  ... 下次加成 ({nextBoostFloor}):</b> {character.display(nextBoostFloorPower)}";
 
             var currentATP = character.advancedTraining.level[1];
             var nextOptimalATP = _atpNeeded(nextOptimalFloorPower);

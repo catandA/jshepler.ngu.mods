@@ -76,18 +76,18 @@ namespace jshepler.ngu.mods
             var seconds = (speed + respawn) / questDC * idleDF;
 
             var altText = !_altIsDown ? string.Empty :
-                $"\n   idle attack speed: {speed}"
-                + $"\n   respawn: {respawn}"
-                + $"\n   quest DC: {questDC}"
-                + $"\n   idle speed divider (perks): {idleDF}"
-                + $"\n   seconds per drop"
-                + $"\n      = (speed + respawn) / questDC * divider"
+                $"\n   攻击速度: {speed}"
+                + $"\n   复活时间: {respawn}"
+                + $"\n   任务DC: {questDC}"
+                + $"\n   空闲速度除数(天赋): {idleDF}"
+                + $"\n   每次掉落秒数"
+                + $"\n      = (速度 + 复活) / 任务DC * 除数"
                 + $"\n      = {seconds} ({NumberOutput.timeOutput(seconds)})\n";
 
-            var text = $"\n\nTime per drop: {timePerDrop}"
+            var text = $"\n\n每次掉落时间: {timePerDrop}"
                 + altText
-                + $"\nTotal quest time: {totalTime}"
-                + $"\n{(hasFib610 ? "Q" : "Average q")}uests per day: {questsPerDay:0.#}\n";
+                + $"\n总任务时间: {totalTime}"
+                + $"\n{(hasFib610 ? "Q" : "平均每")}天任务数: {questsPerDay:0.#}\n";
 
             return text;
         }
@@ -110,7 +110,7 @@ namespace jshepler.ngu.mods
             if (curProgress > 0)
                 secondsLeft -= curProgress * secondsPerDrop;
 
-            __result += $"\nTime to completed quest: {NumberOutput.timeOutput(secondsLeft)}";
+            __result += $"\n完成任务剩余时间: {NumberOutput.timeOutput(secondsLeft)}";
         }
     }
 }

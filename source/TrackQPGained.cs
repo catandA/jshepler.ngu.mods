@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -185,8 +185,8 @@ namespace jshepler.ngu.mods
             while (true)
             {
                 if (!_altIsDown)
-                    text = $"<b>QP gained this rebirth:</b> {character.display(QPGainedThisRB)}"
-                        + $"\n<b>QP gained last rebirth:</b> {character.display(QPGainedLastRB)}";
+                    text = $"<b>本次重生QP获取:</b> {character.display(QPGainedThisRB)}"
+                        + $"\n<b>上次重生QP获取:</b> {character.display(QPGainedLastRB)}";
 
                 else
                 {
@@ -209,11 +209,11 @@ namespace jshepler.ngu.mods
 
                     var otherThisRB = QPGainedThisRB - sumThisRB;
                     if (otherThisRB > 0)
-                        dataThisRB.Add(("Other", otherThisRB, QPGainedThisRB == 0 ? 0f : (float)otherThisRB / QPGainedThisRB));
+                        dataThisRB.Add(("其他", otherThisRB, QPGainedThisRB == 0 ? 0f : (float)otherThisRB / QPGainedThisRB));
 
                     var otherLastRB = QPGainedLastRB - sumLastRB;
                     if (otherLastRB > 0)
-                        dataLastRB.Add(("Other", otherLastRB, QPGainedLastRB == 0 ? 0f : (float)otherLastRB / QPGainedLastRB));
+                        dataLastRB.Add(("其他", otherLastRB, QPGainedLastRB == 0 ? 0f : (float)otherLastRB / QPGainedLastRB));
 
                     dataThisRB.Sort(sorter);
                     dataLastRB.Sort(sorter);
@@ -221,8 +221,8 @@ namespace jshepler.ngu.mods
                     var sourcesThisRB = dataThisRB.Join(d => $"   <b>{d.Item1}:</b> {display(d.Item2)} <color=blue>({d.Item3 * 100f:0.#}%)</color>", "\n");
                     var sourcesLastRB = dataLastRB.Join(d => $"   <b>{d.Item1}:</b> {display(d.Item2)} <color=blue>({d.Item3 * 100f:0.#}%)</color>", "\n");
 
-                    text = $"<b>QP gained this rebirth:</b> {character.display(QPGainedThisRB)}\n{sourcesThisRB}"
-                        + $"\n\n<b>QP gained last rebirth:</b> {character.display(QPGainedLastRB)}\n{sourcesLastRB}";
+                    text = $"<b>本次重生QP获取:</b> {character.display(QPGainedThisRB)}\n{sourcesThisRB}"
+                        + $"\n\n<b>上次重生QP获取:</b> {character.display(QPGainedLastRB)}\n{sourcesLastRB}";
                 }
 
                 Plugin.ShowTooltip(text);
@@ -242,11 +242,11 @@ namespace jshepler.ngu.mods
 
             internal static Func<int, string> Name = i => i switch
             {
-                0 => "Quests",
-                1 => "Titans",
-                2 => "Fruit",
-                3 => "Minor Quests",
-                4 => "Major Quests",
+                0 => "任务",
+                1 => "泰坦",
+                2 => "果实",
+                3 => "小任务",
+                4 => "主要任务",
                 _ => $"??? {i}"
             };
         }

@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using UnityEngine;
 
 namespace jshepler.ngu.mods.BarTooltips
@@ -17,7 +17,7 @@ namespace jshepler.ngu.mods.BarTooltips
             var wanMeh = baseSpeeds[OSType.wandoosMEH] / energySpeed + 1;
             var wanXL = baseSpeeds[OSType.wandoosXL] / energySpeed + 1;
 
-            ___message += $"\n\n<b>Current Speed Caps:</b>"
+            ___message += $"\n\n<b>当前速度上限:</b>"
                 + $"\n - <b>Wandoos 98:</b> {character.display(wan98)}"
                 + $"\n - <b>Wandoos MEH:</b> {character.display(wanMeh)}"
                 + $"\n - <b>Wandoos XL:</b> {character.display(wanXL)}";
@@ -27,7 +27,7 @@ namespace jshepler.ngu.mods.BarTooltips
             var capPct = ppt * 100f;
 
             if (!Plugin.Character.challenges.blindChallenge.inChallenge)
-                ___message += $"\n\n<b>% Allocated:</b> {capPct}%"
+                ___message += $"\n\n<b>分配百分比:</b> {capPct}%"
                     + $"\n   (ppt: {ppt:0.0000000} = {tpb}t/bar)";
 
             __instance.tooltip.showTooltip(___message);
@@ -44,7 +44,7 @@ namespace jshepler.ngu.mods.BarTooltips
             var wanMeh = baseSpeeds[OSType.wandoosMEH] / magicSpeed + 1;
             var wanXL = baseSpeeds[OSType.wandoosXL] / magicSpeed + 1;
 
-            ___message += $"\n\n<b>Current Speed Caps:</b>"
+            ___message += $"\n\n<b>当前速度上限:</b>"
                 + $"\n - <b>Wandoos 98:</b> {character.display(wan98)}"
                 + $"\n - <b>Wandoos MEH:</b> {character.display(wanMeh)}"
                 + $"\n - <b>Wandoos XL:</b> {character.display(wanXL)}";
@@ -54,7 +54,7 @@ namespace jshepler.ngu.mods.BarTooltips
             var capPct = ppt * 100f;
 
             if (!Plugin.Character.challenges.blindChallenge.inChallenge)
-                ___message += $"\n\n<b>% Allocated:</b> {capPct}%"
+                ___message += $"\n\n<b>分配百分比:</b> {capPct}%"
                     + $"\n   (ppt: {ppt:0.0000000} = {tpb}t/bar)";
 
             __instance.tooltip.showTooltip(___message);

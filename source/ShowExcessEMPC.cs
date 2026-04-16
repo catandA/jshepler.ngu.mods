@@ -72,7 +72,7 @@ namespace jshepler.ngu.mods
 
             if (ePowTotal > EM_POW_HARDCAP)
             {
-                sb.Append("\nexcess EP: ");
+                sb.Append("\n超出能量Power: ");
 
                 if (ePowNoEquip >= EM_POW_HARDCAP)
                     sb.Append($"{(ePowEquipBonus * 100f):#,##0.#}%");
@@ -87,7 +87,7 @@ namespace jshepler.ngu.mods
 
             if (mPowTotal > EM_POW_HARDCAP)
             {
-                sb.Append("\nexcess MP: ");
+                sb.Append("\n超出魔法Power: ");
 
                 if (mPowNoEquip >= EM_POW_HARDCAP)
                     sb.Append($"{(mPowEquipBonus * 100f):#,##0.#}%");
@@ -102,7 +102,7 @@ namespace jshepler.ngu.mods
 
             if (eCapTotal > EM_CAP_HARDCAP)
             {
-                sb.Append("\nexcess EC: ");
+                sb.Append("\n超出能量上限: ");
 
                 if (eCapNoEquip >= EM_CAP_HARDCAP)
                     sb.Append($"{(eCapEquipBonus * 100f):#,##0.#}%");
@@ -117,7 +117,7 @@ namespace jshepler.ngu.mods
 
             if (mCapTotal > EM_CAP_HARDCAP)
             {
-                sb.Append("\nexcess MC: ");
+                sb.Append("\n超出魔法上限: ");
 
                 if (mCapNoEquip >= EM_CAP_HARDCAP)
                     sb.Append($"{(mCapEquipBonus * 100f):#,##0.#}%");

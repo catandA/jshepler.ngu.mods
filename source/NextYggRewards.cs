@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using HarmonyLib;
 using UnityEngine;
@@ -61,10 +61,10 @@ namespace jshepler.ngu.mods
             string text;
 
             if (character.yggdrasil.fruits[fc.id].eatFruit == false)
-                text = $"If harvested now, {fruit} will give:\n\n{Harvest(fc)}";
+                text = $"如果现在收获，{fruit} 将获得：\n\n{Harvest(fc)}";
 
             else if (fc.id > 14)
-                text = $"If eaten now, {fruit} will give:\n\n{Mayo(fc)}";
+                text = $"如果现在食用，{fruit} 将获得：\n\n{Mayo(fc)}";
 
             else
             {
@@ -88,7 +88,7 @@ namespace jshepler.ngu.mods
                     _ => null
                 };
 
-                text = $"If eaten now, {fruit} will give:\n\n{rewards}";
+                text = $"如果现在食用，{fruit} 将获得：\n\n{rewards}";
             }
 
             return text;
@@ -107,29 +107,29 @@ namespace jshepler.ngu.mods
             var ngu = character.NGUController.yggdrasilBonus();
             var fh = character.adventureController.itopod.totalHarvestBonus(fc.id);
 
-            var text = $"\n\n<b>Base Seeds:</b> {baseSeeds}"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}";
+            var text = $"\n\n<b>基础种子:</b> {baseSeeds}"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (equip > 1.0f)
-                text += $"\n<b>Equipment:</b> {showMulti(equip)}";
+                text += $"\n<b>装备:</b> {showMulti(equip)}";
 
             if (perks > 1.0f)
-                text += $"\n<b>Perks:</b> {showMulti(perks)}";
+                text += $"\n<b>天赋:</b> {showMulti(perks)}";
 
             if (quirks > 1.0f)
-                text += $"\n<b>Quirks:</b> {showMulti(quirks)}";
+                text += $"\n<b>特性:</b> {showMulti(quirks)}";
 
             if (ngu > 1.0f)
                 text += $"\n<b>NGU YGG:</b> {showMulti(ngu)}";
 
             if (poop > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poop)}";
+                text += $"\n<b>便便:</b> {showMulti(poop)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
             if (harvest)
-                text += $"\n<b>Harvest Seeds Bonus:</b> {showMulti(2f)}";
+                text += $"\n<b>收获种子加成:</b> {showMulti(2f)}";
 
             return text;
         }
@@ -140,7 +140,7 @@ namespace jshepler.ngu.mods
             var poopMulti = poopBonus(fc.id);
 
             var seeds = fc.harvestSeedReward(fc.id, tierFactor, poopMulti);
-            var text = $"+{fc.character.display(seeds)} seeds";
+            var text = $"+{fc.character.display(seeds)} 种子";
 
             if (Plugin.AltIsDown)
                 text += Seeds(fc, tierFactor, poopMulti, true);
@@ -157,14 +157,14 @@ namespace jshepler.ngu.mods
             var mayo = tierFactor * 0.025f * mayoSpeed * poopMulti;
             var name = fc.character.cardsController.getManaName(fc.id - 15);
 
-            var text = $"+{mayo:0.##} {name}\n+{fc.character.display(seeds)} seeds";
+            var text = $"+{mayo:0.##} {name}\n+{fc.character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += "\n\n<b>Base Mayo:</b> 0.025"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}"
-                + $"\n<b>Mayo Speed:</b> {showMulti(mayoSpeed)}";
+            text += "\n\n<b>基础蛋黄酱:</b> 0.025"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}"
+                + $"\n<b>蛋黄酱速度:</b> {showMulti(mayoSpeed)}";
 
             if(poopMulti > 1.0f)
                 text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
@@ -185,20 +185,20 @@ namespace jshepler.ngu.mods
             var fh = character.adventureController.itopod.totalHarvestBonus(0);
             var gold = tierFactor * poopMulti * goldPerHour * fh;
 
-            var text = $"+{character.display(gold)} gold"
-                + $"\n+{character.display(seeds)} seeds";
+            var text = $"+{character.display(gold)} 金币"
+                + $"\n+{character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += $"\n\n<b>Gross GPS (1hr):</b> {character.display(goldPerHour)}"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}";
+            text += $"\n\n<b>总金币/秒 (1小时):</b> {character.display(goldPerHour)}"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (poopMulti > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
+                text += $"\n<b>便便:</b> {showMulti(poopMulti)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
             text += Seeds(fc, tierFactor, poopMulti);
             return text;
@@ -220,25 +220,25 @@ namespace jshepler.ngu.mods
 
             var text = $"+{character.display(gainLevels)} levels gained"
                 + $"\n+{character.display((newBonus - oldBonus) * 100f)}% Attack/Defense bonus,"
-                + $"\n+{character.display(seeds)} seeds";
+                + $"\n+{character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += "\n\n<b>Base Levels:</b> 1"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}";
+            text += "\n\n<b>基础等级:</b> 1"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (ngu > 1.0f)
                 text += $"\n<b>NGU YGG:</b> {showMulti(ngu)}";
 
             if (ygg > 1.0f)
-                text += $"\n<b>YGG Yield:</b> {showMulti(ygg)}";
+                text += $"\n<b>YGG产量:</b> {showMulti(ygg)}";
 
             if (poopMulti > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
+                text += $"\n<b>便便:</b> {showMulti(poopMulti)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
             text += Seeds(fc, tierFactor, poopMulti);
             return text;
@@ -263,25 +263,25 @@ namespace jshepler.ngu.mods
                 + $"\n+{character.display(pt)} Toughness"
                 + $"\n+{character.display(health)} Max Health"
                 + $"\n+{character.display(regen)} Health Regen"
-                + $"\n+{character.display(seeds)} seeds";
+                + $"\n+{character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += $"\n\n<b>Base Tough (5th root):</b> {baseT}"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}";
+            text += $"\n\n<b>基础韧性 (5次方根):</b> {baseT}"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (ngu > 1.0f)
                 text += $"\n<b>NGU YGG:</b> {showMulti(ngu)}";
 
             if (ygg > 1.0f)
-                text += $"\n<b>YGG Yield:</b> {showMulti(ygg)}";
+                text += $"\n<b>YGG产量:</b> {showMulti(ygg)}";
 
             if (poopMulti > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
+                text += $"\n<b>便便:</b> {showMulti(poopMulti)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
             text += Seeds(fc, tierFactor, poopMulti);
             return text;
@@ -309,34 +309,34 @@ namespace jshepler.ngu.mods
             var modified = character.checkExpAdded(exp);
 
             var text = $"+{character.display(modified)} EXP"
-                + $"\n+{character.display(seeds)} seeds";
+                + $"\n+{character.display(seeds)} 种子";
 
             if (!_expDiggerActive)
-                text += "\n\n<b><color=red>EXP DIGGER IS NOT ACTIVE!</color></b>";
+                text += "\n\n<b><color=red>经验掘金者未激活！</color></b>";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += "\n\n<b>Base EXP:</b> 5"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}";
+            text += "\n\n<b>基础经验:</b> 5"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (perks > 1)
-                text += $"\n<b>Perks:</b> {showMulti(perks)}";
+                text += $"\n<b>天赋:</b> {showMulti(perks)}";
 
             if (ngu > 1.0f)
                 text += $"\n<b>NGU YGG:</b> {showMulti(ngu)}";
 
             if (ygg > 1.0f)
-                text += $"\n<b>YGG Yield:</b> {showMulti(ygg)}";
+                text += $"\n<b>YGG产量:</b> {showMulti(ygg)}";
 
             if (poopMulti > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
+                text += $"\n<b>便便:</b> {showMulti(poopMulti)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
             var globalExpMulti = character.checkExpAdded(10000L) / 10000f;
-            text += $"\n<b>Global EXP Multi:</b> {showMulti(globalExpMulti)}";
+            text += $"\n<b>全局经验倍率:</b> {showMulti(globalExpMulti)}";
 
             text += Seeds(fc, tierFactor, poopMulti);
             return text;
@@ -348,7 +348,7 @@ namespace jshepler.ngu.mods
             var poopMulti = poopBonus(4);
             var seeds = fc.harvestSeedReward(4, tierFactor, poopMulti);
 
-            var text = $"+{fc.character.display(seeds)} seeds";
+            var text = $"+{fc.character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
@@ -375,25 +375,25 @@ namespace jshepler.ngu.mods
 
             var text = $"+{character.display(gainLevels)} levels gained"
                 + $"\n+{(newBonus - oldBonus) * 100f:#,##0.##}% Drop Chance Bonus"
-                + $"\n+{character.display(seeds)} seeds";
+                + $"\n+{character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += $"\n\n<b>Base Levels:</b> {baseLevels}"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}";
+            text += $"\n\n<b>基础等级:</b> {baseLevels}"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (ngu > 1.0f)
                 text += $"\n<b>NGU YGG:</b> {showMulti(ngu)}";
 
             if (ygg > 1.0f)
-                text += $"\n<b>YGG Yield:</b> {showMulti(ygg)}";
+                text += $"\n<b>YGG产量:</b> {showMulti(ygg)}";
 
             if (poopMulti > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
+                text += $"\n<b>便便:</b> {showMulti(poopMulti)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
             text += Seeds(fc, tierFactor, poopMulti);
             return text;
@@ -417,25 +417,25 @@ namespace jshepler.ngu.mods
 
             var text = $"+{character.display(gainLevels)} levels"
                 + $"\n+{character.display((newBonus - oldBonus) * 100.0)}% Attack/Defense bonus"
-                + $"\n+{character.display(seeds)} seeds";
+                + $"\n+{character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += $"\n\n<b>Base Levels:</b> {baseLevels}"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}";
+            text += $"\n\n<b>基础等级:</b> {baseLevels}"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (ngu > 1.0f)
                 text += $"\n<b>NGU YGG:</b> {showMulti(ngu)}";
 
             if (ygg > 1.0f)
-                text += $"\n<b>YGG Yield:</b> {showMulti(ygg)}";
+                text += $"\n<b>YGG产量:</b> {showMulti(ygg)}";
 
             if (poopMulti > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
+                text += $"\n<b>便便:</b> {showMulti(poopMulti)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
             text += Seeds(fc, tierFactor, poopMulti);
             return text;
@@ -452,23 +452,23 @@ namespace jshepler.ngu.mods
             var ap = (long)Mathf.Ceil(15 * tierFactor * poopMulti * fh);
             var modded = character.checkAPAdded(ap);
 
-            var text = $"+{character.display(modded)} AP"
-                + $"\n+{character.display(seeds)} seeds";
+            var text = $"+{character.display(modded)} 任意点"
+                + $"\n+{character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += "\n\n<b>Base AP:</b> 15"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}";
+            text += "\n\n<b>基础AP:</b> 15"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (poopMulti > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
+                text += $"\n<b>便便:</b> {showMulti(poopMulti)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
             var globalAPMulti = character.checkAPAdded(10000L) / 10000f;
-            text += $"\n<b>Global AP Multi:</b> {showMulti(globalAPMulti)}";
+            text += $"\n<b>全局AP倍率:</b> {showMulti(globalAPMulti)}";
 
             text += Seeds(fc, tierFactor, poopMulti);
             return text;
@@ -492,25 +492,25 @@ namespace jshepler.ngu.mods
 
             var text = $"+{character.display(gainLevels)} levels"
                 + $"\n+{character.display((newBonus - oldBonus) * 100f)}% NUMBER Bonus"
-                + $"\n+{character.display(seeds)} seeds";
+                + $"\n+{character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += $"\n\n<b>Base Levels:</b> {baseLevels}"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}";
+            text += $"\n\n<b>基础等级:</b> {baseLevels}"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (ngu > 1.0f)
                 text += $"\n<b>NGU YGG:</b> {showMulti(ngu)}";
 
             if (ygg > 1.0f)
-                text += $"\n<b>YGG Yield:</b> {showMulti(ygg)}";
+                text += $"\n<b>YGG产量:</b> {showMulti(ygg)}";
 
             if (poopMulti > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
+                text += $"\n<b>便便:</b> {showMulti(poopMulti)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
             text += Seeds(fc, tierFactor, poopMulti);
             return text;
@@ -532,28 +532,28 @@ namespace jshepler.ngu.mods
             ppp = character.adventureController.itopod.progressToRemainder(ppp);
 
             var text = $"+{character.display(pp)} PP"
-                + $"\n+{character.display(ppp)} progress to next PP"
-                + $"\n+{character.display(seeds)} seeds";
+                + $"\n+{character.display(ppp)} 距离下次PP的进度"
+                + $"\n+{character.display(seeds)} 种子";
 
             if (!_ppDiggerActive)
-                text += "\n\n<b><color=red>PP DIGGER IS NOT ACTIVE!</color></b>";
+                text += "\n\n<b><color=red>PP掘金者未激活！</color></b>";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += "\n\n<b>Base PPP:</b> 60,000"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}";
+            text += "\n\n<b>基础PPP:</b> 60,000"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (ygg > 1.0f)
-                text += $"\n<b>YGG Yield:</b> {showMulti(ygg)}";
+                text += $"\n<b>YGG产量:</b> {showMulti(ygg)}";
 
             if (poopMulti > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
+                text += $"\n<b>便便:</b> {showMulti(poopMulti)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
-            text += $"\n<b>Global PPP Multi (w/o pills):</b> {showMulti(globalPPPMulti)}"
+            text += $"\n<b>全局PPP倍率 (无药水):</b> {showMulti(globalPPPMulti)}"
                 + Seeds(fc, tierFactor, poopMulti);
 
             return text;
@@ -574,26 +574,26 @@ namespace jshepler.ngu.mods
             var capped = levels > int.MaxValue ? int.MaxValue : (int)levels;
             var isRandom = character.wishes.wishes[25].level <= 0;
 
-            var text = $"+{character.display(capped)} levels to {(isRandom ? "a random" : "your first")} equipped MacGuffin"
-                + $"\n+{character.display(seeds)} seeds";
+            var text = $"+{character.display(capped)} levels to {(isRandom ? "随机" : "你的第一个")} equipped MacGuffin"
+                + $"\n+{character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += "\n\n<b>Base Levels:</b> 0.5"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}";
+            text += "\n\n<b>基础等级:</b> 0.5"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (wish > 1.0f)
-                text += $"\n<b>Wish 60:</b> {showMulti(wish)}";
+                text += $"\n<b>愿望60:</b> {showMulti(wish)}";
 
             if (ygg > 1.0f)
-                text += $"\n<b>YGG Yield:</b> {showMulti(ygg)}";
+                text += $"\n<b>YGG产量:</b> {showMulti(ygg)}";
 
             if (poopMulti > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
+                text += $"\n<b>便便:</b> {showMulti(poopMulti)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
             text += Seeds(fc, tierFactor, poopMulti);
             return text;
@@ -617,25 +617,25 @@ namespace jshepler.ngu.mods
 
             var text = $"+{character.display(gainLevels)} levels"
                 + $"\n+{(newBonus - oldBonus) * 100f:#,##0.##}% Attack/Defense bonus"
-                + $"\n+{character.display(seeds)} seeds";
+                + $"\n+{character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += $"\n\n<b>Base Levels:</b> {baseLevels}"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}";
+            text += $"\n\n<b>基础等级:</b> {baseLevels}"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (ngu > 1.0f)
                 text += $"\n<b>NGU YGG:</b> {showMulti(ngu)}";
 
             if (ygg > 1.0f)
-                text += $"\n<b>YGG Yield:</b> {showMulti(ygg)}";
+                text += $"\n<b>YGG产量:</b> {showMulti(ygg)}";
 
             if (poopMulti > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
+                text += $"\n<b>便便:</b> {showMulti(poopMulti)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
             text += Seeds(fc, tierFactor, poopMulti);
             return text;
@@ -647,7 +647,7 @@ namespace jshepler.ngu.mods
             var poopMulti = poopBonus(12);
             var seeds = fc.harvestSeedReward(12, tierFactor, poopMulti);
 
-            var text = $"+{fc.character.display(seeds)} seeds";
+            var text = $"+{fc.character.display(seeds)} 种子";
             if (!Plugin.AltIsDown)
                 return text;
 
@@ -668,22 +668,22 @@ namespace jshepler.ngu.mods
             var capped = levels > int.MaxValue ? int.MaxValue : (int)levels;
 
             var text = $"+{character.display(capped)} levels to ALL equipped MacGuffins"
-                + $"\n+{character.display(seeds)} seeds";
+                + $"\n+{character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += "\n\n<b>Base Levels:</b> 0.1"
-                + $"\n<b>Tier Factor:</b> {showMulti(tierFactor)}";
+            text += "\n\n<b>基础等级:</b> 0.1"
+                + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (ygg > 1.0f)
-                text += $"\n<b>YGG Yield:</b> {showMulti(ygg)}";
+                text += $"\n<b>YGG产量:</b> {showMulti(ygg)}";
 
             if (poopMulti > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
+                text += $"\n<b>便便:</b> {showMulti(poopMulti)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
             text += Seeds(fc, tierFactor, poopMulti);
             return text;
@@ -706,24 +706,24 @@ namespace jshepler.ngu.mods
             var qp = (long)Mathf.Ceil(3 * tier * poopMulti * ygg * globalQPMulti * fh);
 
             var text = $"+{character.display(qp)} QP"
-                + $"\n+{character.display(seeds)} seeds";
+                + $"\n+{character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += "\n\n<b>Base QP:</b> 3"
-                + $"\n<b>Tier Factor:</b> {showMulti(tier)}";
+            text += "\n\n<b>基础QP:</b> 3"
+                + $"\n<b>等级因子:</b> {showMulti(tier)}";
 
             if (ygg > 1.0f)
-                text += $"\n<b>YGG Yield:</b> {showMulti(ygg)}";
+                text += $"\n<b>YGG产量:</b> {showMulti(ygg)}";
 
             if (poopMulti > 1.0f)
-                text += $"\n<b>Poop:</b> {showMulti(poopMulti)}";
+                text += $"\n<b>便便:</b> {showMulti(poopMulti)}";
 
             if (fh > 1.0f)
-                text += $"\n<b>First Harvest:</b> {showMulti(fh)}";
+                text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
-            text += $"\n<b>Global QP Multi (w/o butter):</b> {showMulti(globalQPMulti)}"
+            text += $"\n<b>全局QP倍率 (无黄油):</b> {showMulti(globalQPMulti)}"
                 + Seeds(fc, tier, poopMulti);
 
             return text;

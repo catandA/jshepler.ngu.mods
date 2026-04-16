@@ -95,13 +95,13 @@ namespace jshepler.ngu.mods
             var totalBonus = completedBoostsBonus * bdwCompleteBonus * constructionCompleteBonus * perksBonus * quirksBonus;
 
             var statsText =
-                $"\n<b>Base Boost Modifier:</b> "
-                + $"\n<b>Completed Boosts ({completedBoostsCount}):</b> "
-                + (bdwCompleteBonus == 1f ? string.Empty : $"\n<b>Completed BDW set:</b> ")
-                + (constructionCompleteBonus == 1f ? string.Empty : $"\n<b>Completed Construction Set:</b> ")
-                + (perksBonus == 1f ? string.Empty : $"\n<b>Perks Modifier:</b> ")
-                + (quirksBonus == 1f ? string.Empty : $"\n<b>Quirks Modifier:</b> ")
-                + $"\n<b>Total Boost Modifier:</b> ";
+                $"\n<b>基础增益修正:</b> "
+                + $"\n<b>已完成增益({completedBoostsCount}):</b> "
+                + (bdwCompleteBonus == 1f ? string.Empty : $"\n<b>已完成BDW套装:</b> ")
+                + (constructionCompleteBonus == 1f ? string.Empty : $"\n<b>已完成建筑套装:</b> ")
+                + (perksBonus == 1f ? string.Empty : $"\n<b>天赋修正:</b> ")
+                + (quirksBonus == 1f ? string.Empty : $"\n<b>特性修正:</b> ")
+                + $"\n<b>总增益修正:</b> ";
 
             var statsValues =
                 $"\n  100%"
@@ -128,43 +128,43 @@ namespace jshepler.ngu.mods
             var hacksMulti = character.hacksController.totalTMSpeedBonus();
             var cardMulti = character.cardsController.getBonus(cardBonus.TMSpeed);
 
-            var eTexts = "\n\n<b>Base Energy Time Machine Speed:</b> ";
-            var mTexts = "\n\n<b>Base Magic Time Machine Speed:</b> ";
+            var eTexts = "\n\n<b>基础时间机器能量速度:</b> ";
+            var mTexts = "\n\n<b>基础时间机器魔法速度:</b> ";
             var eValues = "\n\n  100%";
             var mValues = "\n\n  100%";
 
-            eTexts += "\n<b>Energy Power Modifier:</b> ";
-            mTexts += "\n<b>Magic Power Modifier:</b> ";
+            eTexts += "\n<b>能量功率修正:</b> ";
+            mTexts += "\n<b>魔法功率修正:</b> ";
             eValues += $"\nx {display(totalEnergyPower * 100f)}%";
             mValues += $"\nx {display(totalMagicPower * 100f)}%";
 
             if (challMulti > 1f)
             {
-                eTexts += "\n<b>Evil No TM Challenge:</b> ";
-                mTexts += "\n<b>Evil No TM Challenge:</b> ";
+                eTexts += "\n<b>邪恶无时间机器挑战:</b> ";
+                mTexts += "\n<b>邪恶无时间机器挑战:</b> ";
                 eValues += $"\nx {display(challMulti * 100f)}%";
                 mValues += $"\nx {display(challMulti * 100f)}%";
             }
 
             if (hacksMulti > 1f)
             {
-                eTexts += "\n<b>TM Speed Hack Modifier:</b> ";
-                mTexts += "\n<b>TM Speed Hack Modifier:</b> ";
+                eTexts += "\n<b>时间机器黑客修正:</b> ";
+                mTexts += "\n<b>时间机器黑客修正:</b> ";
                 eValues += $"\nx {display(hacksMulti * 100f)}%";
                 mValues += $"\nx {display(hacksMulti * 100f)}%";
             }
 
             if (cardMulti > 1f)
             {
-                eTexts += "\n<b>TM Speed Card Modifier:</b> ";
-                mTexts += "\n<b>TM Speed Card Modifier:</b> ";
+                eTexts += "\n<b>时间机器卡片修正:</b> ";
+                mTexts += "\n<b>时间机器卡片修正:</b> ";
                 eValues += $"\nx {display(cardMulti * 100f)}%";
                 mValues += $"\nx {display(cardMulti * 100f)}%";
             }
 
             var totalMulti = challMulti * hacksMulti * cardMulti;
-            eTexts += "\n<b>Total Energy Time Machine Speed:</b> ";
-            mTexts += "\n<b>Total Magic Time Machine Speed:</b> ";
+            eTexts += "\n<b>总时间机器能量速度:</b> ";
+            mTexts += "\n<b>总时间机器魔法速度:</b> ";
             eValues += $"\n  {display(totalMulti * totalEnergyPower * 100f)}%";
             mValues += $"\n  {display(totalMulti * totalMagicPower * 100f)}%";
 
@@ -187,34 +187,34 @@ namespace jshepler.ngu.mods
             if (totalBloogGainMulti == 1f)
                 return (string.Empty, string.Empty);
 
-            var statsText = "\n\n<b>Base Blood Gain Modifier:</b> ";
+            var statsText = "\n\n<b>基础血液获取修正:</b> ";
             var statsValues = "\n\n  100%";
 
             if (diggerBloodGainMulti > 1f)
             {
-                statsText += "\n<b>Blood Digger:</b> ";
+                statsText += "\n<b>血液掘金者:</b> ";
                 statsValues += $"\nx {display(diggerBloodGainMulti * 100f)}%";
             }
 
             if (guffBloodGainMulti > 1f)
             {
-                statsText += "\n<b>Blood MacGuffin:</b> ";
+                statsText += "\n<b>血液麦高芬:</b> ";
                 statsValues += $"\nx {display(guffBloodGainMulti * 100f)}%";
             }
 
             if (quirkBloodGainMulti > 1f)
             {
-                statsText += "\n<b>Better Blood Magic (quirk):</b> ";
+                statsText += "\n<b>更好的血液魔法(特性):</b> ";
                 statsValues += $"\nx {display(quirkBloodGainMulti * 100f)}%";
             }
 
             if (hacksBloodGainMulti > 1f)
             {
-                statsText += "\n<b>Blood Gain Hack:</b> ";
+                statsText += "\n<b>血液获取黑客:</b> ";
                 statsValues += $"\nx {display(hacksBloodGainMulti * 100f)}%";
             }
 
-            statsText += "\n<b>Total Blood Gain Modifier:</b> ";
+            statsText += "\n<b>总血液获取修正:</b> ";
             statsValues += $"\n  {display(totalBloogGainMulti * 100f)}%";
 
             return (statsText, statsValues);
@@ -223,7 +223,7 @@ namespace jshepler.ngu.mods
         private static void InsertDaycareTimeBreakdown(Text statsBreakdown, Text statValue)
         {
             var character = Plugin.Character;
-            var statText = "\n\n<b>Base Kitty Happiness (time):</b> ";
+            var statText = "\n\n<b>基础猫咪幸福度(时间):</b> ";
             var valueText = "\n\n  100%";
             var totalModifier = 1f;
 
@@ -233,7 +233,7 @@ namespace jshepler.ngu.mods
                 var blindModifier = 1f - 0.05f - blindCompletions * 0.01f;
                 totalModifier *= blindModifier;
 
-                statText += "\n<b>Normal Blind Challenge:</b> ";
+                statText += "\n<b>普通失明挑战:</b> ";
                 valueText += $"\nx {blindModifier * 100f}%";
             }
 
@@ -245,18 +245,18 @@ namespace jshepler.ngu.mods
                 perkModifier *= 1f - perk28 * character.adventureController.itopod.effectPerLevel[28];
                 totalModifier *= perkModifier;
 
-                statText += "\n<b>Perks Modifier:</b> ";
+                statText += "\n<b>天赋修正:</b> ";
                 valueText += $"\nx {perkModifier * 100f}%";
             }
 
             if (character.arbitrary.hasDaycareSpeed)
             {
                 totalModifier *= 0.9f;
-                statText += "\n<b>AP Purchase:</b> ";
+                statText += "\n<b>任意点购买:</b> ";
                 valueText += "\nx 90%";
             }
 
-            statText += "\n<b>Total Kitty Happiness (time):</b> ";
+            statText += "\n<b>总猫咪幸福度(时间):</b> ";
             valueText += $"\n  {totalModifier * 100f}%";
 
             statsBreakdown.text += statText;
@@ -278,51 +278,51 @@ namespace jshepler.ngu.mods
             var sadTC6 = character.allChallenges.trollChallenge.sadisticCompletions() >= 6 ? 1.1f : 1f;
             var potion = character.arbitrary.mayoSpeedPotTime.totalseconds > 0.0 ? character.allArbitrary.potionModifier() : 1f;
 
-            var stats = "\n\n<b>Base Mayo Generation Rate:</b> "
-                + $"\n  <b># Generators ({gensUnlocked}):</b> ";
+            var stats = "\n\n<b>基础蛋黄酱生成率:</b> "
+                + $"\n  <b># 发电机({gensUnlocked}):</b> ";
 
             var values = "\n\n  100% (1:00:00)"
                 + $"\nx {genBonus * 100f}%";
 
             if (rhComplete > 1f)
             {
-                stats += "\n<b>Rainbow Heart Set:</b> ";
+                stats += "\n<b>彩虹之心套装:</b> ";
                 values += $"\nx {display(rhComplete * 100f)}%";
             }
 
             if (duckComplete > 1f)
             {
-                stats += "\n<b>Duck Set:</b> ";
+                stats += "\n<b>鸭子套装:</b> ";
                 values += $"\nx {display(duckComplete * 100f)}%";
             }
 
             if (perks > 1f)
             {
-                stats += "\n<b>Perks Modifier:</b> ";
+                stats += "\n<b>天赋修正:</b> ";
                 values += $"\nx {display(perks * 100f)}%";
             }
 
             if (quirks > 1f)
             {
-                stats += "\n<b>Quirks Modifier:</b> ";
+                stats += "\n<b>特性修正:</b> ";
                 values += $"\nx {display(quirks * 100f)}%";
             }
 
             if (wishes > 1f)
             {
-                stats += "\n<b>Wishes Modifier:</b> ";
+                stats += "\n<b>愿望修正:</b> ";
                 values += $"\nx {display(wishes * 100f)}%";
             }
 
             if (sadTC6 > 1f)
             {
-                stats += "\n<b>Sad TC6:</b> ";
+                stats += "\n<b>虐待狂TC6:</b> ";
                 values += $"\nx {display(sadTC6 * 100f)}%";
             }
 
             if (potion > 1f)
             {
-                stats += "\n<b>Infuser:</b> ";
+                stats += "\n<b>注入器:</b> ";
                 values += $"\nx {display(potion * 100f)}%";
             }
 
@@ -330,7 +330,7 @@ namespace jshepler.ngu.mods
             var ppt = 5.555555E-06f * total;
             var seconds = 1f / ppt / 50f;
 
-            stats += "\n<b>Total Mayo Generation Rate:</b> ";
+            stats += "\n<b>总蛋黄酱生成率:</b> ";
             values += $"\n  {display(total * 100f)}% ({NumberOutput.timeOutput(seconds)})";
 
             return (stats, values);

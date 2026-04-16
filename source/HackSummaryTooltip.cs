@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Linq;
 using HarmonyLib;
 using UnityEngine;
@@ -74,7 +74,7 @@ namespace jshepler.ngu.mods
                 if (totalSecondsToTargets > 0.0)
                     text += $"\n\n<b>{"Total Time".PadLeft(col1 + col2 + 1)}:</b> {bonuses[15].PadLeft(col3)}";
 
-                var header = "Hacks Summary";
+                var header = "黑客总览";
                 var padding = (col1 + col2 + col3 + 4) / 2 - (header.Length / 2);
                 text = string.Empty.PadLeft(padding) + $"<b><color=blue>{header}</color></b>\n\n{text}";
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
@@ -36,12 +36,12 @@ namespace jshepler.ngu.mods
             var list = new List<string>();
 
             if (zoneId == 1000)
-                list.Add("<b>THE I.T.O.P.O.D</b>");
+                list.Add("<b>无限塔</b>");
 
             if (zoneId == -1)
-                list.Add("<b>Safe Zone: Awakening Site</b>");
+                list.Add("<b>安全区: 觉醒之地</b>");
             else
-                list.Add("Safe Zone: Awakening Site");
+                list.Add("安全区: 觉醒之地");
 
             var maxUnlockedZone = getMaxUnlockedZone();
             var maxUnlockedZoneId = maxUnlockedZone == null ? -1 : maxUnlockedZone.id;

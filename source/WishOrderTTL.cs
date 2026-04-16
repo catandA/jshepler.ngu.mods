@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 
@@ -29,10 +29,10 @@ namespace jshepler.ngu.mods
 
             __instance.orderTypeText.text = __instance.character.wishes.orderType switch
             {
-                orderWish.Default => "Order By:\n<b>DEFAULT</b>",
-                orderWish.SpeedCost => "Order By:\n<b>BASE COST</b>",
-                orderWish.totalCost => "Order By:\n<b>TOTAL COST</b>",
-                _ => "Order By:\n<b>TTL</b>"
+                orderWish.Default => "排序方式:\n<b>默认</b>",
+                orderWish.SpeedCost => "排序方式:\n<b>基础消耗</b>",
+                orderWish.totalCost => "排序方式:\n<b>总消耗</b>",
+                _ => "排序方式:\n<b>时间</b>"
             };
 
             return false;

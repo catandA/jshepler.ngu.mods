@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using HarmonyLib;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ namespace jshepler.ngu.mods
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
                     _lastEquipped = GetCurrentEquip();
-                    Plugin.ShowOverrideNotification("Equipped items saved to temp loadout.", 1f);
+                    Plugin.ShowOverrideNotification("装备已保存到临时配置。", 1f);
                     return;
                 }
 

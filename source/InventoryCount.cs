@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
@@ -59,12 +59,12 @@ namespace jshepler.ngu.mods
                 return;
 
             var count = _inventory.Count(i => i != null && i.id > 0);
-            _inventoryLabelText.text = $"inventory ({count} / {_inventory.Count})";
+            _inventoryLabelText.text = $"物品栏 ({count} / {_inventory.Count})";
 
             var mergeSlots = Plugin.Character.inventoryController.totalInvMergeSlots();
             var countIgnoringMergeSlots = _inventory.Skip(mergeSlots).Count(i => i != null && i.id > 0);
             var open = _inventory.Count - mergeSlots - countIgnoringMergeSlots;
-            _inventoryButtonText.text = _inventoryEnabled ? $"Inventory ({open})" : "Really Locked";
+            _inventoryButtonText.text = _inventoryEnabled ? $"物品栏 ({open})" : "真的锁定";
 
             _inventoryButton.image.color = !_inventoryEnabled ? Color.white
                 : open switch

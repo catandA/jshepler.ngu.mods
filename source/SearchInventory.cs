@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -73,7 +73,7 @@ namespace jshepler.ngu.mods
             GUILayout.BeginArea(_window, _windowStyle);
             GUILayout.BeginHorizontal();
 
-            GUILayout.Label("Search: ", GUILayout.ExpandWidth(false));
+            GUILayout.Label("搜索: ", GUILayout.ExpandWidth(false));
 
             GUI.SetNextControlName("searchInput");
             _searchString = GUILayout.TextField(_searchString, GUILayout.ExpandWidth(true));

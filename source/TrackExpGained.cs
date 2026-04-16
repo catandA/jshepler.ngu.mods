@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -236,12 +236,12 @@ namespace jshepler.ngu.mods
 
             while (true)
             {
-                var text = "This will open up a magical menu to allow you to spend EXP on a huge variety of bonuses! Most of these bonuses are permanent, too!"
-                    + $"\n\nYou have <b>{character.realExp:###,##0}</b> EXP to spend.";
+                var text = "这将打开一个神奇的菜单，让你可以在大量奖励上花费经验值！大多数奖励也是永久的！"
+                    + $"\n\n你有 <b>{character.realExp:###,##0}</b> 经验可花费。";
 
                 if (!_altIsDown)
-                    text += $"\n\n<b>EXP gained this rebirth:</b> {display(_expThisRB)}"
-                       + $"\n<b>EXP gained last rebirth:</b> {display(_expLastRB)}";
+                    text += $"\n\n<b>本次重生经验获取:</b> {display(_expThisRB)}"
+                       + $"\n<b>上次重生经验获取:</b> {display(_expLastRB)}";
 
                 else
                 {
@@ -264,11 +264,11 @@ namespace jshepler.ngu.mods
 
                     var otherThisRB = _expThisRB - sumThisRB;
                     if (otherThisRB > 0)
-                        dataThisRB.Add(("Other", otherThisRB, _expThisRB == 0 ? 0f : (float)otherThisRB / _expThisRB));
+                        dataThisRB.Add(("其他", otherThisRB, _expThisRB == 0 ? 0f : (float)otherThisRB / _expThisRB));
 
                     var otherLastRB = _expLastRB - sumLastRB;
                     if (otherLastRB > 0)
-                        dataLastRB.Add(("Other", otherLastRB, _expLastRB == 0 ? 0f : (float)otherLastRB / _expLastRB));
+                        dataLastRB.Add(("其他", otherLastRB, _expLastRB == 0 ? 0f : (float)otherLastRB / _expLastRB));
 
                     dataThisRB.Sort(sorter);
                     dataLastRB.Sort(sorter);
@@ -276,8 +276,8 @@ namespace jshepler.ngu.mods
                     var sourcesThisRB = dataThisRB.Join(d => $"   <b>{d.Item1}:</b> {display(d.Item2)} <color=blue>({d.Item3 * 100f:0.#}%)</color>", "\n");
                     var sourcesLastRB = dataLastRB.Join(d => $"   <b>{d.Item1}:</b> {display(d.Item2)} <color=blue>({d.Item3 * 100f:0.#}%)</color>", "\n");
 
-                    text += $"\n\n<b>EXP gained this rebirth:</b> {display(_expThisRB)}\n{sourcesThisRB}"
-                       + $"\n\n<b>EXP gained last rebirth:</b> {display(_expLastRB)}\n{sourcesLastRB}";
+                    text += $"\n\n<b>本次重生经验获取:</b> {display(_expThisRB)}\n{sourcesThisRB}"
+                       + $"\n\n<b>上次重生经验获取:</b> {display(_expLastRB)}\n{sourcesLastRB}";
                 }
 
                 Plugin.ShowTooltip(text);
@@ -298,11 +298,11 @@ namespace jshepler.ngu.mods
 
             internal static Func<int, string> Name = i => i switch
             {
-                0 => "Fight Boss",
-                1 => "Titans",
+                0 => "战斗Boss",
+                1 => "泰坦",
                 2 => "ITOPOD",
-                3 => "Fruit",
-                4 => "Adv Bosses",
+                3 => "果实",
+                4 => "冒险Boss",
                 _ => string.Empty
             };
         }

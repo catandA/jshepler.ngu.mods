@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 
 namespace jshepler.ngu.mods
 {
@@ -25,7 +25,7 @@ namespace jshepler.ngu.mods
 
                 __instance.magic.idleMagic += magicToAdd;
                 __instance.magic.curMagic += magicToAdd;
-                __instance.message = "Gained " + __instance.format.suffixFormat(magicToAdd) + " Magic!\n\n";
+                __instance.message = "获得 " + __instance.format.suffixFormat(magicToAdd) + " 魔法!\n\n";
             }
 
             return false;

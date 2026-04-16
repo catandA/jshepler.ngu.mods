@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using HarmonyLib;
 
 namespace jshepler.ngu.mods
@@ -31,7 +31,7 @@ namespace jshepler.ngu.mods
                 __instance.activateDigger(id);
 
             if (digger.active)
-                Plugin.ShowNotification("This digger has been set to the highest level your GPS can handle!");
+                Plugin.ShowNotification("此掘金者已设置到你的GPS可处理的最大等级！");
 
             __instance.refreshMenu();
             return false;

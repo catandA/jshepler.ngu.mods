@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using jshepler.ngu.mods.ModSave;
 using UnityEngine;
 
@@ -97,17 +97,17 @@ namespace jshepler.ngu.mods.Popups
         private void DrawTitleBar()
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label("WISH LIST", _titleLabelStyle);
+            GUILayout.Label("愿望列表", _titleLabelStyle);
             if (GUILayout.Button("×", GUILayout.ExpandWidth(false)))
                 Close();
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
 
-            _enabled = GUILayout.Toggle(_enabled, "Enabled   ");
-            _autoAdvance = GUILayout.Toggle(_autoAdvance, "Auto Advance   ");
-            _singleLevelMode = GUILayout.Toggle(_singleLevelMode, "Single Level   ");
-            _blacklistToggle = GUILayout.Toggle(_blacklistToggle, "Blacklist");
+            _enabled = GUILayout.Toggle(_enabled, "启用   ");
+            _autoAdvance = GUILayout.Toggle(_autoAdvance, "自动推进   ");
+            _singleLevelMode = GUILayout.Toggle(_singleLevelMode, "单级模式   ");
+            _blacklistToggle = GUILayout.Toggle(_blacklistToggle, "黑名单");
 
             if (_blacklistMode != _blacklistToggle)
             {
@@ -117,13 +117,13 @@ namespace jshepler.ngu.mods.Popups
 
             GUILayout.FlexibleSpace();
 
-            if (GUILayout.Button("start"))
+            if (GUILayout.Button("开始"))
                 WishList.FillOpenWishSlots();
 
-            if (GUILayout.Button("resume"))
+            if (GUILayout.Button("继续"))
                 WishList.ResumeWishes();
 
-            if (GUILayout.Button("clear"))
+            if (GUILayout.Button("清空"))
                 Clear();
 
             GUILayout.EndHorizontal();

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using UnityEngine;
@@ -16,7 +16,7 @@ namespace jshepler.ngu.mods
 
             ApplyDiggerLoadout(__instance);
 
-            Plugin.ShowNotification("Saved diggers have been capped!", 2f);
+            Plugin.ShowNotification("已保存的掘金者已达到上限！", 2f);
             __instance.refreshMenu();
 
             return false;

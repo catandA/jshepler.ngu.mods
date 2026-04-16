@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -131,7 +131,7 @@ namespace jshepler.ngu.mods
                 var wish = Wishes.AllWishes[__instance.curSelectedWish];
                 if (wish.Level >= wish.MaxLevel)
                 {
-                    Plugin.ShowNotification("Wish is at max level, why are you allocating resources?");
+                    Plugin.ShowNotification("愿望已达最大等级，为什么还要分配资源？");
                     return false;
                 }
 

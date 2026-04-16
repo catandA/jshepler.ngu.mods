@@ -44,7 +44,7 @@ namespace jshepler.ngu.mods
             {
                 var character = __instance.character;
 
-                __instance.statsBreakdown.text += $"\n<b>(cube root):</b> ";
+                __instance.statsBreakdown.text += $"\n<b>(立方根):</b> ";
                 __instance.statValue.text += $"\n  {character.display(character.lootFactorRooted() * 100)}%";
             }
         }
@@ -66,61 +66,61 @@ namespace jshepler.ngu.mods
             var notmMulti = character.allChallenges.timeMachineChallenge.totalGPSbonus();
             var totalMulti = fillsPerSecond * bossMulti * machineSpeedMulti * goldMulti * bmMulti * beardMulti * nguMulti * notmMulti;
 
-            var statsText = "\n\n<b>Time Machine Gold/bar:</b> "
-                + "\n<b>Bars/second:</b> ";
+            var statsText = "\n\n<b>时间机器金条/条:</b> "
+                + "\n<b>条/秒:</b> ";
 
             var valuesText = $"\n\n  {d(goldPerBar)}"
                 + $"\nx {fillsPerSecond}";
 
             if (bossMulti > 1)
             {
-                statsText += "\n<b>Highest Boss Multiplier:</b> ";
+                statsText += "\n<b>最高Boss倍率:</b> ";
                 valuesText += $"\nx {bossMulti} (boss #{bossMulti + 27})";
             }
 
             if (machineSpeedMulti > 1)
             {
-                statsText += "\n<b>TM Speed Multiplier:</b> ";
+                statsText += "\n<b>时间机器速度倍率:</b> ";
                 valuesText += $"\nx {d(machineSpeedMulti)}";
             }
 
             if (goldMulti > 1)
             {
-                statsText += "\n<b>TM Gold Multiplier:</b> ";
+                statsText += "\n<b>时间机器黄金倍率:</b> ";
                 valuesText += $"\nx {d(goldMulti)}";
             }
 
             if (bmMulti > 1)
             {
-                statsText += "\n<b>Counterfeit Gold Modifier:</b> ";
+                statsText += "\n<b>血腥黄金修正:</b> ";
                 valuesText += $"\nx {d(bmMulti * 100.0)}%";
             }
 
             if (beardMulti > 1)
             {
-                statsText += "\n<b>Golden Beard Modifier:</b> ";
+                statsText += "\n<b>金胡须修正:</b> ";
                 valuesText += $"\nx {d(beardMulti * 100.0)}%";
             }
 
             if (nguMulti > 1)
             {
-                statsText += "\n<b>NGU Gold Modifier:</b> ";
+                statsText += "\n<b>NGU黄金修正:</b> ";
                 valuesText += $"\nx {d(nguMulti * 100.0)}%";
             }
 
             if (notmMulti > 1)
             {
-                statsText += "\n<b> No Time Machine Challenge:</b> ";
+                statsText += "\n<b>无时间机器挑战:</b> ";
                 valuesText += $"\nx {d(notmMulti * 100.0)}%";
             }
 
-            statsText += "\n<b>Total GPS Modifier:</b> "
-                + "\n<b>Gross GPS:</b> ";
+            statsText += "\n<b>总GPS修正:</b> "
+                + "\n<b>总GPS:</b> ";
 
             valuesText += $"\nx {d(totalMulti * 100.0)}%";
 
             if (character.challenges.timeMachineChallenge.inChallenge)
-                valuesText += "\n  0/s (in challenge)";
+                valuesText += "\n  0/s (挑战中)";
             else
                 valuesText += $"\n  {d(goldPerBar * totalMulti)}/s";
 

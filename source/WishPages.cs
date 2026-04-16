@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
@@ -42,7 +42,7 @@ namespace jshepler.ngu.mods
             {
                 buttons[x].gameObject.SetActive(x < numberOfPages);
                 _buttonTexts[x].fontSize = _row == 0 ? FONTSIZE_0 : FONTSIZE_1;
-                _buttonTexts[x].text = $"Page {x + offset}";
+                _buttonTexts[x].text = $"第{x + offset}页";
             }
 
             return false;

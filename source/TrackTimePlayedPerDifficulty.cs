@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using jshepler.ngu.mods.ModSave;
 using UnityEngine;
 
@@ -37,10 +37,10 @@ namespace jshepler.ngu.mods
         [HarmonyPostfix, HarmonyPatch(typeof(TotalTimePlayed), "updateText")]
         private static void TotalTimePlayed_updateText_postfix(TotalTimePlayed __instance)
         {
-            __instance.timerText.text += $" (offline: {NumberOutput.timeOutput(Data.TotalTimeOffline)})"
-                + $"\n         (normal): {NumberOutput.timeOutput(Data.TotalTimePlayedNormal)} (offline: {NumberOutput.timeOutput(Data.TotalTimeOfflineNormal)})"
-                + $"\n           (evil): {NumberOutput.timeOutput(Data.TotalTimePlayedEvil)} (offline: {NumberOutput.timeOutput(Data.TotalTimeOfflineEvil)})"
-                + $"\n       (sadistic): {NumberOutput.timeOutput(Data.TotalTimePlayedSadistic)} (offline: {NumberOutput.timeOutput(Data.TotalTimeOfflineSadistic)})";
+            __instance.timerText.text += $" (离线: {NumberOutput.timeOutput(Data.TotalTimeOffline)})"
+                + $"\n         (普通): {NumberOutput.timeOutput(Data.TotalTimePlayedNormal)} (离线: {NumberOutput.timeOutput(Data.TotalTimeOfflineNormal)})"
+                + $"\n           (邪恶): {NumberOutput.timeOutput(Data.TotalTimePlayedEvil)} (离线: {NumberOutput.timeOutput(Data.TotalTimeOfflineEvil)})"
+                + $"\n       (虐待狂): {NumberOutput.timeOutput(Data.TotalTimePlayedSadistic)} (离线: {NumberOutput.timeOutput(Data.TotalTimeOfflineSadistic)})";
         }
 
         internal static void AddTime(double totalSeconds, bool offline = false)

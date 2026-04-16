@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -112,10 +112,10 @@ namespace jshepler.ngu.mods
             var ppToNextLevel = costPerLevel - pp;
             if (ppToNextLevel > 0)
             {
-                text = $"\n\n<b>PP to next level: {display(ppToNextLevel)}</b>";
+                text = $"\n\n<b>PP到下一级: {display(ppToNextLevel)}</b>";
 
                 if (gainedPerSec > 0)
-                    text += $"\n ... est. days: {display(Math.Floor(ppToNextLevel / gainedPerSec / 86400.0))}";
+                    text += $"\n ... 预计天数: {display(Math.Floor(ppToNextLevel / gainedPerSec / 86400.0))}";
             }
 
             else //if (buyLevels > 1)
@@ -123,20 +123,20 @@ namespace jshepler.ngu.mods
                 var buyCost = buyLevels * costPerLevel;
                 var newLevel = currentLevel + buyLevels;
 
-                text = $"\n\n<b>Right-Click:</b> <size=10>(max levels: {maxLevelsCanBuy})</size>"
-                    + $"\n   <b>New Level: {(newLevel == maxLevel ? "<color=green>MAX</color>" : $"{newLevel}</b> <size=10>(+{buyLevels})</size><b>")}"
+                text = $"\n\n<b>右键点击:</b> <size=10>(最大等级: {maxLevelsCanBuy})</size>"
+                    + $"\n   <b>新等级: {(newLevel == maxLevel ? "<color=green>最大</color>" : $"{newLevel}</b> <size=10>(+{buyLevels})</size><b>")}"
                     + getNewPerkLevelBonus(perkId, buyLevels)
-                    + $"\n   COST: {display(buyCost)} Perk Point{(buyCost > 1 ? "s" : string.Empty)}</b>";
+                    + $"\n   消耗: {display(buyCost)} 天赋点{(buyCost > 1 ? "s" : string.Empty)}</b>";
             }
 
             var levelsToMax = maxLevel - currentLevel;
             var ppToMax = costPerLevel * levelsToMax - pp;
             if (levelsToMax > 1 && ppToMax > 0)
             {
-                text += $"\n\n<b>PP to max level: {display(ppToMax)}</b>";
+                text += $"\n\n<b>PP到满级: {display(ppToMax)}</b>";
 
                 if (gainedPerSec > 0)
-                    text += $"\n ... est. days: {display(Math.Floor(ppToMax / gainedPerSec / 86400.0))}";
+                    text += $"\n ... 预计天数: {display(Math.Floor(ppToMax / gainedPerSec / 86400.0))}";
             }
 
             if (perkId == FIB_PERK_ID)
@@ -148,17 +148,17 @@ namespace jshepler.ngu.mods
 
                 if (ppToNextBonus > 0)
                 {
-                    text += $"\n\n<b>PP to next bonus: {display(ppToNextBonus)}</b>";
+                    text += $"\n\n<b>PP到下一加成: {display(ppToNextBonus)}</b>";
 
                     if (gainedPerSec > 0)
-                        text += $"\n ... est. days: {display(Math.Floor(ppToNextBonus / gainedPerSec / 86400.0))}";
+                        text += $"\n ... 预计天数: {display(Math.Floor(ppToNextBonus / gainedPerSec / 86400.0))}";
                 }
 
                 else
                 {
-                    text += "\n\n<b>Shift-Right-Click:</b> <size=10>(buy up to next bonus)</size>"
-                        + $"\n   <b>New Level: {nextBonusLevel}"
-                        + $"\n   COST: {display(ppNeeded)} Perk Points</b>";
+                    text += "\n\n<b>Shift-右键点击:</b> <size=10>(购买到下一加成)</size>"
+                        + $"\n   <b>新等级: {nextBonusLevel}"
+                        + $"\n   消耗: {display(ppNeeded)} 天赋点</b>";
                 }
             }
 
@@ -180,10 +180,10 @@ namespace jshepler.ngu.mods
 
             return perkId switch
             {
-                84 => $"\n   New Level Bonus: {_perkController.statEffect(perkId, offset)}x",
-                85 => $"\n   New Level Bonus: {_perkController.statEffect(perkId, offset)}x",
-                93 => $"\n   New Level Bonus: {_perkController.invertedEffectPercent(perkId, offset)}%",
-                _ => $"\n   New Level Bonus: {_perkController.percentEffect(perkId, offset)}%"
+                84 => $"\n   新等级加成: {_perkController.statEffect(perkId, offset)}x",
+                85 => $"\n   新等级加成: {_perkController.statEffect(perkId, offset)}x",
+                93 => $"\n   新等级加成: {_perkController.invertedEffectPercent(perkId, offset)}%",
+                _ => $"\n   新等级加成: {_perkController.percentEffect(perkId, offset)}%"
             };
         }
     }

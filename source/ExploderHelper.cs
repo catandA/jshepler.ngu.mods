@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using HarmonyLib;
 using UnityEngine;
 
@@ -51,7 +51,7 @@ namespace jshepler.ngu.mods
                 _lastSeconds = secondsLeft;
 
                 if(secondsLeft < 3)
-                    __instance.log.AddEvent($"Explodes in: {secondsLeft}", 3);
+                    __instance.log.AddEvent($"{secondsLeft}秒后爆炸", 3);
             }
         }
     }

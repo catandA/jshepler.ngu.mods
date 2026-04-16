@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using UnityEngine;
@@ -16,13 +16,13 @@ namespace jshepler.ngu.mods.Popups
 
         private static List<Titan> _titans = new()
         {
-            new Titan(6, "The Beast"),
-            new Titan(7, "Greasy Nerd"),
-            new Titan(8, "The Godmother"),
-            new Titan(9, "The Exile"),
-            new Titan(10, "IT HUNGERS"),
-            new Titan(11, "Rock Lobster"),
-            new Titan(12, "AMALGAMATE"),
+            new Titan(6, "野兽"),
+            new Titan(7, "油腻书呆子"),
+            new Titan(8, "教母"),
+            new Titan(9, "流放者"),
+            new Titan(10, "饥饿之物"),
+            new Titan(11, "摇滚龙虾"),
+            new Titan(12, "融合体"),
         };
 
         private static List<Titan> _killedTitans;
@@ -64,7 +64,7 @@ namespace jshepler.ngu.mods.Popups
             GUILayout.BeginVertical();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("<b>Change Titan Versions</b>", _titleStyle);
+            GUILayout.Label("<b>更改泰坦版本</b>", _titleStyle);
             if (GUILayout.Button("×", GUILayout.ExpandWidth(false)))
                 Close();
             GUILayout.EndHorizontal();
@@ -81,16 +81,16 @@ namespace jshepler.ngu.mods.Popups
 
             GUILayout.Label(titan.name);
 
-            if (GUILayout.Button("Easy", titan.version == 0 ? _selected : _notSelected, GUILayout.ExpandWidth(false)))
+            if (GUILayout.Button("简单", titan.version == 0 ? _selected : _notSelected, GUILayout.ExpandWidth(false)))
                 titan.version = 0;
 
-            if (GUILayout.Button("Normal", titan.version == 1 ? _selected : _notSelected, GUILayout.ExpandWidth(false)))
+            if (GUILayout.Button("普通", titan.version == 1 ? _selected : _notSelected, GUILayout.ExpandWidth(false)))
                 titan.version = 1;
 
-            if (GUILayout.Button("Hard", titan.version == 2 ? _selected : _notSelected, GUILayout.ExpandWidth(false)))
+            if (GUILayout.Button("困难", titan.version == 2 ? _selected : _notSelected, GUILayout.ExpandWidth(false)))
                 titan.version = 2;
 
-            if (GUILayout.Button("Brutal", titan.version == 3 ? _selected : _notSelected, GUILayout.ExpandWidth(false)))
+            if (GUILayout.Button("残暴", titan.version == 3 ? _selected : _notSelected, GUILayout.ExpandWidth(false)))
                 titan.version = 3;
 
             GUILayout.EndHorizontal();

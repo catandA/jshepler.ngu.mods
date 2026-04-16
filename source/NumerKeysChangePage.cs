@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
 using UnityEngine;
@@ -181,7 +181,7 @@ namespace jshepler.ngu.mods
                 return;
 
             if (showNotification)
-                Plugin.ShowNotification($"Equipping loadout: <b>{character.inventory.loadouts[loadoutId].loadoutName}</b>");
+                Plugin.ShowNotification($"正在装备配置: <b>{character.inventory.loadouts[loadoutId].loadoutName}</b>");
 
             character.inventoryController.equipLoadout(loadoutId);
         }

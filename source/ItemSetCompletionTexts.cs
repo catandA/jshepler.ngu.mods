@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 
 namespace jshepler.ngu.mods
 {
@@ -7,8 +7,8 @@ namespace jshepler.ngu.mods
     {
         private static Character character => Plugin.Character;
 
-        private static string expText(long gained) => character.display(gained) + " EXP";
-        private static string apText(long gained) => character.display(gained) + " AP";
+        private static string expText(long gained) => character.display(gained) + " 经验";
+        private static string apText(long gained) => character.display(gained) + " 任意点";
 
         private static string modExpText(long baseExp) => expText(character.checkExpAdded(baseExp)) + $" ({character.display(baseExp)} base)";
         private static string modApText(long baseAp) => apText(character.checkAPAdded(baseAp)) + $" ({character.display(baseAp)} base)";
@@ -174,7 +174,7 @@ namespace jshepler.ngu.mods
                 || (__instance.setID == 1028 && il.normalBonusAccComplete)
                 || (__instance.setID == 1029 && il.evilBonusAccComplete))
             {
-                text += "\n\n<color=green><b>COMPLETE</b></color>";
+                text += "\n\n<color=green><b>已完成</b></color>";
             }
 
             __result = text;

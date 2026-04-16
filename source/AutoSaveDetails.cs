@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -24,7 +24,7 @@ namespace jshepler.ngu.mods
                 .InsertAndAdvance(
                     new CodeInstruction(OpCodes.Ldarg_0)
                     , new CodeInstruction(OpCodes.Ldfld, _localPlayerDataField)
-                    , Transpilers.EmitDelegate(saveDetails("Autosave")))
+                    , Transpilers.EmitDelegate(saveDetails("自动存档")))
                 .RemoveInstructions(28);
 
             return cm.InstructionEnumeration();
@@ -41,7 +41,7 @@ namespace jshepler.ngu.mods
                 .InsertAndAdvance(
                     new CodeInstruction(OpCodes.Ldarg_0)
                     , new CodeInstruction(OpCodes.Ldfld, _cloudPlayerDataField)
-                    , Transpilers.EmitDelegate(saveDetails("Steam Cloud")))
+                    , Transpilers.EmitDelegate(saveDetails("Steam 云存档")))
                 .RemoveInstructions(28);
 
             return cm.InstructionEnumeration();
@@ -56,8 +56,8 @@ namespace jshepler.ngu.mods
 
                 return $"<b>{saveType}</b>"
                      + $"\n{dt:M/d/yyyy H:mm:ss}"
-                     + $"\n\n<b>Total Time played:</b> {NumberOutput.timeOutput(pd.totalPlaytime.totalseconds)}"
-                     + $"\n\n<b>Total EXP Earned:</b> {Plugin.Character.display(pd.stats.totalExp)}";
+                     + $"\n\n<b>总游戏时间:</b> {NumberOutput.timeOutput(pd.totalPlaytime.totalseconds)}"
+                     + $"\n\n<b>总获得经验:</b> {Plugin.Character.display(pd.stats.totalExp)}";
             };
         }
     }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -190,8 +190,8 @@ namespace jshepler.ngu.mods
             {
 
                 if (!_altIsDown)
-                    text = $"<b>PP gained this rebirth:</b> {character.display(PPGainedThisRB)}"
-                        + $"\n<b>PP gained last rebirth:</b> {character.display(PPGainedLastRB)}";
+                    text = $"<b>本次重生PP获取:</b> {character.display(PPGainedThisRB)}"
+                        + $"\n<b>上次重生PP获取:</b> {character.display(PPGainedLastRB)}";
 
                 else
                 {
@@ -214,11 +214,11 @@ namespace jshepler.ngu.mods
 
                     var otherThisRB = PPGainedThisRB - sumThisRB;
                     if (otherThisRB > 0)
-                        dataThisRB.Add(("Other", otherThisRB, PPGainedThisRB == 0 ? 0f : (float)otherThisRB / PPGainedThisRB));
+                        dataThisRB.Add(("其他", otherThisRB, PPGainedThisRB == 0 ? 0f : (float)otherThisRB / PPGainedThisRB));
 
                     var otherLastRB = PPGainedLastRB - sumLastRB;
                     if (otherLastRB > 0)
-                        dataLastRB.Add(("Other", otherLastRB, PPGainedLastRB == 0 ? 0f : (float)otherLastRB / PPGainedLastRB));
+                        dataLastRB.Add(("其他", otherLastRB, PPGainedLastRB == 0 ? 0f : (float)otherLastRB / PPGainedLastRB));
 
                     dataThisRB.Sort(sorter);
                     dataLastRB.Sort(sorter);
@@ -226,8 +226,8 @@ namespace jshepler.ngu.mods
                     var sourcesThisRB = dataThisRB.Join(d => $"   <b>{d.Item1}:</b> {display(d.Item2)} <color=blue>({d.Item3 * 100f:0.#}%)</color>", "\n");
                     var sourcesLastRB = dataLastRB.Join(d => $"   <b>{d.Item1}:</b> {display(d.Item2)} <color=blue>({d.Item3 * 100f:0.#}%)</color>", "\n");
 
-                    text = $"<b>PP gained this rebirth:</b> {character.display(PPGainedThisRB)}\n{sourcesThisRB}"
-                        + $"\n\n<b>PP gained last rebirth:</b> {character.display(PPGainedLastRB)}\n{sourcesLastRB}";
+                    text = $"<b>本次重生PP获取:</b> {character.display(PPGainedThisRB)}\n{sourcesThisRB}"
+                        + $"\n\n<b>上次重生PP获取:</b> {character.display(PPGainedLastRB)}\n{sourcesLastRB}";
                 }
 
                 Plugin.ShowTooltip(text);
@@ -246,8 +246,8 @@ namespace jshepler.ngu.mods
             internal static Func<int, string> Name = i => i switch
             {
                 0 => "ITOPOD",
-                1 => "Titans",
-                2 => "Fruit",
+                1 => "泰坦",
+                2 => "果实",
                 _ => string.Empty
             };
         }

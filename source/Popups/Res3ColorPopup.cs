@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using UnityEngine;
 
 namespace jshepler.ngu.mods.Popups
@@ -83,7 +83,7 @@ namespace jshepler.ngu.mods.Popups
             GUILayout.BeginVertical();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Res3 Color RGB Input", _titleStyle);
+            GUILayout.Label("资源3 颜色 RGB 输入", _titleStyle);
             if (GUILayout.Button("×", GUILayout.ExpandWidth(false)))
                 Close();
             GUILayout.EndHorizontal();
@@ -116,7 +116,7 @@ namespace jshepler.ngu.mods.Popups
             _b = GUILayout.TextField(_b, GUILayout.Width(30f));
 
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("OK"))
+            if (GUILayout.Button("确定"))
                 SetColorAndClose();
 
             GUILayout.EndHorizontal();

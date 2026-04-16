@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
@@ -42,10 +42,10 @@ namespace jshepler.ngu.mods
             var qpToNextLevel = costPerLevel - qp;
             if (qpToNextLevel > 0)
             {
-                ___message += $"\n\n<b>QP to next level: {display(costPerLevel - qp)}</b>";
+                ___message += $"\n\n<b>距离下一级所需QP: {display(costPerLevel - qp)}</b>";
 
                 if (gainedPerSec > 0)
-                    ___message += $"\n ... est. days: {display(Math.Floor(qpToNextLevel / gainedPerSec / 86400.0))}";
+                    ___message += $"\n ... 预计天数: {display(Math.Floor(qpToNextLevel / gainedPerSec / 86400.0))}";
             }
 
             else //if (buyLevels > 1)
@@ -53,20 +53,20 @@ namespace jshepler.ngu.mods
                 var buyCost = buyLevels * costPerLevel;
                 var newLevel = currentLevel + buyLevels;
 
-                ___message += $"\n\n<b>Right-Click:</b> <size=10>(max levels: {maxLevelsCanBuy})</size>"
-                    + $"\n   <b>New Level: {(newLevel == maxLevel ? "<color=green>MAX</color>" : $"{newLevel}</b> <size=10>(+{buyLevels})</size><b>")}"
+                ___message += $"\n\n<b>右键:</b> <size=10>(最大等级: {maxLevelsCanBuy})</size>"
+                    + $"\n   <b>新等级: {(newLevel == maxLevel ? "<color=green>已满</color>" : $"{newLevel}</b> <size=10>(+{buyLevels})</size><b>")}"
                     + getNewQuirkLevelBonus(id, buyLevels)
-                    + $"\n   COST: {display(buyCost)} Quirk Point{(buyCost > 1 ? "s" : string.Empty)}</b>";
+                    + $"\n   花费: {display(buyCost)} 特性点{(buyCost > 1 ? "" : "")}</b>";
             }
 
             var levelsToMax = maxLevel - currentLevel;
             var qpToMax = costPerLevel * levelsToMax - qp;
             if (levelsToMax > 1 && qpToMax > 0)
             {
-                ___message += $"\n\n<b>QP to max level: {display(qpToMax)}</b>";
+                ___message += $"\n\n<b>升至满级所需QP: {display(qpToMax)}</b>";
 
                 if (gainedPerSec > 0)
-                    ___message += $"\n ... est. days: {display(Math.Floor(qpToMax / gainedPerSec / 86400.0))}";
+                    ___message += $"\n ... 预计天数: {display(Math.Floor(qpToMax / gainedPerSec / 86400.0))}";
             }
 
             __instance.tooltip.showTooltip(___message);
@@ -82,7 +82,7 @@ namespace jshepler.ngu.mods
                 || _quirkController.character.beastQuest.quirkLevel[quirkId] >= _quirkController.capLevel(quirkId))
                 return string.Empty;
 
-            return $"\n   New Level Bonus: {_quirkController.percentEffect(quirkId, offset)}%";
+            return $"\n   新等级加成: {_quirkController.percentEffect(quirkId, offset)}%";
         }
     }
 }

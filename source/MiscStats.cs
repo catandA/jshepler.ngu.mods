@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 
 namespace jshepler.ngu.mods
 {
@@ -17,18 +17,18 @@ namespace jshepler.ngu.mods
             var highestBoss_evil = character.highestHardBoss;
             var highestBoss_sad = character.highestSadisticBoss;
 
-            var labels = "<b>Total Rebirths:"
-                + "\n\nTotal Bosses Defeated:"
-                + "\n\nHighest Boss Defeated:"
-                + "\nHighest Evil Boss Defeated:"
-                + "\nHighest Sadistic Boss Defeated:"
-                + "\n\nTitans Defeated (Adventure Mode):"
-                + "\n\nPissed Off Dudes Defeated:"
-                + "\n\nPlayer Deaths (norm / evil / sad):"
-                + "\n\nTotal Earned EXP:"
-                + "\n\nTotal Earned AP:"
-                + "\n\nTotal Earned Gold:"
-                + "\n\nTotal Gold Tossed:";
+            var labels = "<b>总重生次数:"
+                + "\n\n击败Boss总数:"
+                + "\n\n最高击败Boss:"
+                + "\n最高击败邪恶Boss:"
+                + "\n最高击败疯狂Boss:"
+                + "\n\n击败泰坦数（冒险模式）:"
+                + "\n\n击败愤怒家伙数:"
+                + "\n\n玩家死亡次数（普通/邪恶/疯狂）:"
+                + "\n\n总获得经验:"
+                + "\n\n总获任意点:"
+                + "\n\n总获得金币:"
+                + "\n\n总投掷金币:";
 
             var values = display(character.stats.rebirthNumber)
                 + $"\n\n{display(character.stats.bossesDefeated)}"

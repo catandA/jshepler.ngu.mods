@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Reflection;
 using HarmonyLib;
@@ -99,13 +99,13 @@ namespace jshepler.ngu.mods
             GUILayout.BeginArea(_area, _areaStyle);
             GUILayout.BeginHorizontal();
 
-            GUILayout.Label($"jshepler mods {_version} available", _labelStyle);
+            GUILayout.Label($"jshepler mods {_version} 可用", _labelStyle);
             GUILayout.FlexibleSpace();
 
-            if(GUILayout.Button("download", GUILayout.ExpandHeight(true)))
+            if(GUILayout.Button("下载", GUILayout.ExpandHeight(true)))
                 Application.OpenURL("https://github.com/jshepler/jshepler.ngu.mods/releases/latest");
 
-            if (GUILayout.Button("skip", GUILayout.ExpandHeight(true)))
+            if (GUILayout.Button("跳过", GUILayout.ExpandHeight(true)))
             {
                 Options.CheckForNewVersion.Skipped.Value = _version;
                 _version = null;

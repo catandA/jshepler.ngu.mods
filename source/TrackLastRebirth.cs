@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 
 namespace jshepler.ngu.mods
 {
@@ -21,12 +21,12 @@ namespace jshepler.ngu.mods
         private static bool RebirthButtonHover_showTooltip_prefix(RebirthButtonHover __instance)
         {
             var character = __instance.character;
-            var message = $"<b>Current Rebirth Time:</b> {character.rebirthTime.timeDisplayColon()}";
+            var message = $"<b>当前重生时间:</b> {character.rebirthTime.timeDisplayColon()}";
 
             if (PauseGame.IsPaused)
-                message += " (PAUSED)";
+                message += " (已暂停)";
 
-            message += $"\n<b>      Last Rebirth Time:</b> {NumberOutput.timeOutput(TrackLastRebirth.LastRebirthTotalSeconds)}";
+            message += $"\n<b>      上次重生时间:</b> {NumberOutput.timeOutput(TrackLastRebirth.LastRebirthTotalSeconds)}";
 
             if (character.challenges.inChallenge)
                 message += $"\n\n{__instance.challengeInfo.challengeInfoMessage()}";

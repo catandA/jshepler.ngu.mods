@@ -52,7 +52,7 @@ namespace jshepler.ngu.mods
             var text = BuildTooltipText();
             if (text != null)
             {
-                ___message += $"\n\n<b>Adv. Training needed to autokill Titans:</b>{text}";
+                ___message += $"\n\n<b>自动击杀泰坦所需高级训练:</b>{text}";
                 __instance.tooltip.showTooltip(___message);
             }
         }
@@ -86,7 +86,7 @@ namespace jshepler.ngu.mods
                 var color = haveIt ? "green" : "red";
                 var p = float.IsInfinity(neededAT.Power) ? " UNREACHABLE" : character.display(neededAT.Power);
                 var t = float.IsInfinity(neededAT.Toughness) ? " UNREACHABLE" : character.display(neededAT.Toughness);
-                sb.Append($"\n<color={color}>{req.name}:  T={t}, P={p}</color>");
+                sb.Append($"\n<color={color}>{req.name}:  韧性={t}, 力量={p}</color>");
 
                 if (req.effectiveBossId == 116 && character.adventure.boss5Kills < 3)
                 {

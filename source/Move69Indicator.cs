@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using UnityEngine.UI;
 
 namespace jshepler.ngu.mods
@@ -20,7 +20,7 @@ namespace jshepler.ngu.mods
             if (__instance.character.adventure.move69Unlocked && __instance.character.adventure.move69Used < 69 && _isReady)
             {
                 __instance.adventure.image.color = Plugin.ButtonColor_Yellow;
-                ___adventureText.text = "Move 69 Ready";
+                ___adventureText.text = "69次移动已就绪";
             }
         }
     }

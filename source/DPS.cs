@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
 using UnityEngine;
@@ -27,7 +27,7 @@ namespace jshepler.ngu.mods
             var dps = _totalDamage / killTime;
             var display = Plugin.Character.display;
 
-            __instance.log.AddEvent($"You did {display(_totalDamage)} damage over {NumberOutput.timeOutput(killTime)} ({display(dps)} DPS)");
+            __instance.log.AddEvent($"您在 {NumberOutput.timeOutput(killTime)} 内造成了 {display(_totalDamage)} 点伤害（{display(dps)} DPS）");
         }
 
         [HarmonyTranspiler, HarmonyPatch(typeof(EnemyAI), "takeDamage")]

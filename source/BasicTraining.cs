@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
@@ -258,11 +258,11 @@ namespace jshepler.ngu.mods
             var color = capAfterRB == maxCapAfterRB ? "green" : "red";
 
             return BT_ATK
-                + $"\n\n<b>Current Speed Cap:</b> {curCap}"
-                + $"\n<b>   ... after rebirth:</b> <color={color}>{capAfterRB} / {maxCapAfterRB}</color>"
-                + $"\n\n<b>Max reduction at level:</b> {maxReductionLevel}"
-                + $"\n<b>   ... time remaining:</b> {NumberOutput.timeOutput(seconds)}"
-                + $"\n\nBase Attack received per level: {character.display(character.training.trainFactor[id])}";
+                + $"\n\n<b>当前速度上限:</b> {curCap}"
+                + $"\n<b>   ... 重生后:</b> <color={color}>{capAfterRB} / {maxCapAfterRB}</color>"
+                + $"\n\n<b>最大缩减等级:</b> {maxReductionLevel}"
+                + $"\n<b>   ... 剩余时间:</b> {NumberOutput.timeOutput(seconds)}"
+                + $"\n\n每级获得基础攻击力: {character.display(character.training.trainFactor[id])}";
         }
 
         private static string BuildDefenseTooltip(int id)
@@ -300,11 +300,11 @@ namespace jshepler.ngu.mods
             var color = capAfterRB == maxCapAfterRB ? "green" : "red";
 
             return BT_DEF
-                + $"\n\n<b>Current Speed Cap:</b> {curCap}"
-                + $"\n<b>   ... after rebirth:</b> <color={color}>{capAfterRB} / {maxCapAfterRB}</color>"
-                + $"\n\n<b>Max reduction at level:</b> {maxReductionLevel}"
-                + $"\n<b>   ... time remaining:</b> {NumberOutput.timeOutput(seconds)}"
-                + $"\n\nBase Defense received per level: {character.display(character.training.trainFactor[id])}";
+                + $"\n\n<b>当前速度上限:</b> {curCap}"
+                + $"\n<b>   ... 重生后:</b> <color={color}>{capAfterRB} / {maxCapAfterRB}</color>"
+                + $"\n\n<b>最大缩减等级:</b> {maxReductionLevel}"
+                + $"\n<b>   ... 剩余时间:</b> {NumberOutput.timeOutput(seconds)}"
+                + $"\n\n每级获得基础防御力: {character.display(character.training.trainFactor[id])}";
         }
     }
 }

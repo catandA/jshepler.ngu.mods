@@ -24,7 +24,7 @@ namespace jshepler.ngu.mods
             //_totalBPS = __instance.bloodMagics.Sum(bm => bm.bloodGainedPerSecond());
             var fontSize = __instance.bloodText.fontSize * .9;
             
-            __instance.bloodText.text += $"\n<size={fontSize}><b>Gain:</b> +{__instance.character.display(_totalBPS)}/s</size>";
+            __instance.bloodText.text += $"\n<size={fontSize}><b>每秒获取:</b> +{__instance.character.display(_totalBPS)}</size>";
         }
 
         //[HarmonyPostfix, HarmonyPatch(typeof(RebirthPowerSpell), "spellTooltip")]
@@ -55,7 +55,7 @@ namespace jshepler.ngu.mods
             var autoCount = getAutoCastCount();
             var totalBlood = bloodInvested + (bm.bloodPoints / Math.Max(1, autoCount));
             var newBonus = bloodToLootBonus(totalBlood);
-            ___message += $"\n\n<b>Total bonus if used now:</b> {newBonus:#,##0.#}% (+{(newBonus - curBonus):#,##0.#}%)";
+            ___message += $"\n\n<b>现在施放后的总加成:</b> {newBonus:#,##0.#}% (+{(newBonus - curBonus):#,##0.#}%)";
 
             if (_totalBPS > 0)
             {
@@ -64,14 +64,14 @@ namespace jshepler.ngu.mods
                 var bloodRemaining = nextTotalBlood - totalBlood;
                 var secondsRemaining = bloodRemaining / (_totalBPS / Math.Max(1, autoCount));
 
-                ___message += $"\n   ({nextBonus:#,##0.#}% in {NumberOutput.timeOutput(secondsRemaining)})";
+                ___message += $"\n   ({nextBonus:#,##0.#}% 在 {NumberOutput.timeOutput(secondsRemaining)}后)";
             }
 
             __instance.tooltip.showTooltip(___message);
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(RebirthPowerSpell), "goldSpellTooltip")]
-        private static void RebirthPowerSpells_goldSpellTooltip_postfix(RebirthPowerSpell __instance, ref string ___message)
+        private static void RebirthPowerSpell_goldSpellTooltip_postfix(RebirthPowerSpell __instance, ref string ___message)
         {
             if (!__instance.IsInvoking("goldSpellTooltip"))
                 __instance.InvokeRepeating("goldSpellTooltip", 0, 0.1f);
@@ -83,7 +83,7 @@ namespace jshepler.ngu.mods
             var autoCount = getAutoCastCount();
             var totalBlood = bloodInvested + (bm.bloodPoints / Math.Max(1, autoCount));
             var newBonus = bloodToGoldBonus(totalBlood);
-            ___message += $"\n\n<b>Total bonus if used now:</b> {newBonus:#,##0.#}% (+{(newBonus - curBonus):#,##0.#}%)";
+            ___message += $"\n\n<b>现在施放后的总加成:</b> {newBonus:#,##0.#}% (+{(newBonus - curBonus):#,##0.#}%)";
 
             if (_totalBPS > 0)
             {
@@ -92,7 +92,7 @@ namespace jshepler.ngu.mods
                 var bloodRemaining = nextTotalBlood - totalBlood;
                 var secondsRemaining = bloodRemaining / (_totalBPS / Math.Max(1, autoCount));
 
-                ___message += $"\n   ({nextBonus:#,##0.#}% in {NumberOutput.timeOutput(secondsRemaining)})";
+                ___message += $"\n   ({nextBonus:#,##0.#}% 在 {NumberOutput.timeOutput(secondsRemaining)}后)";
             }
 
             __instance.tooltip.showTooltip(___message);
@@ -112,7 +112,7 @@ namespace jshepler.ngu.mods
                 return;
 
             var secondsRemaining = bloodRemaining / _totalBPS;
-            ___message += $"\n\n<b>Time Remaining:</b> {NumberOutput.timeOutput(secondsRemaining)}";
+            ___message += $"\n\n<b>剩余时间:</b> {NumberOutput.timeOutput(secondsRemaining)}";
 
             __instance.tooltip.showTooltip(___message);
         }

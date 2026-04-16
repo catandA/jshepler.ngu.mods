@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 
 namespace jshepler.ngu.mods
 {
@@ -12,7 +12,7 @@ namespace jshepler.ngu.mods
                 return;
 
             __instance.character.achievements.achievementComplete[id] = true;
-            Plugin.ShowNotification($"<b>Achievement completed!</b>\n\n{__instance.achievementHint(id)}", 5f);
+            Plugin.ShowNotification($"<b>成就已完成！</b>\n\n{__instance.achievementHint(id)}", 5f);
         }
     }
 }

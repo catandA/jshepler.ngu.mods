@@ -37,7 +37,7 @@ namespace jshepler.ngu.mods
             DefaultPlayerPortait.Filename = Config.Bind("DefaultPlayerPortait", "Filename", "", "filename of 184x184 image in config folder, used to replace default player portrait (overrides BossId option), leave empty to disable\n配置文件夹中184x184图片的文件名，用于替换默认玩家肖像（覆盖BossId选项），留空禁用");
             TrollKitty.Filename = Config.Bind("TrollKitty", "Filename", "", "filename of 900x600 image in config folder, used to replace troll kitty sprite, leave empty to disable\n配置文件夹中900x600图片的文件名，用于替换 troll 猫咪图像，留空禁用");
 
-            DiggerUpgradeIndicator.Enabled = Config.Bind("DiggerUpgradeIndicator", "Enabled", false, "if enabled, digger button will light up yellow if any digger can be upgraded\n如果启用，当有任何挖掘机可以升级时，挖掘机按钮将亮黄色");
+            DiggerUpgradeIndicator.Enabled = Config.Bind("DiggerUpgradeIndicator", "Enabled", false, "if enabled, digger button will light up yellow if any digger can be upgraded\n如果启用，当有任何掘金者可以升级时，掘金者按钮将亮黄色");
             DropTableTooltip.Enabled = Config.Bind("DropTableTooltip", "Enabled", true, "enables display of zones' Drop Table tooltip by holding the alt key\n启用按住 Alt 键显示区域的掉落表工具提示");
             DropTableTooltip.OnlyUnlocked = Config.Bind("DropTableTooltip", "OnlyUnlocked", true, "if true, only items that meet their drop conditions will be displayed\n如果为 true，仅显示满足掉落条件的物品");
             DropTableTooltip.UnknownItems = Config.Bind("DropTableTooltip", "UnknownItems", DropTableTooltip.UnknownItemDisplay.Blur, "how unknown items (not yet dropped) are displayed; Blur replaces names with \"????\"\n未知物品（尚未掉落）的显示方式；Blur 用 \"????\" 替换名称");
@@ -56,7 +56,7 @@ namespace jshepler.ngu.mods
             PotionWarning.ExpireSeconds = Config.Bind("PotionWarning", "ExpireSeconds", 60f, "when potion timer drops below this number of seconds, the Sellout Shop button flashes red; 0 = disabled\n当药水计时器低于此秒数时，倒闭商店按钮闪烁红色；0 = 禁用");
             PruneSaves.DaysToKeep = Config.Bind("PruneSaves", "DaysToKeep", 0, "When quick/auto saving, will delete saves older than value; 0 = disabled\n快速/自动保存时，将删除超过此天数的存档；0 = 禁用");
             Questing.AlwaysRandom = Config.Bind("Questing", "AlwaysRandom", false, "If true, new quests will always be random instead of targeting current zone\n如果为 true，新任务将始终随机生成，而不是针对当前区域");
-            Questing.AutoButter = Config.Bind("Questing", "AutoButter", false, "If true, will automatically use butter when starting a major quest\n如果为 true，开始重大任务时将自动使用黄油");
+            Questing.AutoButter = Config.Bind("Questing", "AutoButter", false, "If true, will automatically use butter when starting a major quest\n如果为 true，开始主要任务时将自动使用黄油");
             QuirkList.FilterEnabled = Config.Bind("QuirkList", "Filter.Enabled", false, "When enabled, quirks page will be filtered to the listed quirks\n启用时，特性页面将过滤到列出的特性");
             QuirkList.OrderEnabled = Config.Bind("QuirkList", "Sort.Enabled", false, "When enabled, quirks page will have listed quirks first and in list order\n启用时，特性页面将优先显示列出的特性并按列表顺序排列");
             ResourceNames.ShowFullName = Config.Bind("ResourceNames", "ShowFullName", ShowFullResourceName.None, "Which of the top-left bars to show full names instead of first letter\n左上角的哪些条显示全名而非首字母");

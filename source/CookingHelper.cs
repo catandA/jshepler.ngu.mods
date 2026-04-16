@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -157,14 +157,14 @@ namespace jshepler.ngu.mods
 
             var dayString = daysDiff switch
             {
-                > 1 => $"in {daysDiff} days",
-                1 => "tomorrow",
-                0 => "today",
-                -1 => "yesterday",
-                _ => $"{-daysDiff} days ago"
+                > 1 => $"{daysDiff}天后",
+                1 => "明天",
+                0 => "今天",
+                -1 => "昨天",
+                _ => $"{Math.Abs(daysDiff)}天前"
             };
             
-            __instance.nextdishTimerText.text += $"\nReady {dayString} at: {readyAt:h:mm:ss tt}";
+            __instance.nextdishTimerText.text += $"\n准备{dayString}于: {readyAt:h:mm:ss tt}";
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(CookingController), "showDishInfo")]
@@ -184,48 +184,48 @@ namespace jshepler.ngu.mods
 
             var cookingItemCount = GetCookingItemCount();
             var cookingItemMulti = Mathf.Pow(1.03f, cookingItemCount);
-            message += $"\n\n   Cooking Items ({cookingItemCount}): x{cookingItemMulti}";
+            message += $"\n\n   烹饪物品 ({cookingItemCount}): x{cookingItemMulti}";
 
             if (character.inventory.itemList.spaceComplete)
-                message += "\n   Space Set Completion: x1.1";
+                message += "\n   太空套装完成: x1.1";
 
             if (character.cooking.ingredients[6].unlocked)
-                message += "\n   Ingredient 7 Unlocked: x1.2";
+                message += "\n   食材7已解锁: x1.2";
 
             if (character.cooking.ingredients[7].unlocked)
-                message += "\n   Ingredient 8 Unlocked: x1.2";
+                message += "\n   食材8已解锁: x1.2";
 
             var totalCookingMulti = __instance.totalCookingBonuses();
-            message += $"\n<b>Total Cooking Multiplier:</b> x{totalCookingMulti}";
+            message += $"\n<b>烹饪总倍率:</b> x{totalCookingMulti}";
 
             var curExpBonus = character.cooking.expBonus - 1f;
-            message += $"\n\n<b>Current Exp Bonus:</b> {curExpBonus}";
+            message += $"\n\n<b>当前经验加成:</b> {curExpBonus}";
 
             if (curExpBonus <= 0.8f)
             {
                 var baseExpGain = 1f - Mathf.Pow(curExpBonus, 2);
-                message += "\n<b>Base Bonus Gain</b> (Total Exp Gain <= 180%)"
-                    + "\n   = 1 - ([exp bonus] ^ 2)"
+                message += "\n<b>基础加成收益</b> (总经验加成 <= 180%)"
+                    + "\n   = 1 - ([经验加成] ^ 2)"
                     + $"\n   = {baseExpGain}";
             }
 
             else
-                message += "\n<b>Base Bonus Gain</b> (Total Exp Gain > 180%)\n   = 0.36";
+                message += "\n<b>基础加成收益</b> (总经验加成 > 180%)\n   = 0.36";
 
             var baseExpBonus = __instance.baseExpBonusPerDish();
-            message += "\n\n<b>Exp Bonus Gain</b> (before meal efficiency):"
-                + "\n   = 0.005 × [base gain] × [cooking multi]"
-                + $"\n   = {baseExpBonus} (clamped)";
+            message += "\n\n<b>经验加成收益</b> (餐前效率):"
+                + "\n   = 0.005 × [基础收益] × [烹饪倍率]"
+                + $"\n   = {baseExpBonus} (限制)";
 
             var max = totalCookingMulti * 0.005f;
             var min = max * 0.36f;
             //message += $"\n(clamped: {min} to {max})";
-            message += $"\n\n(max = [cooking multi] × 0.005 = {max})"
-                + $"\n(min = [max] * 0.36 = {min})";
+            message += $"\n\n(最大值 = [烹饪倍率] × 0.005 = {max})"
+                + $"\n(最小值 = [最大值] * 0.36 = {min})";
 
             var totalBonusGain = baseExpBonus * __instance.getCurPercentofMaxScore();
-            message += $"\n\n   ... × [efficiency] = {totalBonusGain} (additive)"
-                + $"\n<b>New Total Exp Gain:</b> {(curExpBonus + totalBonusGain + 1f) * 100f:###.##}%";
+            message += $"\n\n   ... × [效率] = {totalBonusGain} (叠加)"
+                + $"\n<b>新总经验加成:</b> {(curExpBonus + totalBonusGain + 1f) * 100f:###.##}%";
             character.tooltip.showOverrideTooltip(message);
 
             return false;

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -72,7 +72,7 @@ namespace jshepler.ngu.mods
             if (file == null)
                 yield break;
 
-            Plugin.ShowNotification($"playing <color=blue><b>{file.Name}</b></color>");
+            Plugin.ShowNotification($"正在播放 <color=blue><b>{file.Name}</b></color>");
             using (var www = UnityWebRequestMultimedia.GetAudioClip($"file://{file.FullName}", AudioType.MPEG))
             {
                 yield return www.SendWebRequest();

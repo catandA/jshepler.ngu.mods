@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using UnityEngine.UI;
 
 namespace jshepler.ngu.mods
@@ -14,7 +14,7 @@ namespace jshepler.ngu.mods
             if (_enabled)
             {
                 __instance.advancedTraining.interactable = true;
-                ___advancedTrainingText.text = "Adv. Training";
+                ___advancedTrainingText.text = "高级训练";
             }
         }
     }

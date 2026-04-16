@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
@@ -237,7 +237,7 @@ namespace jshepler.ngu.mods.AutoAllocator
             var runTimeSeconds = _character.input.energyMagicInput * 60;
             if (runTimeSeconds > 172800)
             {
-                Plugin.ShowNotification("Max time allowed is 2 days");
+                Plugin.ShowNotification("允许的最大时间为2天");
                 return;
             }
 

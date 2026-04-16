@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
@@ -211,11 +211,11 @@ namespace jshepler.ngu.mods
             rectClone.anchoredPosition += new Vector2(110f, -1f);
 
             var textClone = clone.GetComponent<Text>();
-            textClone.text = "<b>Quirk List:</b>";
+            textClone.text = "<b>特性列表:</b>";
             textClone.alignment = TextAnchor.MiddleLeft;
 
             var filterToggleClone = clone.transform.Find("Difficulty Toggle");
-            filterToggleClone.Find("Text").GetComponent<Text>().text = "Filter";
+            filterToggleClone.Find("Text").GetComponent<Text>().text = "筛选";
             _filterCheckmark = filterToggleClone.Find("Checkmark").GetComponent<Image>();
 
             var filterToggleButtonClone = filterToggleClone.GetComponent<Button>();
@@ -231,7 +231,7 @@ namespace jshepler.ngu.mods
 
 
             var orderToggleClone = clone.transform.Find("Affordable Toggle");
-            orderToggleClone.Find("Text").GetComponent<Text>().text = "Order";
+            orderToggleClone.Find("Text").GetComponent<Text>().text = "排序";
             _orderCheckmark = orderToggleClone.Find("Checkmark").GetComponent<Image>();
 
             var orderToggleButtonClone = orderToggleClone.GetComponent<Button>();

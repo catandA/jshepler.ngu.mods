@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 
 namespace jshepler.ngu.mods
 {
@@ -9,7 +9,7 @@ namespace jshepler.ngu.mods
         private static void BeastQuestController_updateText_postfix(BeastQuestController __instance)
         {
             if (Plugin.Character.InMenu(Menu.Quests))
-                __instance.questStats.text += $"\n<b>Quest Item Drop Chance:</b> {__instance.questDropChance() * 100: #,##0.##}%";
+                __instance.questStats.text += $"\n<b>任务物品掉率:</b> {__instance.questDropChance() * 100: #,##0.##}%";
         }
     }
 }

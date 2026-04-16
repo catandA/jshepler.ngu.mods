@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Reflection;
 using HarmonyLib;
@@ -106,7 +106,7 @@ namespace jshepler.ngu.mods
                 + (magicUnlocked ? customMagicAllCost : 0)
                 + (res3Unlocked ? customRes3AllCost : 0);
 
-            var text = $"Buy ALL Custom {(_ctrlDown ? "E/M/R3" : "E/M")} Purchases for {NumberOutput.expPrint(_customAllAllCost)} EXP";
+            var text = $"购买全部自定义{(_ctrlDown ? "能量/魔法/资源3" : "能量/魔法")}购买项，花费 {NumberOutput.expPrint(_customAllAllCost)} 经验";
             __instance.buyAllCustom.GetComponentInChildren<Text>().text = text;
         }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace jshepler.ngu.mods.GameData
 {
@@ -13,10 +13,10 @@ namespace jshepler.ngu.mods.GameData
             new AK(82, 304, 1, "JAKE", new PTR(25000f, 15000f)),
             new AK(100, 305, 1, "UUG", new PTR(800000f, 400000f, 14000f)),
             new AK(116, 310, 1, "WALDERP", new PTR(1.3e+7f, 7.0e+6f, 150000f)),
-            new AK(132, 312, 1, "BEAST v1", new PTR(2.5E+09f, 1.6E+09f, 2.5E+07f)),
-            new AK(132, 313, 2, "BEAST v2", new PTR(2.5E+10f, 1.6E+10f, 2.5E+08f)),
-            new AK(132, 314, 3, "BEAST v3", new PTR(2.5E+11f, 1.6E+11f, 2.5E+09f)),
-            new AK(132, 315, 4, "BEAST v4", new PTR(2.5E+12f, 1.6E+12f, 2.5E+10f)),
+            new AK(132, 312, 1, "虫兽 v1", new PTR(2.5E+09f, 1.6E+09f, 2.5E+07f)),
+            new AK(132, 313, 2, "虫兽 v2", new PTR(2.5E+10f, 1.6E+10f, 2.5E+08f)),
+            new AK(132, 314, 3, "虫兽 v3", new PTR(2.5E+11f, 1.6E+11f, 2.5E+09f)),
+            new AK(132, 315, 4, "虫兽 v4", new PTR(2.5E+12f, 1.6E+12f, 2.5E+10f)),
             new AK(426, 334, 1, "NERD v1", new PTR(5E+14f, 2.5E+14f, 5E+12f)),
             new AK(426, 335, 2, "NERD v2", new PTR(1E+16f, 5E+15f, 1E+14f)),
             new AK(426, 336, 3, "NERD v3", new PTR(2E+17f, 1E+17f, 2E+15f)),
@@ -25,10 +25,10 @@ namespace jshepler.ngu.mods.GameData
             new AK(467, 340, 2, "GM v2", new PTR(1E+20f, 5E+19f, 1E+18f)),
             new AK(467, 341, 3, "GM v3", new PTR(2E+21f, 1E+21f, 2E+19f)),
             new AK(467, 342, 4, "GM v4", new PTR(5E+22f, 2.5E+22f, 5E+20f)),
-            new AK(491, 344, 1, "EXILE v1", new PTR(1E+23f, 5E+22f, 1E+21f), 24),
-            new AK(491, 345, 2, "EXILE v2", new PTR(2E+24f, 1E+24f, 2E+22f), 24),
-            new AK(491, 346, 3, "EXILE v3", new PTR(4E+25f, 2E+25f, 4E+23f), 24),
-            new AK(491, 347, 4, "EXILE v4", new PTR(7.5E+26f, 3.7E+26f, 7.5E+24f), 24),
+            new AK(491, 344, 1, "流放者 v1", new PTR(1E+23f, 5E+22f, 1E+21f), 24),
+            new AK(491, 345, 2, "流放者 v2", new PTR(2E+24f, 1E+24f, 2E+22f), 24),
+            new AK(491, 346, 3, "流放者 v3", new PTR(4E+25f, 2E+25f, 4E+23f), 24),
+            new AK(491, 347, 4, "流放者 v4", new PTR(7.5E+26f, 3.7E+26f, 7.5E+24f), 24),
             new AK(777, 365, 1, "IH v1", new PTR(4E+28f, 2E+28f, 4E+26f), 5),
             new AK(777, 366, 2, "IH v2", new PTR(3.2E+29f, 1.6E+29f, 1.6E+27f), 5),
             new AK(777, 367, 3, "IH v3", new PTR(2E+30f, 1E+30f, 1E+28f), 5),

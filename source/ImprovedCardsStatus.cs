@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
@@ -52,20 +52,20 @@ namespace jshepler.ngu.mods
             // cardSpawnTime is already in real time, no need to /cardSpeed again
             var cardsPerDay = 86400f / cardSpawnTime;
 
-            var text = $"<b>Card Spawn Time:</b> {NumberOutput.timeOutput(cardSpawnTime)}"
-                + $"\n<b>Time to Next Card:</b> {NumberOutput.timeOutput(timeToNextCard)}"
-                + $"\n<b>Cards per Day:</b> {cardsPerDay:#,##0.#}";
+            var text = $"<b>卡片生成时间:</b> {NumberOutput.timeOutput(cardSpawnTime)}"
+                + $"\n<b>到下一张卡片:</b> {NumberOutput.timeOutput(timeToNextCard)}"
+                + $"\n<b>每日卡片数:</b> {cardsPerDay:#,##0.#}";
 
             if (character.cardsController.unlockedChonkers())
             {
                 var chonkerSpawnTime = controller.chonkerSpawnTime() / cardSpeed;
                 var timeToNextChonker = chonkerSpawnTime - character.cards.chonkerSpawnTimer.totalseconds / cardSpeed;
 
-                text += $"\n\n<b>CHONKER Spawn Time:</b> {NumberOutput.timeOutput(chonkerSpawnTime)}"
-                    + $"\n<b>Time to Next CHONKER:</b> {NumberOutput.timeOutput(timeToNextChonker)}";
+                text += $"\n\n<b>巨型卡片生成时间:</b> {NumberOutput.timeOutput(chonkerSpawnTime)}"
+                    + $"\n<b>到下一张巨型卡片:</b> {NumberOutput.timeOutput(timeToNextChonker)}";
             }
 
-            text += $"\n\n<b>Total Cards Generated:</b> {character.cards.cardsGenerated:#,##0}";
+            text += $"\n\n<b>已生成卡片总数:</b> {character.cards.cardsGenerated:#,##0}";
 
             return text;
         }
@@ -75,35 +75,35 @@ namespace jshepler.ngu.mods
             var character = Plugin.Character;
             var controller = character.cardsController;
 
-            var text = "<b>Tag Order:</b>";
+            var text = "<b>标签顺序:</b>";
             var tags = character.cards.taggedBonuses;
             for (var x = 0; x < tags.Count; x++)
                 text += $"\n  {x+1} - {controller.getBonusName(tags[x])}";
 
             var nextCard = getNextCard(false, out var fromTag);
-            var mayoString = $"{nextCard.manaCosts.Sum()} mayo";
+            var mayoString = $"{nextCard.manaCosts.Sum()} 蛋黄酱";
             var rarityString = $"{controller.getRarityColorTag(nextCard.cardRarity)}{controller.getRarityNameShort(nextCard.cardRarity)}</color>";
             var bonusTypeString = controller.getShortBonusName(nextCard.bonusType);
 
             var fromTagString = string.Empty;
             if (tags.Contains(nextCard.bonusType))
-                fromTagString = fromTag ? "(from tag)" : "(not from tag)";
+                fromTagString = fromTag ? "(来自标签)" : "(非来自标签)";
 
-            text += "\n\n<b>Next Card:</b>"
+            text += "\n\n<b>下一张卡片:</b>"
                 + $"\n  {rarityString} {mayoString} {bonusTypeString} {fromTagString}";
 
             if (character.cardsController.unlockedChonkers())
             {
                 nextCard = getNextCard(true, out fromTag);
-                mayoString = $"{nextCard.manaCosts.Sum()} mayo";
+                mayoString = $"{nextCard.manaCosts.Sum()} 蛋黄酱";
                 rarityString = $"{controller.getRarityColorTag(nextCard.cardRarity)}{controller.getRarityNameShort(nextCard.cardRarity)}</color>";
                 bonusTypeString = controller.getShortBonusName(nextCard.bonusType);
 
                 fromTagString = string.Empty;
                 if (tags.Contains(nextCard.bonusType))
-                    fromTagString = fromTag ? "(from tag)" : "(not from tag)";
+                    fromTagString = fromTag ? "(来自标签)" : "(非来自标签)";
 
-                text += "\n\n<b>Next Chonker:</b>"
+                text += "\n\n<b>下一张巨型卡片:</b>"
                     + $"\n  {rarityString} {mayoString} {bonusTypeString} {fromTagString}";
             }
 
@@ -178,18 +178,18 @@ namespace jshepler.ngu.mods
             var sb = new StringBuilder();
 
             var tt = new TextTable(defaultAlignment: TextTable.TextAlign.Right, spacing: 1);
-            tt.AddRow(new TextTable.Cell("<b>Tag Slots Used:</b>")
+            tt.AddRow(new TextTable.Cell("<b>已使用标签槽:</b>")
                 , new TextTable.Cell($"{tagCount}", alignment: TextTable.TextAlign.Left));
-            tt.AddRow("<b>Tag Effect:</b>", $"{tagEffect * 100f:0.00}%");
-            //tt.AddRow("<b>Tag Slots Used:</b>", $"{tagCount}");
-            tt.AddRow("<b>Tag Slot:</b>", $"{tagEffect * tagCount * 100f:0.00}%");
-            tt.AddRow("<b>No Tag Slot:</b>", $"{(1f - tagEffect * tagCount) * 100f:0.00}%");
-            tt.AddRow("<b>Fallback/Random:</b>", $"{1f / 14f * 100f:0.00}%");
+            tt.AddRow("<b>标签效果:</b>", $"{tagEffect * 100f:0.00}%");
+            //tt.AddRow("<b>已使用标签槽:</b>", $"{tagCount}");
+            tt.AddRow("<b>标签槽:</b>", $"{tagEffect * tagCount * 100f:0.00}%");
+            tt.AddRow("<b>无标签槽:</b>", $"{(1f - tagEffect * tagCount) * 100f:0.00}%");
+            tt.AddRow("<b>备用/随机:</b>", $"{1f / 14f * 100f:0.00}%");
             sb.AppendLine($"{tt}");
 
             tt = new TextTable(defaultAlignment: TextTable.TextAlign.Right, spacing: 1);
-            tt.AddRow("<b>Specific Untagged:</b>", $"{singleUntaggedChance * 100F:0.00}%");
-            tt.AddRow("<b>Specific Tagged:</b>", $"{singleTaggedChance * 100f:0.00}%");
+            tt.AddRow("<b>特定无标签:</b>", $"{singleUntaggedChance * 100F:0.00}%");
+            tt.AddRow("<b>特定有标签:</b>", $"{singleTaggedChance * 100f:0.00}%");
             sb.AppendLine($"\n{tt}");
 
             tt = buildSingleBonusTable(tagEffect, singleUntaggedChance, singleTaggedChance, rarityChances);
@@ -198,8 +198,8 @@ namespace jshepler.ngu.mods
             var anyUntaggedChance = (14 - tagCount) * singleUntaggedChance;
             var anyTaggedChance = tagCount * singleTaggedChance;
             tt = new TextTable(defaultAlignment: TextTable.TextAlign.Right, spacing: 1);
-            tt.AddRow("<b>Any Untagged:</b>", $"{anyUntaggedChance * 100F:0.00}%");
-            tt.AddRow("<b>Any Tagged:</b>", $"{anyTaggedChance * 100f:0.00}%");
+            tt.AddRow("<b>任意无标签:</b>", $"{anyUntaggedChance * 100F:0.00}%");
+            tt.AddRow("<b>任意有标签:</b>", $"{anyTaggedChance * 100f:0.00}%");
             sb.AppendLine($"\n{tt}");
 
             tt = buildAnyBonusTable(tagCount, singleUntaggedChance, singleTaggedChance, rarityChances);
@@ -213,7 +213,7 @@ namespace jshepler.ngu.mods
             var controller = Plugin.Character.cardsController;
 
             var tt = new TextTable(defaultAlignment: TextTable.TextAlign.Right);
-            tt.AddRow("<b>Rarity</b>", "<b>Base</b>", "<b>Untagged</b>", "<b>Tagged</b>");
+            tt.AddRow("<b>稀有度</b>", "<b>基础</b>", "<b>无标签</b>", "<b>有标签</b>");
             tt.AddSeparatorRow();
 
             foreach (var kvp in rarityChances)
@@ -254,7 +254,7 @@ namespace jshepler.ngu.mods
             var anyTaggedChance = tagCount * singleTaggedChance;
 
             var tt = new TextTable(defaultAlignment: TextTable.TextAlign.Right);
-            tt.AddRow("<b>Rarity</b>", "<b>Base</b>", "<b>Untagged</b>", "<b>Tagged</b>");
+            tt.AddRow("<b>稀有度</b>", "<b>基础</b>", "<b>无标签</b>", "<b>有标签</b>");
             tt.AddSeparatorRow();
 
             foreach (var kvp in rarityChances)

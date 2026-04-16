@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,12 +35,12 @@ namespace jshepler.ngu.mods
 
             return itemId switch
             {
-                (int)Items.Poop => "Poop",
+                (int)Items.Poop => "便便",
                 (int)Items.QP => "QP",
                 (int)Items.PP => "PP",
                 (int)Items.AP => "AP",
-                (int)Items.Exp => "Exp",
-                (int)Items.Unknown => "Unknown",
+                (int)Items.Exp => "经验",
+                (int)Items.Unknown => "未知",
                 _ => Plugin.Character.itemInfo.itemName[itemId].Replace("Resource 3", Plugin.Character.res3.res3Name)
             };
         };
@@ -115,7 +115,7 @@ namespace jshepler.ngu.mods
                     continue;
                 }
 
-                var text = "Enemy doesn't spawn in any zone";
+                var text = "该敌人不在任何区域生成";
                 if (zones.Count > 0)
                     text = BuildDropTable(zones[0]);
 
@@ -169,8 +169,8 @@ namespace jshepler.ngu.mods
                 _dcMulti *= rooted ? rootedCharmMulti : charmMulti;
 
             var color = _shiftIsDown ? "blue" : "black";
-            var text = $"<b>Drop Table For {controller.zoneName(_zoneId)}</b>"
-                + $"\n\n<b>Total DC Modifier{(rooted ? " (rooted)" : string.Empty)}:</b> <color={color}>{_dcM(_dcMulti)}</color>";
+            var text = $"<b>{controller.zoneName(_zoneId)} 掉落表</b>"
+                + $"\n\n<b>总掉落倍率{(rooted ? " (已扎根)" : string.Empty)}:</b> <color={color}>{_dcM(_dcMulti)}</color>";
 
             var enemies = controller.enemyList[_zoneId];
             var eCount = enemies.Count;
@@ -178,20 +178,20 @@ namespace jshepler.ngu.mods
             var bCount = enemies.Count(e => e.enemyType == enemyType.boss);
 
             if (zone.NormalDrops != null)
-                text += $"\n\n<b>Normal Drops:</b> {nCount}/{eCount} ({(nCount / (float)eCount) * 100f:0.##}%){DropsString(zone.NormalDrops)}";
+                text += $"\n\n<b>普通掉落:</b> {nCount}/{eCount} ({(nCount / (float)eCount) * 100f:0.##}%){DropsString(zone.NormalDrops)}";
 
             if (zone.BossDrops != null)
-                text += $"\n\n<b>Boss Drops:</b> {bCount}/{eCount} ({(bCount / (float)eCount) * 100f:0.##}%){DropsString(zone.BossDrops)}";
+                text += $"\n\n<b>Boss掉落:</b> {bCount}/{eCount} ({(bCount / (float)eCount) * 100f:0.##}%){DropsString(zone.BossDrops)}";
 
             if (zone.TitanV1Drops != null)
             {
                 if (zone.TitanV2Drops == null)
-                    text += $"\n\n<b>Titan Drops:</b>{DropsString(zone.TitanV1Drops, true)}";
+                    text += $"\n\n<b>泰坦掉落:</b>{DropsString(zone.TitanV1Drops, true)}";
                 else
-                    text += $"\n\n<b>Titan V1 Drops:</b>{DropsString(zone.TitanV1Drops, true)}"
-                          + $"\n\n<b>Titan V2 adds:</b>{DropsString(zone.TitanV2Drops, true)}"
-                          + $"\n\n<b>Titan V3 adds:</b>{DropsString(zone.TitanV3Drops, true)}"
-                          + $"\n\n<b>Titan V4 adds:</b>{DropsString(zone.TitanV4Drops, true)}";
+                    text += $"\n\n<b>泰坦V1掉落:</b>{DropsString(zone.TitanV1Drops, true)}"
+                          + $"\n\n<b>泰坦V2额外:</b>{DropsString(zone.TitanV2Drops, true)}"
+                          + $"\n\n<b>泰坦V3额外:</b>{DropsString(zone.TitanV3Drops, true)}"
+                          + $"\n\n<b>泰坦V4额外:</b>{DropsString(zone.TitanV4Drops, true)}";
             }
 
             if (zone.EnemyDrops != null)
@@ -201,7 +201,7 @@ namespace jshepler.ngu.mods
                     if (ed.HasVisibleDrops() || !Options.DropTableTooltip.OnlyUnlocked.Value)
                     {
                         var name = Plugin.Character.adventureController.fetchEnemyNamebySpriteID(ed.EnemyId);
-                        text += $"\n\n<b>Extra drops for {name}:</b>{DropsString(ed)}";
+                        text += $"\n\n<b>额外掉落 {name}:</b>{DropsString(ed)}";
                     }
                 }
             }
@@ -225,7 +225,7 @@ namespace jshepler.ngu.mods
                 var dc = Math.Min((Plugin.Character.bossID - 57) / 243f, 1f);
                 color = dc < 1f ? _shiftIsDown ? "blue" : "red" : "green";
                 var name = _name((int)Items.Tutorial_Flubber);
-                text += $"\n\n<b>Secret Drop:</b>\n<b><color={color}>{_dcP(dc)}</color></b> for {name}";
+                text += $"\n\n<b>秘密掉落:</b>\n<b><color={color}>{_dcP(dc)}</color></b> for {name}";
             }
 
             return $"<size=11>{text}</size>";
@@ -249,7 +249,7 @@ namespace jshepler.ngu.mods
             var killsRemaining = killsPerGuff - Plugin.Character.adventureController.globalKillCounter % killsPerGuff;
             var name = _name((int)drop.MacGuffinItem);
 
-            return $"\n\n<b>MacGuffin:</b> ({killsRemaining} kills remaining)\n<b><color=green>100%</color></b> for {name}";
+            return $"\n\n<b>MacGuffin:</b> ({killsRemaining} 击杀剩余)\n<b><color=green>100%</color></b> for {name}";
         }
 
         private static string DropString(QuestItemDrop drop)
@@ -272,7 +272,7 @@ namespace jshepler.ngu.mods
 
             var dc = Plugin.Character.beastQuestController.questDropChance();
             var color = dc >= 1.0f ? "green" : "red";
-            var text = $"\n\n<b>Quest Item:</b>\n<b><color={color}>{_dcP(dc)}</color></b> for {name}";
+            var text = $"\n\n<b>任务物品:</b>\n<b><color={color}>{_dcP(dc)}</color></b> for {name}";
 
             return text;
         }
@@ -285,7 +285,7 @@ namespace jshepler.ngu.mods
             {
                 var minGold = group.BaseGold * 4 * Plugin.Character.totalGoldbonus();
                 var maxGold = group.BaseGold * 5 * Plugin.Character.totalGoldbonus();
-                text = $"\n<b><color=green>100%</color></b> for {_number(minGold)} - {_number(maxGold)} gold";
+                text = $"\n<b><color=green>100%</color></b> for {_number(minGold)} - {_number(maxGold)} 黄金";
             }
 
             foreach (var idc in group.Items.OrderByDescending(i => i.BaseDC))
@@ -300,37 +300,37 @@ namespace jshepler.ngu.mods
                 var dc = Math.Min(moddedDC, idc.MaxDC);
                 var color = dc == idc.MaxDC ? "green" : _shiftIsDown ? "blue" : "red";
                 var showMax = idc.MaxDC < 1f && dc < idc.MaxDC;
-                text += $"\n<b><color={color}>{_dcP(dc)}</color></b>{(showMax ? " (max: " + _dcP(idc.MaxDC) + ")" : string.Empty)} for ";
+                text += $"\n<b><color={color}>{_dcP(dc)}</color></b>{(showMax ? " (最大: " + _dcP(idc.MaxDC) + ")" : string.Empty)} for ";
 
                 switch (idc.ItemIds[0])
                 {
                     case (int)Items.RandomGuff:
-                        text += $"Random MacGuffin Fragment";
+                        text += $"随机MacGuffin碎片";
                         break;
 
                     case (int)Items.Poop:
-                        text += $"{idc.BaseAmount} POOP";
+                        text += $"{idc.BaseAmount} 便便";
                         break;
 
                     case (int)Items.QP:
                         var qp = Evaluators.TitanQP(_zoneId);
-                        text += $"{_number(qp)} QP ({_number(idc.BaseAmount)} base)";
+                        text += $"{_number(qp)} QP ({_number(idc.BaseAmount)} 基础)";
                         break;
 
                     case (int)Items.PP:
                         var pp = Evaluators.TitanPPP(_zoneId);
-                        text += $"{_number(pp / 1e+6D)} PP ({(idc.BaseAmount / 1e+6D)} base)";
+                        text += $"{_number(pp / 1e+6D)} PP ({(idc.BaseAmount / 1e+6D)} 基础)";
                         break;
 
                     case (int)Items.AP:
                         var ap = Evaluators.TitanAP(_zoneId);
-                        text += $"{_number(ap)} AP ({_number(idc.BaseAmount)} base)";
+                        text += $"{_number(ap)} AP ({_number(idc.BaseAmount)} 基础)";
                         break;
 
                     case (int)Items.Exp:
                         var exp = isTitan ? Evaluators.TitanExp(_zoneId) : Plugin.Character.checkExpAdded(idc.BaseAmount);
                         var bonusKillsRemaining = isTitan ? ((Plugin.Character.adventure.itopod.perkLevel[34] * 3) - Evaluators.TitanKills(_zoneId)) : 0;
-                        text += $"{_number(exp)} EXP ({_number(idc.BaseAmount)} base){(isTitan ? $"\n\t({(bonusKillsRemaining < 0 ? 0 : bonusKillsRemaining)} bonus exp kills left)" : string.Empty)}";
+                        text += $"{_number(exp)} 经验 ({_number(idc.BaseAmount)} 基础){(isTitan ? $"\n\t({(bonusKillsRemaining < 0 ? 0 : bonusKillsRemaining)} 额外经验击杀剩余)" : string.Empty)}";
                         break;
 
                     default:
@@ -338,7 +338,7 @@ namespace jshepler.ngu.mods
                             text += $"{_name(idc.ItemIds[0])}";
                         else
                         {
-                            text += "1 of the following:";
+                            text += "以下任选其一:";
                             foreach (var id in idc.ItemIds.Where(i => _showItem(i)).OrderBy(i => i))
                                 text += $"\n    {_name(id)}";
                         }

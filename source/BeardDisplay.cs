@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,8 +39,8 @@ namespace jshepler.ngu.mods
             var id = __instance.id;
             var beard = character.beards.beards[id];
 
-            __instance.levelText.text = "Temporary:\nPermanent:\nTotal:";
-            __instance.tempBonus.text = "<b>Level</b>";
+            __instance.levelText.text = "临时:\n永久:\n总计:";
+            __instance.tempBonus.text = "<b>等级</b>";
             __instance.permBonus.text = $"<b>{bonusText(id)}</b>";
             __instance.tempValue.text = $"{beard.beardLevel:#,##0}\n{beard.permLevel:#,##0}";
 
@@ -51,7 +51,7 @@ namespace jshepler.ngu.mods
 
             __instance.permValue.text += $"\nx{permBonus(id):#,##0.00}%\n{totalBonus(id):#,##0.00}%";
 
-            __instance.activeBeardsText.text = $"Active:\n{character.beards.activeBeards.Count}/{character.allBeards.capBeards()}";
+            __instance.activeBeardsText.text = $"已激活:\n{character.beards.activeBeards.Count}/{character.allBeards.capBeards()}";
             return false;
         }
 
@@ -59,13 +59,13 @@ namespace jshepler.ngu.mods
         {
             return id switch
             {
-                0 => "Atack/Defense Bonus",
-                1 => "Drop Chance Bonus",
-                2 => "Number Bonus",
-                3 => "NGU Speed Bonus",
-                4 => "Wandoos Speed Bonus",
-                5 => "Adventure Bonus",
-                6 => "GPS Bonus",
+                0 => "攻击/防御加成",
+                1 => "掉落概率加成",
+                2 => "数字加成",
+                3 => "NGU速度加成",
+                4 => "Wandoos速度加成",
+                5 => "冒险加成",
+                6 => "金币加成",
                 _ => string.Empty
             };
         }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace jshepler.ngu.mods.Popups
@@ -42,13 +42,13 @@ namespace jshepler.ngu.mods.Popups
             switch (menu)
             {
                 case Menu.EXP_Energy:
-                    _resource = "Energy";
+                    _resource = "能量";
                     _base = _baseEnergy;
                     _customPower = character.settings.customPowerAmount;
                     break;
 
                 case Menu.EXP_Magic:
-                    _resource = "Magic";
+                    _resource = "魔法";
                     _base = _baseMagic;
                     _customPower = character.settings.customMagicPowerAmount;
                     break;
@@ -135,9 +135,9 @@ namespace jshepler.ngu.mods.Popups
             GUILayout.BeginHorizontal();
 
             GUILayout.Label(" ", GUILayout.Width(COL1));
-            GUILayout.Label("Power", _rightAlignedLabel, GUILayout.Width(COL2));
-            GUILayout.Label("Cap (multiple of 250)", _rightAlignedLabel, GUILayout.Width(COL3));
-            GUILayout.Label("Bars", _rightAlignedLabel, GUILayout.Width(COL4));
+            GUILayout.Label("能量", _rightAlignedLabel, GUILayout.Width(COL2));
+            GUILayout.Label("上限 (250的倍数)", _rightAlignedLabel, GUILayout.Width(COL3));
+            GUILayout.Label("条数", _rightAlignedLabel, GUILayout.Width(COL4));
 
             GUILayout.EndHorizontal();
         }
@@ -146,7 +146,7 @@ namespace jshepler.ngu.mods.Popups
         private static void drawRatio()
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Ratio: ", _rightAlignedLabel, GUILayout.Width(COL1));
+            GUILayout.Label("比例: ", _rightAlignedLabel, GUILayout.Width(COL1));
 
             if (long.TryParse(GUILayout.TextField(_ratio.power.ToString(), _rightAlignedTextField, GUILayout.Width(COL2)), out long rp))
             {
@@ -182,28 +182,28 @@ namespace jshepler.ngu.mods.Popups
         private static void drawCalculated()
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Base: ", _rightAlignedLabel, GUILayout.Width(COL1));
+            GUILayout.Label("基础: ", _rightAlignedLabel, GUILayout.Width(COL1));
             GUILayout.Label($"{_base.power:#,##0} ", _rightAlignedLabel, GUILayout.Width(COL2));
             GUILayout.Label($"{_base.cap:#,##0} ", _rightAlignedLabel, GUILayout.Width(COL3));
             GUILayout.Label($"{_base.bars:#,##0} ", _rightAlignedLabel, GUILayout.Width(COL4));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Should Have: ", _rightAlignedLabel, GUILayout.Width(COL1));
+            GUILayout.Label("应有: ", _rightAlignedLabel, GUILayout.Width(COL1));
             GUILayout.Label($"{_shouldBe.power:#,##0} ", _rightAlignedLabel, GUILayout.Width(COL2));
             GUILayout.Label($"{_shouldBe.cap:#,##0} ", _rightAlignedLabel, GUILayout.Width(COL3));
             GUILayout.Label($"{_shouldBe.bars:#,##0} ", _rightAlignedLabel, GUILayout.Width(COL4));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Levels Needed: ", _rightAlignedLabel, GUILayout.Width(COL1));
+            GUILayout.Label("所需等级: ", _rightAlignedLabel, GUILayout.Width(COL1));
             GUILayout.Label($"{_levelsNeeded.power:#,##0} ", _rightAlignedLabel, GUILayout.Width(COL2));
             GUILayout.Label($"{_levelsNeeded.cap:#,##0} ", _rightAlignedLabel, GUILayout.Width(COL3));
             GUILayout.Label($"{_levelsNeeded.bars:#,##0} ", _rightAlignedLabel, GUILayout.Width(COL4));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Exp Needed: ", _rightAlignedLabel, GUILayout.Width(COL1));
+            GUILayout.Label("所需经验: ", _rightAlignedLabel, GUILayout.Width(COL1));
             GUILayout.Label($"{_expNeeded.power:#,##0} ", _rightAlignedLabel, GUILayout.Width(COL2));
             GUILayout.Label($"{_expNeeded.cap:#,##0} ", _rightAlignedLabel, GUILayout.Width(COL3));
             GUILayout.Label($"{_expNeeded.bars:#,##0} ", _rightAlignedLabel, GUILayout.Width(COL4));
@@ -217,19 +217,19 @@ namespace jshepler.ngu.mods.Popups
 
             GUILayout.BeginHorizontal(GUILayout.Width(COL2));
             GUILayout.FlexibleSpace();
-            if (_levelsNeeded.power > 0 && GUILayout.Button("buy"))
+            if (_levelsNeeded.power > 0 && GUILayout.Button("购买"))
                 buyPower();
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal(GUILayout.Width(COL3));
             GUILayout.FlexibleSpace();
-            if (_levelsNeeded.cap > 0 && GUILayout.Button("buy"))
+            if (_levelsNeeded.cap > 0 && GUILayout.Button("购买"))
                 buyCap();
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal(GUILayout.Width(COL4));
             GUILayout.FlexibleSpace();
-            if (_levelsNeeded.bars > 0 && GUILayout.Button("buy"))
+            if (_levelsNeeded.bars > 0 && GUILayout.Button("购买"))
                 buyBars();
             GUILayout.EndHorizontal();
 
@@ -242,7 +242,7 @@ namespace jshepler.ngu.mods.Popups
             GUILayout.BeginVertical("box");
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Custom Amnts:", _rightAlignedLabel, GUILayout.Width(COL1));
+            GUILayout.Label("自定义数量:", _rightAlignedLabel, GUILayout.Width(COL1));
 
             var root = _customPower / _ratio.power;
             if (long.TryParse(GUILayout.TextField($"{_customPower:0}", _rightAlignedTextField, GUILayout.Width(COL2)), out var cp))
@@ -260,7 +260,7 @@ namespace jshepler.ngu.mods.Popups
 
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("set custom purchases"))
+            if (GUILayout.Button("设置自定义购买"))
                 updateCustomInputs();
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();

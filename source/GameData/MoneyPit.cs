@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace jshepler.ngu.mods.GameData
 {
@@ -10,81 +10,81 @@ namespace jshepler.ngu.mods.GameData
         {
             // tier 1
             { 7, new() {
-                "Power Boost"
-                , "Toughness Boost"
-                , "Special Boost"
-                , "Adv Power"
-                , "Adv Toughness"
-                , "Max Health"
-                , "Health Regen"
-                , "Nothing" // code does random(1, 9) but only has 7 options, 8th drops to the default "Pit belches" - i.e. "nothing"
+                "力量提升"
+                , "韧性提升"
+                , "特殊提升"
+                , "高级力量"
+                , "高级韧性"
+                , "最大生命值"
+                , "生命回复"
+                , "无" // code does random(1, 9) but only has 7 options, 8th drops to the default "Pit belches" - i.e. "nothing"
             } },
 
             // tier 2-4
             { 13, new() {
-                "Power Boost"
-                , "Toughness Boost"
-                , "Special Boost"
-                , "Random Equipped Item LevelUp"
-                , "Exp"
-                , "Adv Power"
-                , "Adv Toughness"
-                , "Max Health"
-                , "Health Regen"
+                "力量提升"
+                , "韧性提升"
+                , "特殊提升"
+                , "随机装备物品升级"
+                , "经验"
+                , "高级力量"
+                , "高级韧性"
+                , "最大生命值"
+                , "生命回复"
             } },
 
             // tier 5
             { 15, new() {
-                "Power Boost"
-                , "Toughness Boost"
-                , "Special Boost"
-                , "All Equipped Items LevelUp"
-                , "Exp"
-                , "Yggdrasil Seeds"
-                , "Adv Power"
-                , "Adv Toughness"
-                , "Max Health"
-                , "Health Regen"
+                "力量提升"
+                , "韧性提升"
+                , "特殊提升"
+                , "所有装备物品升级"
+                , "经验"
+                , "世界树种子"
+                , "高级力量"
+                , "高级韧性"
+                , "最大生命值"
+                , "生命回复"
             } },
 
             // tier 6
             { 18, new() {
-                "Power Boost"
-                , "Toughness Boost"
-                , "Special Boost"
-                , "All Equipped Items LevelUp"
-                , "Exp"
-                , "Yggdrasil Seeds"
-                , "Adv Power"
-                , "Adv Toughness"
-                , "Max Health"
-                , "Health Regen"
-                , "Wandoos Pit Level"
+                "力量提升"
+                , "韧性提升"
+                , "特殊提升"
+                , "所有装备物品升级"
+                , "经验"
+                , "世界树种子"
+                , "高级力量"
+                , "高级韧性"
+                , "最大生命值"
+                , "生命回复"
+                , "Wandoos 钱坑等级"
             } },
 
             // tier 7-11
             { 50, new() {
-                "Power Boost"
-                , "Toughness Boost"
-                , "Special Boost"
-                , "All Equipped Items LevelUp"
-                , "Exp"
-                , "Yggdrasil Seeds"
-                , "Adv Power"
-                , "Adv Toughness"
-                , "Max Health"
-                , "Health Regen"
-                , "Wandoos Pit Level"
-                , "ALL Daycare Items LevelUp"
+                "力量提升"
+                , "韧性提升"
+                , "特殊提升"
+                , "所有装备物品升级"
+                , "经验"
+                , "世界树种子"
+                , "高级力量"
+                , "高级韧性"
+                , "最大生命值"
+                , "生命回复"
+                , "Wandoos 钱坑等级"
+                , "所有日托物品升级"
             } },
 
             // tier 12-16
             { int.MaxValue, new() {
-                "Small Iron Pill (adv stats) x?"
-                , "ALL Equipped Items LevelUp"
-                , "Exp x?"
-                , "Small Pomegranate (seeds) x?"
-                , "ALL Daycare Items LevelUp"
+                "小铁丸（高级属性）x?"
+                , "所有装备物品升级"
+                , "经验 x?"
+                , "小石榴（种子）x?"
+                , "所有日托物品升级"
             } },
         };
     }
@@ -263,4 +263,4 @@ namespace jshepler.ngu.mods.GameData
                 , "ALL Daycare Items Level + 1"
             } },
 
- */
+*/

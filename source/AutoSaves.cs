@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -49,7 +49,7 @@ namespace jshepler.ngu.mods
                         Plugin.Character.settings.dailySaveRewardTime.reset();
                         var ap = Plugin.Character.addAP(200);
                         TrackAPGained.TrackGain(ap, TrackAPGained.APSource.DailySave);
-                        Plugin.ShowOverrideNotification($"You (tried) to manually save your file today! Here's {ap} AP as a bribe!");
+                        Plugin.ShowOverrideNotification($"你(尝试)在今天手动保存了文件！这是 {ap} AP 作为贿赂！");
                     }
 
                     if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
@@ -130,7 +130,7 @@ namespace jshepler.ngu.mods
             try
             {
                 File.WriteAllText($"{saveFolder}/{saveName}_{DateTime.UtcNow:yyyy-MM-dd_HH-mm-ss}.txt", data);
-                Plugin.ShowOverrideNotification($"game saved: {saveName}", 1);
+                Plugin.ShowOverrideNotification($"游戏已保存: {saveName}", 1);
             }
             catch (Exception ex)
             {
@@ -151,7 +151,7 @@ namespace jshepler.ngu.mods
         {
             if (Hardcore.Enabled)
             {
-                Plugin.ShowOverrideNotification("<b><color=red>HARDCORE MODE</color></b>\n\nCannot load quicksaves in hardcore");
+                Plugin.ShowOverrideNotification("<b><color=red>硬核模式</color></b>\n\n在硬核模式下无法加载快速存档");
                 return;
             }
 
@@ -166,8 +166,8 @@ namespace jshepler.ngu.mods
 
             if (quickSaves.Length == 0 || quickSaves[0] == null)
             {
-                Plugin.LogInfo("no quick saves found");
-                Plugin.ShowOverrideNotification("No quicksaves found");
+                Plugin.LogInfo("未找到快速存档");
+                Plugin.ShowOverrideNotification("未找到快速存档");
                 return;
             }
 

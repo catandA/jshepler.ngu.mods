@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using HarmonyLib;
@@ -56,9 +56,9 @@ namespace jshepler.ngu.mods
                     secondsRemaining = 0;
 
                 var nextReward = GetNextPitReward(_character.realGold);
-                var text = $"<b>Next Pit Reward in:</b> {NumberOutput.timeOutput(secondsRemaining)}"
+                var text = $"<b>下次钱坑奖励倒计时:</b> {NumberOutput.timeOutput(secondsRemaining)}"
                     + $"\n  {nextReward.reward}"
-                    + $"\n  and {nextReward.ap} AP";
+                    + $"\n  和 {nextReward.ap} 任意点";
 
                 if (_altDown)
                     text += buildRewardGroups(nextReward.tier);
@@ -89,25 +89,25 @@ namespace jshepler.ngu.mods
             var text = string.Empty;
 
             var reward = GetNextPitReward(1e+5);
-            text += format(1, $"Tier 1 @{_character.display(1e+5)} gold:\n   {reward.reward}");
+            text += format(1, $"阶层 1 @{_character.display(1e+5)} 黄金:\n   {reward.reward}");
 
             reward = GetNextPitReward(1e+7);
-            text += format(2, $"Tier 2-4 @{_character.display(1e+7)} gold:\n   {reward.reward}");
+            text += format(2, $"阶层 2-4 @{_character.display(1e+7)} 黄金:\n   {reward.reward}");
 
             reward = GetNextPitReward(1e+13);
-            text += format(3, $"Tier 5 @{_character.display(1e+13)} gold:\n   {reward.reward}");
+            text += format(3, $"阶层 5 @{_character.display(1e+13)} 黄金:\n   {reward.reward}");
 
             reward = GetNextPitReward(1e+15);
-            text += format(4, $"Tier 6 @{_character.display(1e+15)} gold:\n   {reward.reward}");
+            text += format(4, $"阶层 6 @{_character.display(1e+15)} 黄金:\n   {reward.reward}");
 
             reward = GetNextPitReward(1e+18);
-            text += format(5, $"Tier 7-11 @{_character.display(1e+18)} gold:\n   {reward.reward}");
+            text += format(5, $"阶层 7-11 @{_character.display(1e+18)} 黄金:\n   {reward.reward}");
 
             if (_character.wishes.wishes[4].level < 1)
                 return text;
 
             reward = GetNextPitReward(1e+50);
-            text += format(6, $"Tier 12-16 @{_character.display(1e+50)} gold:\n   {reward.reward}");
+            text += format(6, $"阶层 12-16 @{_character.display(1e+50)} 黄金:\n   {reward.reward}");
 
             return text;
         }

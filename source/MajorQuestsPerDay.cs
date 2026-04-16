@@ -47,9 +47,9 @@ namespace jshepler.ngu.mods
             var curMajors = character.beastQuest.curBankedQuests;
             var secondsUntilMax = curMajors >= maxMajors ? 0f : (maxMajors - curMajors) * secondsPerQuest - character.beastQuest.dailyQuestTimer.totalseconds;
 
-            text += $"\n<b>Time per Major Quest:</b> {NumberOutput.timeOutput(secondsPerQuest)}"
-                + $"\n<b>Major Quests per Day:</b> {questsPerDay}"
-                + $"\n<b>Time to Full Bank:</b> {NumberOutput.timeOutput(secondsUntilMax)}";
+            text += $"\n<b>每个主要任务时间:</b> {NumberOutput.timeOutput(secondsPerQuest)}"
+                + $"\n<b>每天主要任务数:</b> {questsPerDay}"
+                + $"\n<b>任务队列填满时间:</b> {NumberOutput.timeOutput(secondsUntilMax)}";
 
             var banked = character.beastQuest.curBankedQuests;
             if (banked > 0)
@@ -61,7 +61,7 @@ namespace jshepler.ngu.mods
                 var dropChance = character.beastQuestController.questDropChance();
                 var bankedSeconds = (banked * avgItems / dropChance) * secondsPerKill;
 
-                text += $"\n<b>Est. Time to Complete Cur Bank:</b> {NumberOutput.timeOutput(bankedSeconds)}";
+                text += $"\n<b>完成当前任务队列预计时间:</b> {NumberOutput.timeOutput(bankedSeconds)}";
             }
 
             return text;

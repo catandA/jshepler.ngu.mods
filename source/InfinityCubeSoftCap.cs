@@ -95,7 +95,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[InfinityCubeSoftCap] 方块力量软帽补丁已跳过：未找到 '<b>力量：</b>' 字符串");
+                Plugin.LogWarning("[InfinityCubeSoftCap] 方块力量软上限补丁已跳过：未找到 '<b>力量：</b>' 字符串");
                 return cm.InstructionEnumeration();
             }
 
@@ -111,7 +111,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[InfinityCubeSoftCap] 方块韧性软帽补丁已跳过：未找到 '<b>韧性：</b>' 字符串");
+                Plugin.LogWarning("[InfinityCubeSoftCap] 方块韧性软上限补丁已跳过：未找到 '<b>韧性：</b>' 字符串");
                 return cm.InstructionEnumeration();
             }
                 
@@ -139,7 +139,7 @@ namespace jshepler.ngu.mods
             }
             else
             {
-                Plugin.LogWarning("[InfinityCubeSoftCap] 软帽警告跳过补丁失败：未找到 cubePower 字段");
+                Plugin.LogWarning("[InfinityCubeSoftCap] 软上限警告跳过补丁失败：未找到 cubePower 字段");
             }
 
             return cm.InstructionEnumeration();
@@ -161,11 +161,11 @@ namespace jshepler.ngu.mods
                 var gainPerMin = secondsLastRB == 0.0 ? 0.0 : gainedLastRB / (secondsLastRB / 60.0);
                 var estDays = gainPerMin == 0 ? 0 : ((softcap - cubePower) / (gainPerMin * 1440.0));
 
-                text += $"\n<b>   ... est. days to SC:</b> {(estDays == 0 ? "n/a" : character.display(estDays))}";
+                text += $"\n<b>   ... 预计天数到软上限:</b> {(estDays == 0 ? "无" : character.display(estDays))}";
             }
 
             else
-                text += $"\n<b>   ... (uncapped):</b> {character.display(cubePower)}";
+                text += $"\n<b>   ... (无上限):</b> {character.display(cubePower)}";
 
             return text;
         }
@@ -186,11 +186,11 @@ namespace jshepler.ngu.mods
                 var gainPerMin = secondsLastRB == 0.0 ? 0.0 : gainedLastRB / (secondsLastRB / 60.0);
                 var estDays = gainPerMin == 0 ? 0 : ((softcap - cubeToughness) / (gainPerMin * 1440.0));
 
-                text += $"\n<b>   ... est. days to SC:</b> {(estDays == 0 ? "n/a" : character.display(estDays))}";
+                text += $"\n<b>   ... 预计天数到软上限:</b> {(estDays == 0 ? "无" : character.display(estDays))}";
             }
 
             else
-                text += $"\n<b>   ... (uncapped):</b> {character.display(cubeToughness)}";
+                text += $"\n<b>   ... (无上限):</b> {character.display(cubeToughness)}";
 
             return text;
         }
@@ -207,7 +207,7 @@ namespace jshepler.ngu.mods
             var toughLastRB = TrackCubeBoosts.ToughnessGainedLastRebirth;
             var secondsLastRB = TrackLastRebirth.LastRebirthTotalSeconds;
 
-            var text = "\n\n<color=blue><b>AT MAX TIER</b></color>";
+            var text = "\n\n<color=blue><b>已达最大等级</b></color>";
             if (nextTier <= 10)
             {
                 var totalLastRB = powLastRB + toughLastRB;
@@ -216,20 +216,20 @@ namespace jshepler.ngu.mods
                 var need = Mathf.Pow(10, nextTier + 1) - total;
                 var estDays = gainPerMin == 0 ? 0 : (need / (gainPerMin * 1440.0));
 
-                text = $"\n\n<b>P + T (uncapped):</b> {character.display(total)}"
-                        + $"\n<b>Need for next tier:</b> {character.display(need)}"
-                        + $"\n<b>   ... est. days:</b> {(estDays == 0 ? "n/a" : character.display(estDays))}";
+                text = $"\n\n<b>P + T (无上限):</b> {character.display(total)}"
+                        + $"\n<b>下一等级需求:</b> {character.display(need)}"
+                        + $"\n<b>   ... 预计天数:</b> {(estDays == 0 ? "无" : character.display(estDays))}";
             }
 
             var powThisRB = TrackCubeBoosts.PowerGainedThisRebirth;
             var toughThisRB = TrackCubeBoosts.ToughnessGainedThisRebirth;
-            text += $"\n\n<b>Power gained this RB:</b> {character.display(powThisRB)}"
-                + $"\n<b>Power gained last RB:</b> {character.display(powLastRB)}"
-                + $"\n<b>Toughness gained this RB:</b> {character.display(toughThisRB)}"
-                + $"\n<b>Toughness gained last RB:</b> {character.display(toughLastRB)}";
+            text += $"\n\n<b>本次重生力量获取:</b> {character.display(powThisRB)}"
+                + $"\n<b>上次重生力量获取:</b> {character.display(powLastRB)}"
+                + $"\n<b>本次重生韧性获取:</b> {character.display(toughThisRB)}"
+                + $"\n<b>上次重生韧性获取:</b> {character.display(toughLastRB)}";
                 //+ $"\n<b>Last Rebirth Time:</b> {NumberOutput.timeOutput(secondsLastRB)}";
 
-            text += $"\n\n<b>Boost Divider:</b> {CubeBoostDivider:0.0#}";
+            text += $"\n\n<b>增益除数:</b> {CubeBoostDivider:0.0#}";
 
             return text;
         }

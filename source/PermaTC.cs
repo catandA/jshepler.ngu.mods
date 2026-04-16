@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using HarmonyLib;
 using UnityEngine;
 
@@ -76,7 +76,7 @@ namespace jshepler.ngu.mods
             if (!IsPermaTCGame)
                 return true;
 
-            __instance.splashScreen.message = "No Offline Progress for PermaTC";
+            __instance.splashScreen.message = "永久TC无离线进度";
             __instance.splashScreen.openScreen();
 
             return false;

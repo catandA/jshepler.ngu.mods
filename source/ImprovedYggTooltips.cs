@@ -85,7 +85,7 @@ namespace jshepler.ngu.mods
             if (cm.IsValid)
             {
                 cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_S, (byte)4))
-                .SetInstruction(Transpilers.EmitDelegate((long l) => $"You eat the fruit and increase your Attack and Defense! You gain +{l:#,##0} levels, increasing Power Fruit α's multiplier from <b>"));
+                .SetInstruction(Transpilers.EmitDelegate((long l) => $"您食用了该果实，提升了攻击力和防御力！您获得了 +{l:#,##0} 级，力量之果实α 的加成从 <b>"));
             }
             else
             {
@@ -104,7 +104,7 @@ namespace jshepler.ngu.mods
             if (cm.IsValid)
             {
                 cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
-                .SetInstruction(Transpilers.EmitDelegate((long l) => $"You eat the fruit and gain:\n+{l:#,##0} levels, resulting in +"));
+                .SetInstruction(Transpilers.EmitDelegate((long l) => $"您食用了该果实，并获得了：\n+{l:#,##0} 级，结果是 +"));
             }
             else
             {
@@ -123,7 +123,7 @@ namespace jshepler.ngu.mods
             if (cm.IsValid)
             {
                 cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
-                .SetInstruction(Transpilers.EmitDelegate((long l) => $"You eat the fruit. It tastes fruity. You also gain:\n+{l:#,##0} levels, resulting in +"));
+                .SetInstruction(Transpilers.EmitDelegate((long l) => $"您食用了该果实。它尝起来果香味浓。您获得了：\n+{l:#,##0} 级，结果是 +"));
             }
             else
             {
@@ -142,7 +142,7 @@ namespace jshepler.ngu.mods
             if (cm.IsValid)
             {
                 cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
-                .SetInstruction(Transpilers.EmitDelegate((long l) => $"You eat the fruit. It tastes fruity. You also gain:\n+{l:#,##0} levels, resulting in +"));
+                .SetInstruction(Transpilers.EmitDelegate((long l) => $"您食用了该果实。它尝起来果香味浓。您获得了：\n+{l:#,##0} 级，结果是 +"));
             }
             else
             {
@@ -161,7 +161,7 @@ namespace jshepler.ngu.mods
             if (cm.IsValid)
             {
                 cm.InsertAndAdvance(new CodeInstruction(OpCodes.Ldloc_3))
-                .SetInstruction(Transpilers.EmitDelegate((long l) => $"You put on an extra strong pair of shades and eat the fruit. The glasses melt onto your face causing unbearable pain, but you gain:\n+{l:#,##0} levels, resulting in +"));
+                .SetInstruction(Transpilers.EmitDelegate((long l) => $"您戴上了一副特别结实的墨镜，然后食用了该水果。墨镜在您的脸上熔化了，带来了剧烈的疼痛，但您获得了：\n+{l:#,##0} 级，结果是 +"));
             }
             else
             {
@@ -262,7 +262,7 @@ namespace jshepler.ngu.mods
             var tiersAfterNext = fruit.maxTier - currentTier - 1;
             var secondsToMaxTier = (int)(secondsToNextTier + tiersAfterNext * secondsPerTier);
 
-            return $"\n<b>Time to max Tier:</b> {NumberOutput.timeOutput(secondsToMaxTier)}";
+            return $"\n<b>达到最高层级时间:</b> {NumberOutput.timeOutput(secondsToMaxTier)}";
         }
     }
 }

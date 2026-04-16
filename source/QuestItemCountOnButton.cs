@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 using UnityEngine;
@@ -100,7 +100,7 @@ namespace jshepler.ngu.mods
                 : diff <= 0 ? Plugin.ButtonColor_Green
                 : Plugin.ButtonColor_Yellow;
 
-            ___beastText.text = $"Questing {total}/{quest.targetDrops}";
+            ___beastText.text = $"任务中 {total}/{quest.targetDrops}";
         }
 
         private static void SetInvItemCount()

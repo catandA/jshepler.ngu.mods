@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using HarmonyLib;
 using jshepler.ngu.mods.ModSave;
 using UnityEngine;
@@ -67,13 +67,13 @@ namespace jshepler.ngu.mods
             var curTimeMultiCombined = character.timeMulti * character.oldTimeMulti;
             var trainingFactor = character.training.totalAttackLevels / 10000 + 1;
 
-            var labels = "Boss Power Bonus: "
-                + "\n   this rebirth: "
-                + "\n   last rebirth: "
-                + "\nRebirth Time Factor: "
-                + "\n   this rebirth: "
-                + "\n   last rebirth: "
-                + "\nTraining level Factor: ";
+            var labels = "Boss力量加成: "
+                + "\n   本次重生: "
+                + "\n   上次重生: "
+                + "\n重生时间因子: "
+                + "\n   本次重生: "
+                + "\n   上次重生: "
+                + "\n训练等级因子: ";
 
             var values = $"x {buildString(curBossMultiCombined, Data.LastBossMultiCombined)}"
                 + $"\n   {diffFactor:r} ^ {character.bossID} = {disp(character.bossMulti)}"
@@ -85,41 +85,41 @@ namespace jshepler.ngu.mods
 
             if (character.bossID > 36)
             {
-                labels += "\nBlood Magic Bonus: ";
+                labels += "\n血液魔法加成: ";
                 values += $"\nx {buildString(character.bloodMagic.rebirthPower, character.stats.lastBloodMagic)}";
             }
 
             if (character.NGUController.numberBonus(noTimeMulti: false) > 1.0)
             {
-                labels += "\nNGU NUMBER Bonus: ";
+                labels += "\nNGU数字加成: ";
                 values += $"\nx {buildString(character.NGUController.numberBonus(), Data.LastNGUNumberBonus)}";
             }
 
             var beardNumberBonus = character.allBeards.numberBonus();
             if (beardNumberBonus > 1f)
             {
-                labels += "\nBeard NUMBER Bonus: ";
+                labels += "\n胡须数字加成: ";
                 values += $"\nx {buildString(beardNumberBonus, Data.LastBeardNumberBonus)}";
             }
 
             var yggNumberBonus = character.yggdrasilController.permNumberBonus();
             if (yggNumberBonus > 1.0)
             {
-                labels += "\nYggdrasil NUMBER Bonus: ";
+                labels += "\n世界树数字加成: ";
                 values += $"\nx {buildString(yggNumberBonus, Data.LastYggNumberBonus)}";
             }
 
             var guffNumberBonus = character.inventory.macguffinBonuses[17];
             if (guffNumberBonus > 1f)
             {
-                labels += "\nMacGuffin NUMBER Bonus: ";
+                labels += "\nMacGuffin数字加成: ";
                 values += $"\nx {buildString(guffNumberBonus, Data.LastGuffNumberBonus)}";
             }
 
             var hackNumberBonus = character.hacksController.totalNumberBonus();
             if (hackNumberBonus > 1f)
             {
-                labels += "\nHack NUMBER Bonus: ";
+                labels += "\n黑客数字加成: ";
                 values += $"\nx {buildString(hackNumberBonus, Data.LastHackNumberBonus)}";
             }
 
@@ -132,7 +132,7 @@ namespace jshepler.ngu.mods
                 time = 0L;
 
             var ap = character.checkAPAdded(time / 500);
-            __instance.rebirthChange.text += $"\nYou will gain {ap} AP if you rebirth now.";
+            __instance.rebirthChange.text += $"\n重生后将获得 {ap}任意点。";
         }
 
         const string RED = "#B22735"; // D82E3F

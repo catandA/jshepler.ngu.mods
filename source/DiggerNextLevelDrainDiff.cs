@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 
 namespace jshepler.ngu.mods
 {
@@ -23,7 +23,7 @@ namespace jshepler.ngu.mods
             var curDrain = character.allDiggers.drain(diggerId);
             var nextDrain = character.allDiggers.drain(diggerId, 1);
 
-            __instance.diggerInfo.text += $"\n<b>GPS Drain (Next Level Diff): {character.display(nextDrain - curDrain)}</b>";
+            __instance.diggerInfo.text += $"\n<b>GPS消耗（下一级差值）: {character.display(nextDrain - curDrain)}</b>";
         }
     }
 }

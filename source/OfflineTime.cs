@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using SFB;
 using UnityEngine;
 
@@ -31,7 +31,7 @@ namespace jshepler.ngu.mods
         {
             if (SkipOfflineProgress)
             {
-                __instance.splashScreen.message = "Offline Progress Skipped By Player\n\n";
+                __instance.splashScreen.message = "玩家跳过离线进度\n\n";
                 __instance.splashScreen.openScreen();
                 SkipOfflineProgress = false;
 

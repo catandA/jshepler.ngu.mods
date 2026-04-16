@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -120,18 +120,18 @@ namespace jshepler.ngu.mods
             var character = __instance.character;
             if (!character.achievements.achievementComplete[145])
             {
-                Plugin.ShowOverrideNotification("You haven't even unlocked MacGuffins yet! Don't bother trying to buy this til you do. It's for your own good.", 3f);
+                Plugin.ShowOverrideNotification("您还没有解锁 MacGuffin！在解锁之前不要尝试购买。这是为了您好。", 3f);
                 return false;
             }
 
             if (character.yggdrasil.seeds < MUFFIN_SEEDS_COST)
             {
-                Plugin.ShowOverrideNotification($"You do not have {character.display(MUFFIN_SEEDS_COST)} seeds!");
+                Plugin.ShowOverrideNotification($"您没有 {character.display(MUFFIN_SEEDS_COST)} 个种子！");
                 return false;
             }
 
             UnityAction yesAction = buyMuffinWithSeeds;
-            __instance.box.displayBox($"Are you sure you want to buy MacGuffin Muffin for {character.display(MUFFIN_SEEDS_COST)} seeds?", yesAction, ___noAction);
+            __instance.box.displayBox($"您确定要用 {character.display(MUFFIN_SEEDS_COST)} 个种子购买 MacGuffin 松饼吗？", yesAction, ___noAction);
 
             return false;
         }
@@ -140,7 +140,7 @@ namespace jshepler.ngu.mods
         {
             Plugin.Character.yggdrasil.seeds -= MUFFIN_SEEDS_COST;
             Plugin.Character.arbitrary.macGuffinBooster1Count++;
-            Plugin.ShowNotification("You've successfully bought MacGuffin Muffin with seeds!", 2f);
+            Plugin.ShowNotification("你已成功用种子购买了_macGuffin松饼！", 2f);
             Plugin.Character.allArbitrary.updateMenu();
         }
     }

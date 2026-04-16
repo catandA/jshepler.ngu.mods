@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Linq;
 using System.Reflection;
 using HarmonyLib;
@@ -37,17 +37,17 @@ namespace jshepler.ngu.mods
             if (UpgradeAllDiggers.CanUpgradeAnyDigger())
             {
                 if (message == "There's nothing you need to do! Go ahead and rebirth!")
-                    message = "You have diggers that can be upgraded!";
+                    message = "你有可以升级的掘金者!";
                 else
-                    message = $"{message}\nYou have diggers that can be upgraded!";
+                    message = $"{message}\n你有可以升级的掘金者!";
             }
 
             if (sadMuffinAvailable())
             {
                 if (message == "There's nothing you need to do! Go ahead and rebirth!")
-                    message = "You have a MacGuffin Muffin that you can eat!";
+                    message = "你有可以吃的玛贡松饼!";
                 else
-                    message = $"{message}\nYou have a MacGuffin Muffin that you can eat!";
+                    message = $"{message}\n你有可以吃的玛贡松饼!";
             }
 
             ___message = message;

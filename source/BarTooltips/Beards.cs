@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using jshepler.ngu.mods.CapCalculators;
 using UnityEngine;
 
@@ -26,17 +26,17 @@ namespace jshepler.ngu.mods.BarTooltips
                 secondsRemaining = (capLevel - currentLevel) / 50f;
             }
 
-            ___message += $"\n\n<b>% Allocated:</b> {capPct}%";
+            ___message += $"\n\n<b>分配百分比:</b> {capPct}%";
 
             if (secondsRemaining > 0)
                 ___message += $" ({NumberOutput.timeOutput(secondsRemaining)})";
 
             ___message += $"\n   (ppt: {ppt:0.0000000} = {tpb}t/bar)"
-                + $"\n\n<b>Time Factor:</b> x{character.allBeards.timeFactor()}";
+                + $"\n\n<b>时间系数:</b> x{character.allBeards.timeFactor()}";
 
             var bank = character.adventureController.itopod.totalBankedBeardTemp();
             if (bank > 0f)
-                ___message += $"\n\n<b>Banked ({bank * 100f:0}%):</b> {character.display((long)(currentLevel * bank))}";
+                ___message += $"\n\n<b>已存储 ({bank * 100f:0}%):</b> {character.display((long)(currentLevel * bank))}";
 
             __instance.tooltip.showTooltip(___message);
         }

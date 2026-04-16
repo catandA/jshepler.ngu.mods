@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using HarmonyLib;
@@ -17,11 +17,11 @@ namespace jshepler.ngu.mods.Popups
         private static GUIStyle _maxYeetEffTextStyle;
         private static GUIStyle _disabledYeetRarities;
 
-        private static string[] _disabledEnabled = ["Disabled", "Enabled"];
-        private static string[] _sortBy = ["Rarity", "Type", "Efficiency", "Variance"];
-        private static string[] _sortDirections = ["Ascending", "Descending"];
-        private static string[] _autoYeetModes = ["Disabled", "Efficency", "Variance", "Rarity"];
-        private static string[] _rarities = ["Crappy", "Bad", "Meh", "Okay", "Good", "Great", "Hot Damn"];
+        private static string[] _disabledEnabled = ["禁用", "启用"];
+        private static string[] _sortBy = ["稀有度", "类型", "效率", "方差"];
+        private static string[] _sortDirections = ["升序", "降序"];
+        private static string[] _autoYeetModes = ["禁用", "效率", "方差", "稀有度"];
+        private static string[] _rarities = ["垃圾", "差", "一般", "还行", "好", "很好", "超棒"];
 
         private static string[] _bonuses = ["END", "E-NGU", "M-NGU", "WAND", "AUGS", "TM", "HACKS", "WISHES", "A/D", "ADV", "DC", "GOLD", "DAYCR", "PP", "QP"];
         private static bool[] _alwaysYeet = new bool[15];
@@ -161,7 +161,7 @@ namespace jshepler.ngu.mods.Popups
             GUILayout.BeginVertical();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("<b>Auto Sort/Yeet Options</b>", _titleStyle);
+            GUILayout.Label("<b>自动排序/丢弃选项</b>", _titleStyle);
             if (GUILayout.Button("×", GUILayout.ExpandWidth(false)))
                 Close();
             GUILayout.EndHorizontal();
@@ -179,7 +179,7 @@ namespace jshepler.ngu.mods.Popups
             GUILayout.BeginVertical("box");
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label($"Auto Sort: {(AutoSortEnabled ? "Enabled" : "Disabled")}");
+            GUILayout.Label($"自动排序: {(AutoSortEnabled ? "启用" : "禁用")}");
             GUILayout.FlexibleSpace();
             AutoSortEnabled = GUILayout.SelectionGrid(AutoSortEnabled ? 1 : 0, _disabledEnabled, 2, _buttonStyle) == 1;
             GUILayout.EndHorizontal();
@@ -194,7 +194,7 @@ namespace jshepler.ngu.mods.Popups
         {
             GUILayout.BeginHorizontal();
 
-            GUILayout.Label($"Sort By: {_sortBy[(int)AutoSortBy]}");
+            GUILayout.Label($"排序方式: {_sortBy[(int)AutoSortBy]}");
             GUILayout.FlexibleSpace();
 
             AutoSortBy = (CardSortBy)GUILayout.SelectionGrid((int)AutoSortBy, _sortBy, 4, _buttonStyle);
@@ -211,7 +211,7 @@ namespace jshepler.ngu.mods.Popups
         {
             GUILayout.BeginHorizontal();
 
-            GUILayout.Label($"Sort Direction: {(AutoSortDirection == CardSortDirection.Ascending ? "Ascending" : "Descending")}");
+            GUILayout.Label($"排序方向: {(AutoSortDirection == CardSortDirection.Ascending ? "升序" : "降序")}");
             GUILayout.FlexibleSpace();
 
             AutoSortDirection = GUILayout.SelectionGrid(AutoSortDirection == CardSortDirection.Ascending ? 0 : 1, _sortDirections, 2, _buttonStyle) == 0 ? CardSortDirection.Ascending : CardSortDirection.Descending;
@@ -229,7 +229,7 @@ namespace jshepler.ngu.mods.Popups
             GUILayout.BeginVertical("box");
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Auto-Protect Chonkers When Spawned");
+            GUILayout.Label("生成时自动保护胖卡片");
             GUILayout.FlexibleSpace();
             AutoProtectChonkers = GUILayout.SelectionGrid(AutoProtectChonkers ? 1 : 0, _disabledEnabled, 2, _buttonStyle) == 1;
             GUILayout.EndHorizontal();
@@ -259,7 +259,7 @@ namespace jshepler.ngu.mods.Popups
         private static void DrawAutoYeetModes()
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label($"Auto Yeet Mode: {_autoYeetModes[(int)AutoYeetMode]}");
+            GUILayout.Label($"自动丢弃模式: {_autoYeetModes[(int)AutoYeetMode]}");
             AutoYeetMode = (CardYeetMode)GUILayout.SelectionGrid((int)AutoYeetMode, _autoYeetModes, 4, _buttonStyle);
             GUILayout.EndHorizontal();
         }
@@ -268,7 +268,7 @@ namespace jshepler.ngu.mods.Popups
         private static void DrawAutoYeetEfficiency()
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Max Mayo Efficiency to yeet (0 to 100): ");
+            GUILayout.Label("最大蛋黄酱效率丢弃 (0 到 100): ");
             GUI.SetNextControlName("maxYeetEfficiency");
             _maxYeetEfficiency = GUILayout.TextField(_maxYeetEfficiency, _maxYeetEffTextStyle, GUILayout.Width(30f));
             GUILayout.Label("%");
@@ -294,7 +294,7 @@ namespace jshepler.ngu.mods.Popups
         private static void DrawAutoYeetVariance()
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Max Variance to yeet (-20 to +20): ");
+            GUILayout.Label("最大方差丢弃 (-20 到 +20): ");
             GUI.SetNextControlName("maxYeetVarience");
             _maxYeetVarience = GUILayout.TextField(_maxYeetVarience, _maxYeetEffTextStyle, GUILayout.Width(30f));
             GUILayout.Label("%");
@@ -334,7 +334,7 @@ namespace jshepler.ngu.mods.Popups
             GUILayout.BeginVertical("box");
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label($"Always Yeet (ignores {_autoYeetModes[(int)AutoYeetMode]}):");
+            GUILayout.Label($"总是丢弃 (忽略 {_autoYeetModes[(int)AutoYeetMode]}):");
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();

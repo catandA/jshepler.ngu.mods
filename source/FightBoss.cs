@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -34,10 +34,10 @@ namespace jshepler.ngu.mods
             var numberFormat = __instance.numberFormat;
 
             string message = $"{character.bossController.getBossName(character.bossID)} ({character.bossID + 1})"
-                + $"\nAttack: {numberFormat.suffixFormat(character.bossAttack)}"
-                + $"\nDefense: {numberFormat.suffixFormat(character.bossDefense)}"
-                + $"\nMax HP: {numberFormat.suffixFormat(character.bossMaxHP)}"
-                + $"\nRegen: {numberFormat.suffixFormat(character.bossRegen * 50.0)}\\s";
+                + $"\n攻击力: {numberFormat.suffixFormat(character.bossAttack)}"
+                + $"\n防御力: {numberFormat.suffixFormat(character.bossDefense)}"
+                + $"\n最大生命值: {numberFormat.suffixFormat(character.bossMaxHP)}"
+                + $"\n回复: {numberFormat.suffixFormat(character.bossRegen * 50.0)}\\s";
 
             __instance.tooltip.showTooltip(message);
             return false;
@@ -87,8 +87,8 @@ namespace jshepler.ngu.mods
 
             if (!Hardcore.IsHardcoreGame)
             {
-                __instance.attackText.text += $"\n(my dmg / boss hp): {_dmgDonePct:f1}%";
-                __instance.defenseText.text += $"\n(boss dmg / my hp): {_dmgTakenPct:f1}%";
+                __instance.attackText.text += $"\n(我的伤害/首领血量): {_dmgDonePct:f1}%";
+                __instance.defenseText.text += $"\n(首领血量/我的伤害): {_dmgTakenPct:f1}%";
             }
         }
 
@@ -141,7 +141,7 @@ namespace jshepler.ngu.mods
             {
                 _image.fillAmount = 0f;
                 //_image.color = Color.white;
-                _text.text = "Fight Boss";
+                _text.text = "对决首领";
             }
             else if (fighting || nuking)
             {
@@ -156,12 +156,12 @@ namespace jshepler.ngu.mods
             {
                 _image.fillAmount = 1f;
                 _image.color = CanNuke ? Plugin.ButtonColor_Green : Plugin.ButtonColor_Yellow;
-                _text.text = "Fight Boss";
+                _text.text = "对决首领";
             }
             else
             {
                 _image.fillAmount = 0f;
-                _text.text = Plugin.Character.bossID < 301 ? "Fight Boss" : "No More Bosses";
+                _text.text = Plugin.Character.bossID < 301 ? "对决首领" : "没有更多Boss";
             }
         }
 
