@@ -28,7 +28,7 @@ namespace jshepler.ngu.mods.BarTooltips
 
             if (!Plugin.Character.challenges.blindChallenge.inChallenge)
                 ___message += $"\n\n<b>分配百分比:</b> {capPct}%"
-                    + $"\n   (ppt: {ppt:0.0000000} = {tpb}t/bar)";
+                    + $"\n   (每刻填充: {ppt:0.0000000} = {tpb}刻填满)";
 
             __instance.tooltip.showTooltip(___message);
         }
@@ -55,7 +55,7 @@ namespace jshepler.ngu.mods.BarTooltips
 
             if (!Plugin.Character.challenges.blindChallenge.inChallenge)
                 ___message += $"\n\n<b>分配百分比:</b> {capPct}%"
-                    + $"\n   (ppt: {ppt:0.0000000} = {tpb}t/bar)";
+                    + $"\n   (每刻填充: {ppt:0.0000000} = {tpb}刻填满)";
 
             __instance.tooltip.showTooltip(___message);
         }

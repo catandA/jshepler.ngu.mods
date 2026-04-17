@@ -255,7 +255,7 @@ namespace jshepler.ngu.mods
             var fruit = controller.character.yggdrasil.fruits[id];
             var currentTier = controller.harvestTier(id);
             if (currentTier >= fruit.maxTier)
-                return $"\n<b>Time to Max Tier:</b> DONE";
+                return $"\n<b>达到最高层级时间:</b> 已达到";
 
             var secondsPerTier = controller.tierThreshold();
             var secondsToNextTier = (int)(secondsPerTier - fruit.seconds % secondsPerTier);

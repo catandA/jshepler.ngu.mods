@@ -74,10 +74,10 @@ namespace jshepler.ngu.mods.BarTooltips
 
             var bank = character.adventureController.itopod.totalBankedAdvTraining();
             if (bank > 0f)
-                message += $"\n\n<b>Banked ({bank * 100f:0}%):</b> {character.display((long)(currentLevel * bank))}";
+                message += $"\n\n<b>已存储 ({bank * 100f:0}%):</b> {character.display((long)(currentLevel * bank))}";
 
             if (!character.advancedTraining.transferredBankedLevels)
-                message += $"\n\n<b>Incoming Banked:</b> {character.display(character.advancedTraining.bankedLevel[id])}";
+                message += $"\n\n<b>待转入存储:</b> {character.display(character.advancedTraining.bankedLevel[id])}";
 
             __instance.tooltip.showTooltip($"{LastTooltip.Message}{message}");
         }

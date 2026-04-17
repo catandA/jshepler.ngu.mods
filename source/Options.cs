@@ -95,7 +95,7 @@ namespace jshepler.ngu.mods
             Yggdrasil.AutoHarvest = Config.Bind("Yggdrasil", "AutoHarvest", false, "enable auto harvest/eat fruits when fully grown (max tier)\n启用完全生长（最高等级）时自动收获/食用果实");
             Yggdrasil.PoopAudioChance = Config.Bind("Yggdrasil", "PoopAudioChance", 0f, "chance a fart audio clip is played when gain poop, 0.0 to 1.0\n获得便便时播放放屁音频片段的概率，0.0 到 1.0");
 
-            Experimental.AlwaysShowAT = Config.Bind("Experimental", "AlwaysShowAT", false, "if enabled, the AT button will always be visible; dislaimer: will not allow you to run AT before being unlocked\n如果启用，AT 按钮将始终可见；免责声明：不会允许在解锁前运行 AT");
+            Experimental.AlwaysShowAT = Config.Bind("Experimental", "AlwaysShowAT", false, "if enabled, the AT button will always be visible; dislaimer: will not allow you to run AT before being unlocked\n如果启用，高级训练按钮将始终可见；免责声明：不会允许在解锁前进行高级训练");
             Experimental.StaplerNoECap = Config.Bind("Experimental", "StaplerNoECap", false, "if enabled, the cap special is removed from stapler (item 118)\n如果启用订书机（物品118）的特殊 cap 效果将被移除");
             Experimental.LoadoutSwapKeepsAutoAllocators = Config.Bind("Experimental", "LoadoutSwapKeepsAutoAllocators", false, "if enabled, and have the game setting 'Unassign E/M on Loadout Swap' enabled, auto allocators won't disable on loadout swap\n如果启用，且游戏设置\"切换装备时取消E/M分配\"启用，自动分配器在切换装备时不会禁用");
             Experimental.ResetCooldownsOnFightEnd = Config.Bind("Experimental", "ResetCooldownsOnFightEnd", false, "if enabled, manual combat move cooldowns and buffs are reset on player/enemy death\n如果启用，玩家/敌人死亡时手动战斗技能冷却和buff将重置");

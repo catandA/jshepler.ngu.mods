@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,9 +36,9 @@ namespace jshepler.ngu.mods
             return itemId switch
             {
                 (int)Items.Poop => "便便",
-                (int)Items.QP => "QP",
-                (int)Items.PP => "PP",
-                (int)Items.AP => "AP",
+                (int)Items.QP => "怪癖点",
+                (int)Items.PP => "特权点",
+                (int)Items.AP => "任意点",
                 (int)Items.Exp => "经验",
                 (int)Items.Unknown => "未知",
                 _ => Plugin.Character.itemInfo.itemName[itemId].Replace("Resource 3", Plugin.Character.res3.res3Name)
@@ -314,17 +314,17 @@ namespace jshepler.ngu.mods
 
                     case (int)Items.QP:
                         var qp = Evaluators.TitanQP(_zoneId);
-                        text += $"{_number(qp)} QP ({_number(idc.BaseAmount)} 基础)";
+                        text += $"{_number(qp)} 怪癖点 ({_number(idc.BaseAmount)} 基础)";
                         break;
 
                     case (int)Items.PP:
                         var pp = Evaluators.TitanPPP(_zoneId);
-                        text += $"{_number(pp / 1e+6D)} PP ({(idc.BaseAmount / 1e+6D)} 基础)";
+                        text += $"{_number(pp / 1e+6D)} 特权点 ({(idc.BaseAmount / 1e+6D)} 基础)";
                         break;
 
                     case (int)Items.AP:
                         var ap = Evaluators.TitanAP(_zoneId);
-                        text += $"{_number(ap)} AP ({_number(idc.BaseAmount)} 基础)";
+                        text += $"{_number(ap)} 任意点 ({_number(idc.BaseAmount)} 基础)";
                         break;
 
                     case (int)Items.Exp:

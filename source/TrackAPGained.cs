@@ -197,7 +197,7 @@ namespace jshepler.ngu.mods
                 .RemoveInstructions(1)
                 .Insert(
                     Transpilers.EmitDelegate((long l) => TrackGain(l, APSource.Bosses)),
-                    Transpilers.EmitDelegate((long l) => Plugin.Character.adventureController.log.AddEvent($"击杀10个BOSS额外获得 {l} AP!", 3)));
+                    Transpilers.EmitDelegate((long l) => Plugin.Character.adventureController.log.AddEvent($"击杀10个BOSS额外获得 {l} 任意点!", 3)));
                 return cm.InstructionEnumeration();
             }
 
@@ -373,7 +373,7 @@ namespace jshepler.ngu.mods
                 time = 0L;
 
             var ap = character.checkAPAdded(time / 500);
-            __instance.rebirthChange.text += $"\n重生后将获得 {ap} AP。";
+            __instance.rebirthChange.text += $"\n重生后将获得 {ap} 任意点。";
         }
 
         // show AP gain for current quest

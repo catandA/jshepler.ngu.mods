@@ -185,8 +185,8 @@ namespace jshepler.ngu.mods
             while (true)
             {
                 if (!_altIsDown)
-                    text = $"<b>本次重生QP获取:</b> {character.display(QPGainedThisRB)}"
-                        + $"\n<b>上次重生QP获取:</b> {character.display(QPGainedLastRB)}";
+                    text = $"<b>本次重生怪癖点获取:</b> {character.display(QPGainedThisRB)}"
+                        + $"\n<b>上次重生怪癖点获取:</b> {character.display(QPGainedLastRB)}";
 
                 else
                 {
@@ -221,8 +221,8 @@ namespace jshepler.ngu.mods
                     var sourcesThisRB = dataThisRB.Join(d => $"   <b>{d.Item1}:</b> {display(d.Item2)} <color=blue>({d.Item3 * 100f:0.#}%)</color>", "\n");
                     var sourcesLastRB = dataLastRB.Join(d => $"   <b>{d.Item1}:</b> {display(d.Item2)} <color=blue>({d.Item3 * 100f:0.#}%)</color>", "\n");
 
-                    text = $"<b>本次重生QP获取:</b> {character.display(QPGainedThisRB)}\n{sourcesThisRB}"
-                        + $"\n\n<b>上次重生QP获取:</b> {character.display(QPGainedLastRB)}\n{sourcesLastRB}";
+                    text = $"<b>本次重生怪癖点获取:</b> {character.display(QPGainedThisRB)}\n{sourcesThisRB}"
+                        + $"\n\n<b>上次重生怪癖点获取:</b> {character.display(QPGainedLastRB)}\n{sourcesLastRB}";
                 }
 
                 Plugin.ShowTooltip(text);

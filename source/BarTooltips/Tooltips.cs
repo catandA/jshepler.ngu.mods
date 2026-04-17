@@ -14,7 +14,7 @@ namespace jshepler.ngu.mods.BarTooltips
                 text += $" ({NumberOutput.timeOutput(overCappedDuration)})";
 
             var tpb = ppt == 0 ? 0 : Mathf.CeilToInt(1 / ppt);
-            text += $"\n   (ppt: {ppt:0.0000000} = {tpb}t/bar)";
+            text += $"\n   (每刻填充: {ppt:0.0000000} = {tpb}刻填满)";
 
             return text;
         }

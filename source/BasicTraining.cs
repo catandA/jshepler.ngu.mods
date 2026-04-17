@@ -161,8 +161,8 @@ namespace jshepler.ngu.mods
         private static int _showTooltipId = -1;
         private static HoverTooltip _tooltip = null;
         private static Coroutine _showTooltip = null;
-        private const string BT_ATK = "Levels gained in this Attack skill will decrease the amount of Energy needed to cap leveling speed upon Rebirth.";
-        private const string BT_DEF = "Levels gained in this Defense skill will decrease the amount of Energy needed to cap leveling speed upon Rebirth.";
+        private const string BT_ATK = "提升此攻击技能的等级，可降低重生后升级速度达到上限所需的能量。";
+        private const string BT_DEF = "提升此防御技能的等级，可降低重生后升级速度达到上限所需的能量。";
 
         [HarmonyPostfix, HarmonyPatch(typeof(OffenseTraining), "Start")]
         private static void OffenseTraining_Start_postfix(OffenseTraining __instance)

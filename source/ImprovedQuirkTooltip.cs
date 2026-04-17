@@ -42,7 +42,7 @@ namespace jshepler.ngu.mods
             var qpToNextLevel = costPerLevel - qp;
             if (qpToNextLevel > 0)
             {
-                ___message += $"\n\n<b>距离下一级所需QP: {display(costPerLevel - qp)}</b>";
+                ___message += $"\n\n<b>距离下一级所需怪癖点: {display(costPerLevel - qp)}</b>";
 
                 if (gainedPerSec > 0)
                     ___message += $"\n ... 预计天数: {display(Math.Floor(qpToNextLevel / gainedPerSec / 86400.0))}";
@@ -63,7 +63,7 @@ namespace jshepler.ngu.mods
             var qpToMax = costPerLevel * levelsToMax - qp;
             if (levelsToMax > 1 && qpToMax > 0)
             {
-                ___message += $"\n\n<b>升至满级所需QP: {display(qpToMax)}</b>";
+                ___message += $"\n\n<b>升至满级所需怪癖点: {display(qpToMax)}</b>";
 
                 if (gainedPerSec > 0)
                     ___message += $"\n ... 预计天数: {display(Math.Floor(qpToMax / gainedPerSec / 86400.0))}";

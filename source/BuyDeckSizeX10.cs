@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,7 +43,7 @@ namespace jshepler.ngu.mods
                 tooltip.showTooltip("You don't even have Cards to begin with - Come back once you actually have them, buttbreath.", 2.5f);
 
             else if (character.arbitrary.curArbitraryPoints < 250000L)
-                tooltip.showTooltip("You don't have enough AP to buy " + __instance.itemName + "!", 2f);
+                tooltip.showTooltip("你没有足够的任意点来购买 " + __instance.itemName + "!", 2f);
 
             else if (character.arbitrary.deckSpaceBought >= __instance.maxDeckSpaces() * 10)
                 tooltip.showTooltip("You've already bought all the Max Deck Size you can! That deck is so huge it could be used as a murder weapon...", 2.5f);
@@ -65,7 +65,7 @@ namespace jshepler.ngu.mods
             if (__instance.id != PURCHASE_ID || __instance.shouldDisableBuyButton(__instance.id))
                 return;
 
-            _buttonText.text = _buy10 ? "Buy 10 for 250,000 AP" : "Buy for 25,000 AP";
+            _buttonText.text = _buy10 ? "购买10次 250,000 任意点" : "购买 25,000 任意点";
         }
     }
 }

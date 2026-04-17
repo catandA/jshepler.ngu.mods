@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using HarmonyLib;
 using UnityEngine;
 
@@ -27,7 +27,7 @@ namespace jshepler.ngu.mods
             if (_enemy == null) return;
 
             var currentATPLevel = character.advancedTraining.level[1];
-            var atText = $"\n\nAT Power: {character.display(currentATPLevel)}\nEnemy: {_enemy.name}";
+            var atText = $"\n\n高级训练力量: {character.display(currentATPLevel)}\n敌人: {_enemy.name}";
 
             // taken from PlayerController.idleAttack()
             // (doesn't use def/2 becase def isn't known yet - used below)

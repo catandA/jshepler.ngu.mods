@@ -132,7 +132,7 @@ namespace jshepler.ngu.mods
             var killsPerHour = 3600f / secondsPerKill;
             var killsPerDay = 86400f / secondsPerKill;
 
-            var text = $"\n\n<b>PP进度:</b> {currentProgress:#,##0} / {MAXPROGRESS:#,##0} ({currentProgress / MAXPROGRESS * 100f:##0.00}%)"
+            var text = $"\n\n<b>特权点进度:</b> {currentProgress:#,##0} / {MAXPROGRESS:#,##0} ({currentProgress / MAXPROGRESS * 100f:##0.00}%)"
                 + $"\n\n<b>每次击杀秒数:</b> {(secondsPerKill == 0f ? "????" : NumberOutput.timeOutput(secondsPerKill))} ({(isEstimated ? "估算" : currentFloor < optimalFloor ? "次优" : "最优")})"
                 + $"\n<b>每小时击杀:</b> {killsPerHour:#,##0.##}"
                 + $"\n<b>每天击杀:</b> {killsPerDay:#,##0.##}";
@@ -145,13 +145,13 @@ namespace jshepler.ngu.mods
             var ppPerDay = secondsPerKill == 0f ? 0 : killsPerDay * ppPerKill;
 
             if (killsPerPP == 1)
-                text += $"\n\n<b>每次击杀PP:</b> {ppPerKill:#,##0.00}";
+                text += $"\n\n<b>每次击杀特权点:</b> {ppPerKill:#,##0.00}";
             else
-                text += $"\n\n<b>每PP击杀:</b> {killsPerPP} 耗时 {(secondsPerPP == 0f ? "????" : NumberOutput.timeOutput(secondsPerPP))}"
-                    + $"\n<b>距离下次PP击杀:</b> {killsRemaining} 还需 {(secondsRemaining == 0f ? "????" : NumberOutput.timeOutput(secondsRemaining))}";
+                text += $"\n\n<b>每特权点击杀:</b> {killsPerPP} 耗时 {(secondsPerPP == 0f ? "????" : NumberOutput.timeOutput(secondsPerPP))}"
+                    + $"\n<b>距离下次特权点击杀:</b> {killsRemaining} 还需 {(secondsRemaining == 0f ? "????" : NumberOutput.timeOutput(secondsRemaining))}";
 
-            text += $"\n<b>每小时PP:</b> {ppPerHour:#,##0.##}"
-                + $"\n<b>每天PP:</b> {ppPerDay:#,##0.##}";
+            text += $"\n<b>每小时特权点:</b> {ppPerHour:#,##0.##}"
+                + $"\n<b>每天特权点:</b> {ppPerDay:#,##0.##}";
 
 
             var tier = character.adventureController.lootDrop.itopodTier(currentFloor);
@@ -245,16 +245,16 @@ namespace jshepler.ngu.mods
             var currentATP = character.advancedTraining.level[1];
             var nextOptimalATP = _atpNeeded(nextOptimalFloorPower);
             if (optimalFloor < 1599)
-                text += $"\n\n<b>Current AT Power:</b> {character.display(currentATP)}"
-                    + $"\n<b>ATP for next opt:</b> {character.display(nextOptimalATP)}";
+                text += $"\n\n<b>当前AT力量:</b> {character.display(currentATP)}"
+                    + $"\n<b>下一最优层ATP:</b> {character.display(nextOptimalATP)}";
 
             var next50FloorATP = _atpNeeded(next50FloorPower);
             if (next50Floor < 1600)
-                text += $"\n<b>  ... next 50th ({next50Floor}):</b> {character.display(next50FloorATP)}";
+                text += $"\n<b>  ... 下一个50层 ({next50Floor}):</b> {character.display(next50FloorATP)}";
 
             var nextBoostATP = _atpNeeded(nextBoostFloorPower);
             if (nextBoostFloor > 0)
-                text += $"\n<b>  ... next boost ({nextBoostFloor}):</b> {character.display(nextBoostATP)}";
+                text += $"\n<b>  ... 下一次加成 ({nextBoostFloor}):</b> {character.display(nextBoostATP)}";
 
             return text;
         }

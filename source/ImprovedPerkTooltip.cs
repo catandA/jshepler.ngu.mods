@@ -112,7 +112,7 @@ namespace jshepler.ngu.mods
             var ppToNextLevel = costPerLevel - pp;
             if (ppToNextLevel > 0)
             {
-                text = $"\n\n<b>PP到下一级: {display(ppToNextLevel)}</b>";
+                text = $"\n\n<b>特权点到下一级: {display(ppToNextLevel)}</b>";
 
                 if (gainedPerSec > 0)
                     text += $"\n ... 预计天数: {display(Math.Floor(ppToNextLevel / gainedPerSec / 86400.0))}";
@@ -133,7 +133,7 @@ namespace jshepler.ngu.mods
             var ppToMax = costPerLevel * levelsToMax - pp;
             if (levelsToMax > 1 && ppToMax > 0)
             {
-                text += $"\n\n<b>PP到满级: {display(ppToMax)}</b>";
+                text += $"\n\n<b>特权点到满级: {display(ppToMax)}</b>";
 
                 if (gainedPerSec > 0)
                     text += $"\n ... 预计天数: {display(Math.Floor(ppToMax / gainedPerSec / 86400.0))}";
@@ -148,7 +148,7 @@ namespace jshepler.ngu.mods
 
                 if (ppToNextBonus > 0)
                 {
-                    text += $"\n\n<b>PP到下一加成: {display(ppToNextBonus)}</b>";
+                    text += $"\n\n<b>特权点到下一加成: {display(ppToNextBonus)}</b>";
 
                     if (gainedPerSec > 0)
                         text += $"\n ... 预计天数: {display(Math.Floor(ppToNextBonus / gainedPerSec / 86400.0))}";

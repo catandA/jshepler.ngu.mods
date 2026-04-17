@@ -190,8 +190,8 @@ namespace jshepler.ngu.mods
             {
 
                 if (!_altIsDown)
-                    text = $"<b>本次重生PP获取:</b> {character.display(PPGainedThisRB)}"
-                        + $"\n<b>上次重生PP获取:</b> {character.display(PPGainedLastRB)}";
+                    text = $"<b>本次重生特权点获取:</b> {character.display(PPGainedThisRB)}"
+                        + $"\n<b>上次重生特权点获取:</b> {character.display(PPGainedLastRB)}";
 
                 else
                 {
@@ -226,8 +226,8 @@ namespace jshepler.ngu.mods
                     var sourcesThisRB = dataThisRB.Join(d => $"   <b>{d.Item1}:</b> {display(d.Item2)} <color=blue>({d.Item3 * 100f:0.#}%)</color>", "\n");
                     var sourcesLastRB = dataLastRB.Join(d => $"   <b>{d.Item1}:</b> {display(d.Item2)} <color=blue>({d.Item3 * 100f:0.#}%)</color>", "\n");
 
-                    text = $"<b>本次重生PP获取:</b> {character.display(PPGainedThisRB)}\n{sourcesThisRB}"
-                        + $"\n\n<b>上次重生PP获取:</b> {character.display(PPGainedLastRB)}\n{sourcesLastRB}";
+                    text = $"<b>本次重生特权点获取:</b> {character.display(PPGainedThisRB)}\n{sourcesThisRB}"
+                        + $"\n\n<b>上次重生特权点获取:</b> {character.display(PPGainedLastRB)}\n{sourcesLastRB}";
                 }
 
                 Plugin.ShowTooltip(text);

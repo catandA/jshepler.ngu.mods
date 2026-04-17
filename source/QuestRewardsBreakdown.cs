@@ -112,7 +112,7 @@ namespace jshepler.ngu.mods
                 }
             }
 
-            sb.Append($"\n<b>基础QP总计:</b> {baseReward:#,##0}\n");
+            sb.Append($"\n<b>基础怪癖点总计:</b> {baseReward:#,##0}\n");
             var totalMulti = 1d;
 
             var questItemsMaxed = qc.questItemsMaxxed();
@@ -176,13 +176,13 @@ namespace jshepler.ngu.mods
             sb.Append($"\n<b>总倍率:</b> x{totalMulti:#,##0.#####}");
             
             var subTotal = (long)(baseReward * totalMulti);
-            sb.Append($"\n\n<b>小计奖励:</b> {c.display(subTotal)} QP (截断)");
+            sb.Append($"\n\n<b>小计奖励:</b> {c.display(subTotal)} 怪癖点 (截断)");
 
             var activeModifier = q.allActive ? qc.allActiveModifier() : 1f;
             sb.Append($"\n\n{(q.allActive ? "手动" : "放置")}: x{activeModifier:0.#####}");
             
             var total = (long)(subTotal * activeModifier);
-            sb.Append($"\n<b>任务奖励总计:</b> {c.display(total)} QP (截断)");
+            sb.Append($"\n<b>任务奖励总计:</b> {c.display(total)} 怪癖点 (截断)");
 
             return sb.ToString();
         }

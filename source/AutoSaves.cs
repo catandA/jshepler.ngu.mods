@@ -49,7 +49,7 @@ namespace jshepler.ngu.mods
                         Plugin.Character.settings.dailySaveRewardTime.reset();
                         var ap = Plugin.Character.addAP(200);
                         TrackAPGained.TrackGain(ap, TrackAPGained.APSource.DailySave);
-                        Plugin.ShowOverrideNotification($"你(尝试)在今天手动保存了文件！这是 {ap} AP 作为贿赂！");
+                        Plugin.ShowOverrideNotification($"你(尝试)在今天手动保存了文件！这是 {ap} 任意点 作为贿赂！");
                     }
 
                     if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))

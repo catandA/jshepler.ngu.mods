@@ -46,7 +46,7 @@ namespace jshepler.ngu.mods
             var pp = character.adventure.itopod.lifetimePoints;
             if (pp > 0)
             {
-                labels += "\n\nTotal Earned PP:";
+                labels += "\n\n总获得特权点:";
                 values += $"\n\n{display(pp)}";
             }
 

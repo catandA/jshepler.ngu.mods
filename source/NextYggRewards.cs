@@ -458,7 +458,7 @@ namespace jshepler.ngu.mods
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += "\n\n<b>基础AP:</b> 15"
+            text += "\n\n<b>基础任意点:</b> 15"
                 + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (poopMulti > 1.0f)
@@ -468,7 +468,7 @@ namespace jshepler.ngu.mods
                 text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
             var globalAPMulti = character.checkAPAdded(10000L) / 10000f;
-            text += $"\n<b>全局AP倍率:</b> {showMulti(globalAPMulti)}";
+            text += $"\n<b>全局任意点倍率:</b> {showMulti(globalAPMulti)}";
 
             text += Seeds(fc, tierFactor, poopMulti);
             return text;
@@ -531,17 +531,17 @@ namespace jshepler.ngu.mods
             var pp = character.adventureController.itopod.progressToPP(ppp);
             ppp = character.adventureController.itopod.progressToRemainder(ppp);
 
-            var text = $"+{character.display(pp)} PP"
-                + $"\n+{character.display(ppp)} 距离下次PP的进度"
+            var text = $"+{character.display(pp)} 特权点"
+                + $"\n+{character.display(ppp)} 距离下次特权点的进度"
                 + $"\n+{character.display(seeds)} 种子";
 
             if (!_ppDiggerActive)
-                text += "\n\n<b><color=red>PP掘金者未激活！</color></b>";
+                text += "\n\n<b><color=red>特权点掘金者未激活！</color></b>";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += "\n\n<b>基础PPP:</b> 60,000"
+            text += "\n\n<b>基础特权点进度:</b> 60,000"
                 + $"\n<b>等级因子:</b> {showMulti(tierFactor)}";
 
             if (ygg > 1.0f)
@@ -553,7 +553,7 @@ namespace jshepler.ngu.mods
             if (fh > 1.0f)
                 text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
-            text += $"\n<b>全局PPP倍率 (无药水):</b> {showMulti(globalPPPMulti)}"
+            text += $"\n<b>全局特权点进度倍率 (无药水):</b> {showMulti(globalPPPMulti)}"
                 + Seeds(fc, tierFactor, poopMulti);
 
             return text;
@@ -705,13 +705,13 @@ namespace jshepler.ngu.mods
             var fh = character.adventureController.itopod.totalHarvestBonus(14);
             var qp = (long)Mathf.Ceil(3 * tier * poopMulti * ygg * globalQPMulti * fh);
 
-            var text = $"+{character.display(qp)} QP"
+            var text = $"+{character.display(qp)} 怪癖点"
                 + $"\n+{character.display(seeds)} 种子";
 
             if (!Plugin.AltIsDown)
                 return text;
 
-            text += "\n\n<b>基础QP:</b> 3"
+            text += "\n\n<b>基础怪癖点:</b> 3"
                 + $"\n<b>等级因子:</b> {showMulti(tier)}";
 
             if (ygg > 1.0f)
@@ -723,7 +723,7 @@ namespace jshepler.ngu.mods
             if (fh > 1.0f)
                 text += $"\n<b>首次收获:</b> {showMulti(fh)}";
 
-            text += $"\n<b>全局QP倍率 (无黄油):</b> {showMulti(globalQPMulti)}"
+            text += $"\n<b>全局怪癖点倍率 (无黄油):</b> {showMulti(globalQPMulti)}"
                 + Seeds(fc, tier, poopMulti);
 
             return text;
